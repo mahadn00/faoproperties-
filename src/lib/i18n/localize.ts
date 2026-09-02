@@ -1,12 +1,23 @@
 import { projects, type Project } from "@/lib/projects";
-import { projectTranslationsSr, type ProjectTranslationSr } from "./projects.sr";
 import type { Locale } from "./dictionary";
+import { projectTranslationsSr } from "./projects.sr";
+import { projectTranslationsTr } from "./projects.tr";
+import { projectTranslationsAr } from "./projects.ar";
+import { projectTranslationsFa } from "./projects.fa";
+import type { ProjectTranslation } from "./project-translation-type";
 
-// Merges a base (English) Project with its Serbian translation overlay.
-// Any field left out of the overlay falls back to the English original, so a
-// project added to projects.ts before it has a Serbian translation still
-// renders correctly on the Serbian site instead of breaking.
-function applyTranslation(project: Project, translation?: ProjectTranslationSr): Project {
+const TRANSLATIONS_BY_LOCALE: Partial<Record<Locale, Record<string, ProjectTranslation>>> = {
+  sr: projectTranslationsSr,
+  tr: projectTranslationsTr,
+  ar: projectTranslationsAr,
+  fa: projectTranslationsFa,
+};
+
+// Merges a base (English) Project with its translation overlay for the given
+// locale. Any field left out of the overlay falls back to the English
+// original, so a project added to projects.ts before it has a translation
+// for every language still renders correctly instead of breaking.
+function applyTranslation(project: Project, translation?: ProjectTranslation): Project {
   if (!translation) return project;
 
   return {
@@ -48,12 +59,14 @@ function applyTranslation(project: Project, translation?: ProjectTranslationSr):
 
 export function localizeProjects(locale: Locale): Project[] {
   if (locale === "en") return projects;
-  return projects.map((p) => applyTranslation(p, projectTranslationsSr[p.slug]));
+  const translations = TRANSLATIONS_BY_LOCALE[locale];
+  return projects.map((p) => applyTranslation(p, translations?.[p.slug]));
 }
 
 export function getLocalizedProjectBySlug(slug: string, locale: Locale): Project | undefined {
   const project = projects.find((p) => p.slug === slug);
   if (!project) return undefined;
   if (locale === "en") return project;
-  return applyTranslation(project, projectTranslationsSr[project.slug]);
+  const translations = TRANSLATIONS_BY_LOCALE[locale];
+  return applyTranslation(project, translations?.[project.slug]);
 }

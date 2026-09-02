@@ -27,7 +27,7 @@ export default function ProjectCard({
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
-        <div className="absolute left-5 top-5 rounded-full bg-white/90 px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--color-ink)]">
+        <div className="absolute start-5 top-5 rounded-full bg-white/90 px-3 py-1 text-xs font-medium uppercase tracking-wide text-[var(--color-ink)]">
           {project.areaTag}
         </div>
       </div>

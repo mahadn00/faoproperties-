@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectSearch from "@/components/ProjectSearch";
 import LeadForm from "@/components/LeadForm";
 import { projects } from "@/lib/projects";
 import { CONTACT_EMAIL, SITE_TAGLINE, WHATSAPP_DISPLAY } from "@/lib/constants";
@@ -83,10 +83,8 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="mt-14 grid gap-8 lg:grid-cols-3">
-            {projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} />
-            ))}
+          <div className="mt-14">
+            <ProjectSearch projects={projects} locale="en" />
           </div>
         </div>
       </section>

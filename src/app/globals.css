@@ -60,6 +60,13 @@ body {
   font-family: var(--font-display), Georgia, serif;
 }
 
+/* Arabic/Persian routes set dir="rtl" via SetHtmlLang — swap in Arabic-script
+   fonts (Fraunces/Inter have no Arabic glyphs) and mirror the page. */
+html[dir="rtl"] {
+  --font-display: var(--font-arabic-display);
+  --font-sans: var(--font-arabic-body);
+}
+
 /* Thin gold rule used under eyebrow labels */
 .rule-gold {
   width: 44px;

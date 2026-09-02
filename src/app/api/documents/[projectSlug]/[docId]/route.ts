@@ -85,6 +85,32 @@ const DOCUMENT_FILES: Record<string, Record<string, string>> = {
     "price-list-towers-1-2": "w-residences-tower-1-2-price-list.pdf",
     "price-list-tower-3": "w-residences-tower-3-price-list.pdf",
   },
+  "kaia-residences": {
+    brochure: "Kaia-Residences-Technical-Brochure.pdf",
+    "sale-offer": "Kaia-Residences-Sample-Sale-Offer.pdf",
+  },
+  "floarea-breeze": {
+    brochure: "Floarea-Breeze-Brochure.pdf",
+    "payment-plan": "Floarea-Breeze-Payment-Plan.pdf",
+  },
+  "mirari-lagoon": {
+    brochure: "mirari-lagoon-brochure.pdf",
+    "payment-plan": "mirari-lagoon-payment-plan.pdf",
+  },
+  "the-archive-imtiaz": {
+    brochure: "the-archive-imtiaz-brochure.pdf",
+  },
+  "the-symphony-imtiaz": {
+    brochure: "the-symphony-imtiaz-brochure.pdf",
+  },
+  "omya-residences": {
+    brochure: "Omya-Residences-Brochure.pdf",
+    "sale-offer": "Omya-Residences-Sale-Offer.pdf",
+  },
+  "the-wow-tower": {
+    brochure: "The-Wow-Tower-Brochure.pdf",
+    "sale-offer": "The-Wow-Tower-Sale-Offer.pdf",
+  },
 };
 
 const CONTENT_TYPES: Record<string, string> = {

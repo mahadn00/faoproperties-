@@ -150,7 +150,7 @@ export default async function SerbianProjectPage({ params }: PageProps<"/sr/proj
                 <div className="overflow-hidden rounded-lg border border-[var(--color-sand-line)]">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-white text-left text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
+                      <tr className="bg-white text-start text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
                         <th className="px-4 py-3">{t.project.milestone}</th>
                         <th className="px-4 py-3">{t.project.percentage}</th>
                         <th className="px-4 py-3">{t.project.timing}</th>

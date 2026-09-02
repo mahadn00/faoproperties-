@@ -146,7 +146,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                 <div className="overflow-hidden rounded-lg border border-[var(--color-sand-line)]">
                   <table className="w-full text-sm">
                     <thead>
-                      <tr className="bg-white text-left text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
+                      <tr className="bg-white text-start text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
                         <th className="px-4 py-3">Milestone</th>
                         <th className="px-4 py-3">Percentage</th>
                         <th className="px-4 py-3">Timing</th>

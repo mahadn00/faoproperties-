@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectSearch from "@/components/ProjectSearch";
 import LeadForm from "@/components/LeadForm";
 import { localizeProjects } from "@/lib/i18n/localize";
 import { CONTACT_EMAIL, WHATSAPP_DISPLAY } from "@/lib/constants";
@@ -85,10 +85,8 @@ export default function SerbianHomePage() {
             </h2>
           </div>
 
-          <div className="mt-14 grid gap-8 lg:grid-cols-3">
-            {projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} locale="sr" />
-            ))}
+          <div className="mt-14">
+            <ProjectSearch projects={projects} locale="sr" />
           </div>
         </div>
       </section>

@@ -26,7 +26,7 @@ export default function DownloadGate({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex w-full items-center justify-between gap-3 rounded-md border border-[var(--color-sand-line)] bg-white px-5 py-4 text-left transition-colors hover:border-[var(--color-gold)]"
+        className="flex w-full items-center justify-between gap-3 rounded-md border border-[var(--color-sand-line)] bg-white px-5 py-4 text-start transition-colors hover:border-[var(--color-gold)]"
       >
         <span>
           <span className="block text-sm font-medium text-[var(--color-text)]">
