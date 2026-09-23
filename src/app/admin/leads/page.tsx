@@ -6,6 +6,7 @@ import { leadFiltersQuery, parseLeadFilters } from "@/lib/lead-filters";
 import { formatDubai } from "@/lib/date-utils";
 import LeadsFilterBar from "@/components/LeadsFilterBar";
 import LeadStatusSelect from "@/components/LeadStatusSelect";
+import { CONTACT_METHOD_LABEL, PURPOSE_LABEL } from "@/lib/lead-status";
 
 export default async function AdminLeadsPage({
   searchParams,
@@ -56,6 +57,7 @@ export default async function AdminLeadsPage({
               <th className="px-4 py-3 text-start">Name</th>
               <th className="px-4 py-3 text-start">Email</th>
               <th className="px-4 py-3 text-start">Phone</th>
+              <th className="px-4 py-3 text-start">Prefers</th>
               <th className="px-4 py-3 text-start">Project</th>
               <th className="px-4 py-3 text-start">Document</th>
               <th className="px-4 py-3 text-start">Source</th>
@@ -65,7 +67,7 @@ export default async function AdminLeadsPage({
           <tbody>
             {leads.length === 0 && (
               <tr>
-                <td colSpan={9} className="px-4 py-10 text-center text-[var(--color-text-on-dark-muted)]">
+                <td colSpan={10} className="px-4 py-10 text-center text-[var(--color-text-on-dark-muted)]">
                   No leads in this range.
                 </td>
               </tr>
@@ -83,6 +85,11 @@ export default async function AdminLeadsPage({
                   </a>
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">{lead.phone}</td>
+                <td className="px-4 py-3 whitespace-nowrap text-[var(--color-text-on-dark-muted)]">
+                  {[CONTACT_METHOD_LABEL[lead.contactMethod], PURPOSE_LABEL[lead.purpose], lead.locale.toUpperCase()]
+                    .filter(Boolean)
+                    .join(" · ") || "—"}
+                </td>
                 <td className="px-4 py-3 whitespace-nowrap">{lead.projectName}</td>
                 <td className="px-4 py-3 whitespace-nowrap">{lead.documentLabel || "—"}</td>
                 <td className="px-4 py-3 whitespace-nowrap">{lead.source}</td>

@@ -20,7 +20,7 @@ Edit `.env.local` (already gitignored — never commit it):
 
 | Variable | Purpose |
 |---|---|
-| `SMTP_PASS` | Gmail **App Password** for `SMTP_USER` (mahabdelrauof1979@gmail.com). Generate at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) — requires 2‑Step Verification on that account. Without this, leads are still saved (see `/admin/leads`) but no email is sent. |
+| `SMTP_PASS` | Gmail **App Password** for `SMTP_USER` (mahabdelrauof1979@gmail.com). Generate at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) — requires 2‑Step Verification on that account. Without this, leads are still saved (see `/admin/leads`) but no email is sent — neither the team notification nor the brochure emails to visitors. Brochures are sent to visitors *from* `SMTP_USER`, so for good inbox placement use a mailbox on the company domain (e.g. Google Workspace) with SPF/DKIM set up rather than a personal Gmail address. |
 | `ADMIN_USERNAME` / `ADMIN_PASSWORD` | Credentials for `/admin/leads`. Leave blank and the admin page stays inaccessible (safe default). |
 | `LEAD_NOTIFY_EMAIL` | Already set to `fao@faoproperties.com`. |
 | `SESSION_SECRET` | Already auto-generated. Signs admin sessions and download links — do not share or rotate casually (rotating logs everyone out and invalidates in-flight download links). |
@@ -33,19 +33,27 @@ Edit `.env.local` (already gitignored — never commit it):
 
 1. Visitor fills the form on the homepage (`general-enquiry`) or clicks
    **Get Brochure / Get Price List** on a project page (`gated-download`).
+   The form asks for name, email and phone (with a country-code picker,
+   pre-set by site language), how they'd like to be contacted (WhatsApp /
+   call / email), and optionally why they're buying and a message.
 2. `POST /api/leads` validates the input, saves the lead to the SQLite
    database `data/leads.db` (auto-created), and emails `LEAD_NOTIFY_EMAIL`
    via Gmail SMTP.
-3. For gated downloads, the notification email includes a signed, 7-day
-   download link (`/api/documents/[project]/[doc]?token=...`) for the sales
-   team to send on. The visitor is told the team will share the file; they
-   don't get the link themselves. Files are streamed from disk, so large
+3. For gated downloads, the visitor is **emailed the document straight
+   away**, in the language of the page they were on: a signed, 7-day
+   download link (`/api/documents/[project]/[doc]?token=...`), with replies
+   going to `LEAD_NOTIFY_EMAIL`. The team notification includes the same
+   link. Each email address gets at most 3 such emails per day (so the form
+   can't be used to flood someone's inbox); past that, or if SMTP isn't
+   configured, the visitor is told the team will send it and the
+   notification asks the team to. Files are streamed from disk, so large
    brochures don't load into server memory.
 4. All leads (from both entry points) are visible at `/admin/leads`
    after signing in at `/admin/login`. Each lead has a status (New,
    Contacted, Qualified, Won, Lost) the team can change from the table, and
    **Export to Excel** downloads the leads currently in view, respecting
-   the date and status filters.
+   the date and status filters. Contact preference, purpose and site
+   language are shown in the table and included in the export.
 
 **Upgrading from the Excel version:** the first time this version starts, it
 imports every row of an existing `data/leads.xlsx` into `data/leads.db` once,

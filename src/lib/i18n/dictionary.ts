@@ -125,7 +125,7 @@ export const dictionary = {
       amenities: "Amenities",
       location: "Location",
       documentsTitle: "Documents & Pricing",
-      documentsBody: "Share your details and our sales team will send these to you directly.",
+      documentsBody: "Share your details and we'll email these to you straight away.",
       whatsappCta: "Chat on WhatsApp",
       whatsappMessage: (name: string) => `Hi, I'm interested in ${name}.`,
     },
@@ -139,7 +139,7 @@ export const dictionary = {
     downloadGate: {
       request: (label: string) => `Request ${label}`,
       shareDetails: (label: string, projectName: string) =>
-        `Share your details and our sales team will send you the ${label.toLowerCase()} for ${projectName} directly.`,
+        `Share your details and we'll email you the ${label.toLowerCase()} for ${projectName} straight away.`,
     },
     leadForm: {
       requesting: "Requesting",
@@ -159,6 +159,13 @@ export const dictionary = {
       networkError: "Network error. Please check your connection and try again.",
       rateLimited: "Too many requests. Please wait a few minutes and try again, or message us on WhatsApp.",
       verificationFailed: "Please complete the security check and try again.",
+      countryCode: "Country code",
+      contactVia: "Contact me via",
+      contactOptions: { whatsapp: "WhatsApp", call: "Phone call", email: "Email" },
+      purposeLabel: "Purpose (optional)",
+      purposeOptions: { live: "To live in", invest: "As an investment" },
+      successDocSent: (label: string, email: string) =>
+        `We've emailed the ${label.toLowerCase()} to ${email}. If it isn't in your inbox in a few minutes, please check your spam folder.`,
     },
     footer: {
       privacy: "Privacy Policy",
@@ -286,7 +293,7 @@ export const dictionary = {
       amenities: "Sadržaji",
       location: "Lokacija",
       documentsTitle: "Dokumenti i cene",
-      documentsBody: "Podelite svoje podatke i naš tim prodaje će vam ih poslati direktno.",
+      documentsBody: "Podelite svoje podatke i odmah ćemo vam ih poslati na email.",
       whatsappCta: "Ćaskajte na WhatsApp-u",
       whatsappMessage: (name: string) => `Zdravo, zanima me projekat ${name}.`,
     },
@@ -300,7 +307,7 @@ export const dictionary = {
     downloadGate: {
       request: (label: string) => `Zatražite: ${label}`,
       shareDetails: (label: string, projectName: string) =>
-        `Podelite svoje podatke i naš tim prodaje će vam poslati dokument „${label}" za projekat ${projectName} direktno.`,
+        `Podelite svoje podatke i odmah ćemo vam poslati dokument „${label}" za projekat ${projectName} na email.`,
     },
     leadForm: {
       requesting: "Zahtev za",
@@ -320,6 +327,13 @@ export const dictionary = {
       networkError: "Greška u mreži. Proverite internet konekciju i pokušajte ponovo.",
       rateLimited: "Previše zahteva. Sačekajte nekoliko minuta i pokušajte ponovo, ili nam pišite na WhatsApp.",
       verificationFailed: "Molimo vas da završite sigurnosnu proveru i pokušate ponovo.",
+      countryCode: "Pozivni broj zemlje",
+      contactVia: "Kontaktirajte me putem",
+      contactOptions: { whatsapp: "WhatsApp", call: "Poziv", email: "Email" },
+      purposeLabel: "Svrha kupovine (opciono)",
+      purposeOptions: { live: "Za stanovanje", invest: "Kao investicija" },
+      successDocSent: (label: string, email: string) =>
+        `Poslali smo dokument „${label}" na ${email}. Ako ga za nekoliko minuta ne vidite u prijemnom sandučetu, proverite folder za neželjenu poštu.`,
     },
     footer: {
       privacy: "Politika privatnosti",
@@ -447,7 +461,7 @@ export const dictionary = {
       amenities: "Sosyal Olanaklar",
       location: "Konum",
       documentsTitle: "Belgeler ve Fiyatlandırma",
-      documentsBody: "Bilgilerinizi paylaşın, satış ekibimiz bunları doğrudan size gönderecektir.",
+      documentsBody: "Bilgilerinizi paylaşın, belgeleri hemen e-posta adresinize gönderelim.",
       whatsappCta: "WhatsApp'tan Yazın",
       whatsappMessage: (name: string) => `Merhaba, ${name} projesiyle ilgileniyorum.`,
     },
@@ -461,7 +475,7 @@ export const dictionary = {
     downloadGate: {
       request: (label: string) => `Talep Et: ${label}`,
       shareDetails: (label: string, projectName: string) =>
-        `Bilgilerinizi paylaşın, satış ekibimiz "${label}" belgesini ${projectName} projesi için doğrudan size gönderecektir.`,
+        `Bilgilerinizi paylaşın, ${projectName} projesine ait "${label}" belgesini hemen e-posta adresinize gönderelim.`,
     },
     leadForm: {
       requesting: "Talep edilen",
@@ -481,6 +495,13 @@ export const dictionary = {
       networkError: "Ağ hatası. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
       rateLimited: "Çok fazla istek gönderildi. Lütfen birkaç dakika bekleyip tekrar deneyin veya bize WhatsApp üzerinden yazın.",
       verificationFailed: "Lütfen güvenlik doğrulamasını tamamlayıp tekrar deneyin.",
+      countryCode: "Ülke kodu",
+      contactVia: "Bana ulaşın",
+      contactOptions: { whatsapp: "WhatsApp", call: "Telefon", email: "E-posta" },
+      purposeLabel: "Satın alma amacı (opsiyonel)",
+      purposeOptions: { live: "Oturmak için", invest: "Yatırım için" },
+      successDocSent: (label: string, email: string) =>
+        `"${label}" belgesini ${email} adresine gönderdik. Birkaç dakika içinde gelen kutunuzda görünmezse lütfen istenmeyen e-posta klasörünü kontrol edin.`,
     },
     footer: {
       privacy: "Gizlilik Politikası",
@@ -608,7 +629,7 @@ export const dictionary = {
       amenities: "المرافق",
       location: "الموقع",
       documentsTitle: "المستندات والأسعار",
-      documentsBody: "شاركنا بياناتك وسيرسلها لك فريق المبيعات مباشرة.",
+      documentsBody: "شاركنا بياناتك وسنرسلها إلى بريدك الإلكتروني فورًا.",
       whatsappCta: "تواصل عبر واتساب",
       whatsappMessage: (name: string) => `مرحبًا، أنا مهتم بمشروع ${name}.`,
     },
@@ -622,7 +643,7 @@ export const dictionary = {
     downloadGate: {
       request: (label: string) => `طلب: ${label}`,
       shareDetails: (label: string, projectName: string) =>
-        `شاركنا بياناتك وسيرسل لك فريق المبيعات مستند "${label}" الخاص بمشروع ${projectName} مباشرة.`,
+        `شاركنا بياناتك وسنرسل مستند "${label}" الخاص بمشروع ${projectName} إلى بريدك الإلكتروني فورًا.`,
     },
     leadForm: {
       requesting: "طلب",
@@ -642,6 +663,13 @@ export const dictionary = {
       networkError: "حدث خطأ في الشبكة. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.",
       rateLimited: "عدد كبير من الطلبات. يُرجى الانتظار بضع دقائق ثم المحاولة مرة أخرى، أو راسلنا عبر واتساب.",
       verificationFailed: "يُرجى إكمال التحقق الأمني ثم المحاولة مرة أخرى.",
+      countryCode: "رمز الدولة",
+      contactVia: "تواصلوا معي عبر",
+      contactOptions: { whatsapp: "واتساب", call: "مكالمة هاتفية", email: "البريد الإلكتروني" },
+      purposeLabel: "الغرض من الشراء (اختياري)",
+      purposeOptions: { live: "للسكن", invest: "للاستثمار" },
+      successDocSent: (label: string, email: string) =>
+        `أرسلنا مستند "${label}" إلى ${email}. إن لم يصل إلى بريدك الوارد خلال دقائق، يُرجى التحقق من مجلد الرسائل غير المرغوب فيها.`,
     },
     footer: {
       privacy: "سياسة الخصوصية",
@@ -769,7 +797,7 @@ export const dictionary = {
       amenities: "امکانات",
       location: "موقعیت",
       documentsTitle: "مدارک و قیمت‌ها",
-      documentsBody: "اطلاعات خود را با ما در میان بگذارید تا تیم فروش ما مستقیماً آن‌ها را برای شما ارسال کند.",
+      documentsBody: "اطلاعات خود را وارد کنید تا فوراً آن‌ها را به ایمیل شما بفرستیم.",
       whatsappCta: "گفتگو در واتساپ",
       whatsappMessage: (name: string) => `سلام، به پروژه ${name} علاقه‌مندم.`,
     },
@@ -783,7 +811,7 @@ export const dictionary = {
     downloadGate: {
       request: (label: string) => `درخواست: ${label}`,
       shareDetails: (label: string, projectName: string) =>
-        `اطلاعات خود را با ما در میان بگذارید تا تیم فروش ما «${label}» مربوط به پروژه ${projectName} را مستقیماً برای شما ارسال کند.`,
+        `اطلاعات خود را وارد کنید تا «${label}» مربوط به پروژه ${projectName} را فوراً به ایمیل شما بفرستیم.`,
     },
     leadForm: {
       requesting: "درخواست برای",
@@ -803,6 +831,13 @@ export const dictionary = {
       networkError: "خطای شبکه. لطفاً اتصال اینترنت خود را بررسی کرده و دوباره تلاش کنید.",
       rateLimited: "تعداد درخواست‌ها زیاد است. لطفاً چند دقیقه صبر کنید و دوباره تلاش کنید، یا از طریق واتساپ به ما پیام دهید.",
       verificationFailed: "لطفاً بررسی امنیتی را تکمیل کرده و دوباره تلاش کنید.",
+      countryCode: "کد کشور",
+      contactVia: "روش تماس با من",
+      contactOptions: { whatsapp: "واتساپ", call: "تماس تلفنی", email: "ایمیل" },
+      purposeLabel: "هدف از خرید (اختیاری)",
+      purposeOptions: { live: "برای سکونت", invest: "برای سرمایه‌گذاری" },
+      successDocSent: (label: string, email: string) =>
+        `«${label}» را به ${email} فرستادیم. اگر تا چند دقیقه دیگر در صندوق ورودی نبود، لطفاً پوشه اسپم را بررسی کنید.`,
     },
     footer: {
       privacy: "سیاست حفظ حریم خصوصی",

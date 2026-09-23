@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Send } from "lucide-react";
 import Modal from "./Modal";
 import LeadForm from "./LeadForm";
@@ -20,6 +20,8 @@ export default function DownloadGate({
 }) {
   const t = dictionary[locale].downloadGate;
   const [open, setOpen] = useState(false);
+  // Stable, so the dialog's focus/keyboard effect doesn't re-run on every render.
+  const close = useCallback(() => setOpen(false), []);
 
   return (
     <>
@@ -39,7 +41,7 @@ export default function DownloadGate({
         <Send size={20} className="shrink-0 text-[var(--color-gold-deep)]" />
       </button>
 
-      <Modal open={open} onClose={() => setOpen(false)} title={t.request(document.label)}>
+      <Modal open={open} onClose={close} title={t.request(document.label)} closeLabel={dictionary[locale].browse.close}>
         <p className="mb-6 text-sm text-[var(--color-text-muted)]">
           {t.shareDetails(document.label, projectName)}
         </p>

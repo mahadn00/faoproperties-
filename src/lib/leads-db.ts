@@ -23,6 +23,9 @@ export type NewLead = {
   documentLabel: string;
   source: string;
   message: string;
+  contactMethod: string; // "whatsapp" | "call" | "email", or "" for older leads
+  purpose: string; // "live" | "invest" | ""
+  locale: string; // site language the form was sent from
 };
 
 export type Lead = NewLead & {
@@ -49,7 +52,10 @@ const SCHEMA = `
     source TEXT NOT NULL DEFAULT '',
     message TEXT NOT NULL DEFAULT '',
     status TEXT NOT NULL DEFAULT 'new',
-    status_updated_at TEXT
+    status_updated_at TEXT,
+    contact_method TEXT NOT NULL DEFAULT '',
+    purpose TEXT NOT NULL DEFAULT '',
+    locale TEXT NOT NULL DEFAULT ''
   );
   CREATE INDEX IF NOT EXISTS leads_submitted_at ON leads (submitted_at);
   CREATE TABLE IF NOT EXISTS meta (key TEXT PRIMARY KEY, value TEXT NOT NULL);
@@ -73,8 +79,20 @@ async function open(): Promise<Database.Database> {
   db.pragma("journal_mode = WAL"); // readers never block the writer
   db.pragma("busy_timeout = 5000");
   db.exec(SCHEMA);
+  addMissingColumns(db);
   await importLegacyWorkbook(db);
   return db;
+}
+
+// Columns added after the first database version; databases created before
+// then get them on start-up (existing rows default to "").
+const ADDED_COLUMNS = ["contact_method", "purpose", "locale"];
+
+function addMissingColumns(db: Database.Database) {
+  const existing = new Set((db.prepare("PRAGMA table_info(leads)").all() as { name: string }[]).map((c) => c.name));
+  for (const column of ADDED_COLUMNS) {
+    if (!existing.has(column)) db.exec(`ALTER TABLE leads ADD COLUMN ${column} TEXT NOT NULL DEFAULT ''`);
+  }
 }
 
 /**
@@ -103,6 +121,9 @@ async function importLegacyWorkbook(db: Database.Database) {
         documentLabel: cellText(v[6]),
         source: cellText(v[7]),
         message: cellText(v[8]),
+        contactMethod: "",
+        purpose: "",
+        locale: "",
       });
     });
     const insertAll = db.transaction((leads: NewLead[]) => leads.forEach((lead) => insert(db, lead)));
@@ -134,8 +155,8 @@ function cellText(value: ExcelJS.CellValue): string {
 function insert(db: Database.Database, lead: NewLead): number {
   const result = db
     .prepare(
-      `INSERT INTO leads (submitted_at, name, email, phone, project_name, document_label, source, message)
-       VALUES (@submittedAt, @name, @email, @phone, @projectName, @documentLabel, @source, @message)`
+      `INSERT INTO leads (submitted_at, name, email, phone, project_name, document_label, source, message, contact_method, purpose, locale)
+       VALUES (@submittedAt, @name, @email, @phone, @projectName, @documentLabel, @source, @message, @contactMethod, @purpose, @locale)`
     )
     .run(lead);
   return Number(result.lastInsertRowid);
@@ -157,6 +178,9 @@ type LeadRow = {
   message: string;
   status: LeadStatus;
   status_updated_at: string | null;
+  contact_method: string;
+  purpose: string;
+  locale: string;
 };
 
 /** Newest first. Date bounds compare ISO strings, which sort chronologically. */
@@ -192,6 +216,9 @@ export async function listLeads({ start, end, status }: LeadQuery = {}): Promise
     message: r.message,
     status: r.status,
     statusUpdatedAt: r.status_updated_at,
+    contactMethod: r.contact_method,
+    purpose: r.purpose,
+    locale: r.locale,
   }));
 }
 
