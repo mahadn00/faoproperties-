@@ -1,43 +1,51 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { ArrowDown } from "lucide-react";
 import ProjectSearch from "@/components/ProjectSearch";
 import LeadForm from "@/components/LeadForm";
 import { localizeProjects } from "@/lib/i18n/localize";
-import { startingPriceAed } from "@/lib/projects";
+import { toProjectCard } from "@/lib/project-card";
 import { CONTACT_EMAIL, WHATSAPP_DISPLAY } from "@/lib/constants";
-import { dictionary } from "@/lib/i18n/dictionary";
+import { dictionary, isLocale, isRtlLocale } from "@/lib/i18n/dictionary";
 import { formatAedShort } from "@/lib/format";
 import { buildPageMetadata } from "@/lib/seo";
 
-const t = dictionary.fa;
+export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  const t = dictionary[locale];
+  return buildPageMetadata({
+    locale,
+    path: "/",
+    title: t.meta.homeTitle,
+    description: t.meta.homeDescription,
+  });
+}
 
-export const metadata: Metadata = buildPageMetadata({
-  locale: "fa",
-  path: "/",
-  title: t.meta.homeTitle,
-  description: t.meta.homeDescription,
-});
-const projects = localizeProjects("fa");
+export default async function HomePage({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
 
-// Numeric prices come from the English data: translated price text (e.g.
-// "601,000 درهم") can't be parsed, which used to skew "Starting from".
-const startingPrices = Object.fromEntries(projects.map((p) => [p.slug, startingPriceAed(p.slug)]));
+  const t = dictionary[locale];
+  const cards = localizeProjects(locale).map(toProjectCard);
 
-const lowestStartingPrice = Object.values(startingPrices)
-  .filter((v): v is number => v !== null)
-  .reduce((min, v) => (v < min ? v : min), Infinity);
+  // Numeric prices come from the English data: translated price text (e.g.
+  // "601,000 درهم") can't be parsed, which used to skew "Starting from".
+  const lowestStartingPrice = cards
+    .map((c) => c.startingPriceAed)
+    .filter((v): v is number => v !== null)
+    .reduce((min, v) => (v < min ? v : min), Infinity);
 
-const districtCount = new Set(projects.map((p) => p.areaTag)).size;
+  const districtCount = new Set(cards.map((c) => c.areaTag)).size;
 
-export default function PersianHomePage() {
   return (
     <>
       {/* Hero */}
       <section className="relative flex min-h-[92vh] items-end overflow-hidden bg-[var(--color-ink)]">
         <Image
           src="/projects/eltiera-views/gallery/01_exterior_aerial_twilight.jpg"
-          alt="املاک لوکس در حال ساخت در دبی"
+          alt={t.hero.imageAlt}
           fill
           priority
           className="object-cover opacity-70"
@@ -48,7 +56,10 @@ export default function PersianHomePage() {
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-gold)]">
             {t.hero.eyebrow}
           </p>
-          <h1 className="font-display mt-5 max-w-3xl text-4xl leading-[1.2] text-white md:text-6xl">
+          {/* Arabic-script headings need a little more line height. */}
+          <h1
+            className={`font-display mt-5 max-w-3xl text-4xl ${isRtlLocale(locale) ? "leading-[1.2]" : "leading-[1.1]"} text-white md:text-6xl`}
+          >
             {t.hero.heading}
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
@@ -76,7 +87,7 @@ export default function PersianHomePage() {
       {/* Stats strip */}
       <section className="border-b border-[var(--color-sand-line)] bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-3 gap-4 px-6 py-10 sm:gap-8 md:px-10">
-          <Stat label={t.stats.developments} value={String(projects.length)} />
+          <Stat label={t.stats.developments} value={String(cards.length)} />
           <Stat
             label={t.stats.startingFrom}
             value={Number.isFinite(lowestStartingPrice) ? formatAedShort(lowestStartingPrice) : t.stats.onRequest}
@@ -98,7 +109,7 @@ export default function PersianHomePage() {
           </div>
 
           <div className="mt-14">
-            <ProjectSearch projects={projects} startingPrices={startingPrices} locale="fa" />
+            <ProjectSearch projects={cards} locale={locale} />
           </div>
         </div>
       </section>
@@ -129,7 +140,7 @@ export default function PersianHomePage() {
           </div>
 
           <div className="rounded-2xl bg-[var(--color-sand)] p-6 sm:p-8">
-            <LeadForm source="general-enquiry" submitLabel={t.contact.submitLabel} locale="fa" />
+            <LeadForm source="general-enquiry" submitLabel={t.contact.submitLabel} locale={locale} />
           </div>
         </div>
       </section>

@@ -1,5 +1,8 @@
-import type { Project } from "./projects";
 import { parseAedValue } from "./format";
+import type { ProjectCardData } from "./project-card";
+
+/** The fields search needs — a homepage card (ProjectCardData) has them. */
+type SearchableProject = Pick<ProjectCardData, "apartmentTypes" | "startingPriceAed">;
 
 export type PropertyType = "studio" | "1br" | "2br" | "3br" | "villa";
 
@@ -58,7 +61,7 @@ export type ProjectSearchInfo = {
 };
 
 // Always classifies off the base English project (see classifyApartmentType).
-export function getProjectSearchInfo(project: Project): ProjectSearchInfo {
+export function getProjectSearchInfo(project: Pick<SearchableProject, "apartmentTypes">): ProjectSearchInfo {
   const types = new Set<PropertyType>();
   const minPriceByType: Partial<Record<PropertyType, number>> = {};
 
@@ -80,11 +83,10 @@ export function getProjectSearchInfo(project: Project): ProjectSearchInfo {
 // `selectedTypes` empty = no type filter (matches every project). Budget is
 // an open-ended [min, max] range — either side can be left null.
 export function projectMatchesSearch(
-  project: Project,
+  project: SearchableProject,
   selectedTypes: ReadonlySet<PropertyType>,
   minBudget: number | null,
-  maxBudget: number | null,
-  startingPrice: number | null
+  maxBudget: number | null
 ): boolean {
   const info = getProjectSearchInfo(project);
 
@@ -106,8 +108,9 @@ export function projectMatchesSearch(
   if (candidatePrices.length > 0) return candidatePrices.some((p) => p >= min && p <= max);
 
   // No per-type price among the relevant types — fall back to the project's
-  // overall starting price rather than excluding it outright. It's passed in
-  // as a number (see startingPriceAed) because `project.startingPrice` may be
-  // translated text like "601,000 درهم" that parseAedValue can't read.
-  return startingPrice !== null && startingPrice >= min && startingPrice <= max;
+  // overall starting price rather than excluding it outright. It's the numeric
+  // startingPriceAed because the display `startingPrice` may be translated
+  // text like "601,000 درهم" that parseAedValue can't read.
+  const overall = project.startingPriceAed;
+  return overall !== null && overall >= min && overall <= max;
 }

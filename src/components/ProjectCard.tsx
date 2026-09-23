@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import type { Project } from "@/lib/projects";
+import type { ProjectCardData } from "@/lib/project-card";
 import { dictionary, type Locale } from "@/lib/i18n/dictionary";
 import { projectPath } from "@/lib/i18n/paths";
 
@@ -9,7 +9,7 @@ export default function ProjectCard({
   project,
   locale = "en",
 }: {
-  project: Project;
+  project: ProjectCardData;
   locale?: Locale;
 }) {
   const t = dictionary[locale].card;

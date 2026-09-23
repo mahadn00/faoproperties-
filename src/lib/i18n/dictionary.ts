@@ -7,6 +7,9 @@ export function isRtlLocale(locale: Locale): boolean {
 
 // Locale metadata for building the language switcher and route prefixes.
 export const LOCALES: Locale[] = ["en", "sr", "tr", "ar", "fa"];
+export function isLocale(value: string): value is Locale {
+  return (LOCALES as string[]).includes(value);
+}
 export const LOCALE_PREFIX: Record<Locale, string> = {
   en: "",
   sr: "/sr",
@@ -42,11 +45,17 @@ export const dictionary = {
       language: "Language",
     },
     hero: {
+      imageAlt: "Luxury off-plan residences in Dubai",
       eyebrow: "Luxury Off-Plan Residences, Dubai",
       heading: "Distinct addresses. One standard of living.",
       body: "Explore our full portfolio of Dubai's most considered new developments — waterfront towers, sky-deck residences, palm-frond villas and branded addresses — and enquire directly with our team.",
       ctaExplore: "Explore Projects",
       ctaContact: "Speak to Our Team",
+    },
+    notFound: {
+      title: "Page not found",
+      body: "The page you're looking for doesn't exist or has moved.",
+      cta: "Back to all projects",
     },
     stats: {
       developments: "Signature Developments",
@@ -78,7 +87,7 @@ export const dictionary = {
       submitLabel: "Send Enquiry",
     },
     project: {
-      by: "By",
+      by: (developer: string) => `By ${developer}`,
       startingFrom: "Starting From",
       apartmentTypesLabel: "Apartment Types",
       community: "Community",
@@ -173,11 +182,17 @@ export const dictionary = {
       language: "Jezik",
     },
     hero: {
+      imageAlt: "Luksuzne rezidencije u izgradnji u Dubaiju",
       eyebrow: "Luksuzne rezidencije u izgradnji, Dubai",
       heading: "Različite adrese. Jedan standard življenja.",
       body: "Istražite naš kompletan portfolio najznačajnijih novih projekata u Dubaiju — tornjeva na obali, rezidencija sa bazenima na krovu, vila na palminim ostrvima i brendiranih adresa — i pošaljite upit direktno našem timu.",
       ctaExplore: "Pogledajte projekte",
       ctaContact: "Kontaktirajte naš tim",
+    },
+    notFound: {
+      title: "Stranica nije pronađena",
+      body: "Stranica koju tražite ne postoji ili je premeštena.",
+      cta: "Nazad na sve projekte",
     },
     stats: {
       developments: "Ekskluzivnih projekata",
@@ -209,7 +224,7 @@ export const dictionary = {
       submitLabel: "Pošalji upit",
     },
     project: {
-      by: "Investitor",
+      by: (developer: string) => `Investitor ${developer}`,
       startingFrom: "Cena od",
       apartmentTypesLabel: "Tipovi stanova",
       community: "Lokacija",
@@ -304,11 +319,17 @@ export const dictionary = {
       language: "Dil",
     },
     hero: {
+      imageAlt: "Dubai'de lüks inşaat halindeki konutlar",
       eyebrow: "Dubai'de Lüks İnşaat Halindeki Konutlar",
       heading: "Farklı adresler. Tek bir yaşam standardı.",
       body: "Dubai'nin en özenle tasarlanmış yeni projelerinin tamamını keşfedin — sahil kuleleri, gökyüzü teraslı rezidanslar, palmiye adası villaları ve marka konutlar — ve ekibimizle doğrudan iletişime geçin.",
       ctaExplore: "Projeleri İnceleyin",
       ctaContact: "Ekibimizle Görüşün",
+    },
+    notFound: {
+      title: "Sayfa bulunamadı",
+      body: "Aradığınız sayfa mevcut değil veya taşınmış.",
+      cta: "Tüm projelere dön",
     },
     stats: {
       developments: "Ayrıcalıklı Proje",
@@ -340,7 +361,7 @@ export const dictionary = {
       submitLabel: "Talebi Gönder",
     },
     project: {
-      by: "Geliştirici",
+      by: (developer: string) => `Geliştirici ${developer}`,
       startingFrom: "Başlangıç Fiyatı",
       apartmentTypesLabel: "Daire Tipleri",
       community: "Konum",
@@ -435,11 +456,17 @@ export const dictionary = {
       language: "اللغة",
     },
     hero: {
+      imageAlt: "مساكن فاخرة قيد الإنشاء في دبي",
       eyebrow: "مساكن فاخرة قيد الإنشاء في دبي",
       heading: "عناوين متميزة. معيار واحد للحياة الراقية.",
       body: "استكشف مجموعتنا الكاملة من أرقى المشاريع الجديدة في دبي — أبراج على الواجهة المائية، ومساكن بمسابح على السطح، وفلل على جزر النخيل، وعناوين ذات علامات تجارية عالمية — وتواصل مباشرة مع فريقنا.",
       ctaExplore: "استكشف المشاريع",
       ctaContact: "تحدث مع فريقنا",
+    },
+    notFound: {
+      title: "الصفحة غير موجودة",
+      body: "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+      cta: "العودة إلى جميع المشاريع",
     },
     stats: {
       developments: "مشروعًا مميزًا",
@@ -471,7 +498,7 @@ export const dictionary = {
       submitLabel: "إرسال الاستفسار",
     },
     project: {
-      by: "المطوّر",
+      by: (developer: string) => `المطوّر: ${developer}`,
       startingFrom: "الأسعار تبدأ من",
       apartmentTypesLabel: "أنواع الوحدات",
       community: "الموقع",
@@ -566,11 +593,17 @@ export const dictionary = {
       language: "زبان",
     },
     hero: {
+      imageAlt: "املاک لوکس در حال ساخت در دبی",
       eyebrow: "املاک لوکس در حال ساخت در دبی",
       heading: "آدرس‌های متمایز. یک استاندارد از زندگی.",
       body: "مجموعه کامل جدیدترین و برجسته‌ترین پروژه‌های دبی را کاوش کنید — برج‌های ساحلی، مجتمع‌های با استخر روی پشت‌بام، ویلاهای جزیره نخل و آدرس‌های برند‌دار — و مستقیماً با تیم ما در تماس باشید.",
       ctaExplore: "مشاهده پروژه‌ها",
       ctaContact: "گفتگو با تیم ما",
+    },
+    notFound: {
+      title: "صفحه پیدا نشد",
+      body: "صفحه‌ای که به دنبال آن هستید وجود ندارد یا منتقل شده است.",
+      cta: "بازگشت به همه پروژه‌ها",
     },
     stats: {
       developments: "پروژه اختصاصی",
@@ -602,7 +635,7 @@ export const dictionary = {
       submitLabel: "ارسال درخواست",
     },
     project: {
-      by: "سازنده",
+      by: (developer: string) => `سازنده: ${developer}`,
       startingFrom: "شروع قیمت از",
       apartmentTypesLabel: "نوع واحدها",
       community: "موقعیت",

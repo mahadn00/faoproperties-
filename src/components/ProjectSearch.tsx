@@ -2,18 +2,15 @@
 
 import { useMemo, useState } from "react";
 import ProjectCard from "./ProjectCard";
-import type { Project } from "@/lib/projects";
+import type { ProjectCardData } from "@/lib/project-card";
 import { dictionary, type Locale } from "@/lib/i18n/dictionary";
 import { PROPERTY_TYPES, projectMatchesSearch, type PropertyType } from "@/lib/search";
 
 export default function ProjectSearch({
   projects,
-  startingPrices,
   locale = "en",
 }: {
-  projects: Project[];
-  /** Numeric AED starting price per slug — see startingPriceAed() in lib/projects. */
-  startingPrices: Record<string, number | null>;
+  projects: ProjectCardData[];
   locale?: Locale;
 }) {
   const t = dictionary[locale].search;
@@ -31,11 +28,10 @@ export default function ProjectSearch({
           p,
           selectedTypes,
           Number.isFinite(min as number) ? min : null,
-          Number.isFinite(max as number) ? max : null,
-          startingPrices[p.slug] ?? null
+          Number.isFinite(max as number) ? max : null
         )
       ),
-    [projects, startingPrices, selectedTypes, min, max]
+    [projects, selectedTypes, min, max]
   );
 
   const hasFilters = selectedTypes.size > 0 || minBudget !== "" || maxBudget !== "";

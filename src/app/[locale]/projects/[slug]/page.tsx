@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
-import { getProjectBySlug, projects } from "@/lib/projects";
+import { projects as baseProjects } from "@/lib/projects";
+import { getLocalizedProjectBySlug } from "@/lib/i18n/localize";
+import { dictionary, isLocale } from "@/lib/i18n/dictionary";
 import Gallery from "@/components/Gallery";
 import MapEmbed from "@/components/MapEmbed";
 import DownloadGate from "@/components/DownloadGate";
@@ -9,7 +11,6 @@ import MobileCtaBar from "@/components/MobileCtaBar";
 import JsonLd from "@/components/JsonLd";
 import ProjectFaq from "@/components/ProjectFaq";
 import { whatsappLink } from "@/lib/constants";
-import { dictionary } from "@/lib/i18n/dictionary";
 import {
   buildPageMetadata,
   projectJsonLd,
@@ -21,18 +22,21 @@ import {
   shareImagePath,
 } from "@/lib/seo";
 
+// Every known project is prerendered for each language (locales come from the
+// parent [locale] layout, whose dynamicParams = false also covers unknown slugs).
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return baseProjects.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
   params,
-}: PageProps<"/projects/[slug]">) {
-  const { slug } = await params;
-  const project = getProjectBySlug(slug);
+}: PageProps<"/[locale]/projects/[slug]">) {
+  const { locale, slug } = await params;
+  if (!isLocale(locale)) return {};
+  const project = getLocalizedProjectBySlug(slug, locale);
   if (!project) return {};
   return buildPageMetadata({
-    locale: "en",
+    locale,
     path: `/projects/${project.slug}`,
     title: project.developer ? `${project.name} — ${project.developer}` : project.name,
     description: project.summary,
@@ -40,23 +44,25 @@ export async function generateMetadata({
   });
 }
 
-export default async function ProjectPage({ params }: PageProps<"/projects/[slug]">) {
-  const { slug } = await params;
-  const project = getProjectBySlug(slug);
+export default async function ProjectPage({ params }: PageProps<"/[locale]/projects/[slug]">) {
+  const { locale, slug } = await params;
+  if (!isLocale(locale)) notFound();
+  const project = getLocalizedProjectBySlug(slug, locale);
   if (!project) notFound();
 
-  const t = dictionary.en;
-  const homeUrl = absoluteUrl(localizedPath("en", "/"));
-  const faqs = projectFaqs(project, "en");
+  const t = dictionary[locale];
+
+  const homeUrl = absoluteUrl(localizedPath(locale, "/"));
+  const faqs = projectFaqs(project, locale);
 
   return (
     <>
-      <JsonLd data={projectJsonLd(project, "en")} />
+      <JsonLd data={projectJsonLd(project, locale)} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: t.nav.home, url: homeUrl },
           { name: t.nav.projects, url: `${homeUrl}#projects` },
-          { name: project.name, url: absoluteUrl(localizedPath("en", `/projects/${project.slug}`)) },
+          { name: project.name, url: absoluteUrl(localizedPath(locale, `/projects/${project.slug}`)) },
         ])}
       />
       <JsonLd data={faqJsonLd(faqs)} />
@@ -74,7 +80,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-40 md:px-10">
           {project.developer && (
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--color-gold)]">
-              By {project.developer}
+              {t.project.by(project.developer)}
             </p>
           )}
           <h1 className="font-display mt-4 text-4xl text-white md:text-6xl">{project.name}</h1>
@@ -85,13 +91,13 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
       {/* Quick facts */}
       <section className="border-b border-[var(--color-sand-line)] bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-10 md:grid-cols-4 md:px-10">
-          <Fact label="Starting From" value={project.startingPrice} />
+          <Fact label={t.project.startingFrom} value={project.startingPrice} />
           <Fact
-            label="Apartment Types"
-            value={project.apartmentTypes.map((t) => t.label).join(" · ")}
+            label={t.project.apartmentTypesLabel}
+            value={project.apartmentTypes.map((type) => type.label).join(" · ")}
           />
-          <Fact label="Community" value={project.community} />
-          <Fact label="Handover" value={project.handover || "On request"} />
+          <Fact label={t.project.community} value={project.community} />
+          <Fact label={t.project.handover} value={project.handover || t.project.onRequest} />
         </div>
         {project.startingPriceNote && (
           <p className="mx-auto max-w-7xl px-6 pb-8 text-xs text-[var(--color-text-muted)] md:px-10">
@@ -104,10 +110,10 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
       <section className="border-b border-[var(--color-sand-line)] bg-white py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
           <h2 className="font-display text-2xl text-[var(--color-text)] md:text-3xl">
-            Gallery
+            {t.project.gallery}
           </h2>
           <div className="rule-gold mt-4 mb-6" />
-          <Gallery images={project.gallery} />
+          <Gallery images={project.gallery} locale={locale} />
         </div>
       </section>
 
@@ -118,7 +124,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             {/* Description */}
             <div>
               <h2 className="font-display text-2xl text-[var(--color-text)] md:text-3xl">
-                About {project.name}
+                {t.project.about} {project.name}
               </h2>
               <div className="rule-gold mt-4 mb-6" />
               <div className="space-y-4 text-[15px] leading-relaxed text-[var(--color-text-muted)]">
@@ -131,7 +137,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             {/* Apartment types */}
             <div>
               <h2 className="font-display text-2xl text-[var(--color-text)] md:text-3xl">
-                Apartment Types
+                {t.project.apartmentTypesLabel}
               </h2>
               <div className="rule-gold mt-4 mb-6" />
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -150,7 +156,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                     )}
                     {type.priceFrom && (
                       <div className="mt-2 text-sm font-medium text-[var(--color-gold-deep)]">
-                        From {type.priceFrom}
+                        {t.project.from} {type.priceFrom}
                       </div>
                     )}
                     {type.units && (
@@ -170,16 +176,16 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             {project.paymentPlan && (
               <div>
                 <h2 className="font-display text-2xl text-[var(--color-text)] md:text-3xl">
-                  Payment Plan
+                  {t.project.paymentPlan}
                 </h2>
                 <div className="rule-gold mt-4 mb-6" />
                 <div className="overflow-hidden rounded-lg border border-[var(--color-sand-line)]">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-white text-start text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
-                        <th className="px-4 py-3 text-start">Milestone</th>
-                        <th className="px-4 py-3 text-start">Percentage</th>
-                        <th className="px-4 py-3 text-start">Timing</th>
+                        <th className="px-4 py-3 text-start">{t.project.milestone}</th>
+                        <th className="px-4 py-3 text-start">{t.project.percentage}</th>
+                        <th className="px-4 py-3 text-start">{t.project.timing}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -204,7 +210,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             {/* Amenities */}
             <div>
               <h2 className="font-display text-2xl text-[var(--color-text)] md:text-3xl">
-                Amenities
+                {t.project.amenities}
               </h2>
               <div className="rule-gold mt-4 mb-6" />
               <ul className="grid gap-3 sm:grid-cols-2">
@@ -220,10 +226,10 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             {/* Location */}
             <div>
               <h2 className="font-display text-2xl text-[var(--color-text)] md:text-3xl">
-                Location
+                {t.project.location}
               </h2>
               <div className="rule-gold mt-4 mb-6" />
-              <MapEmbed location={project.location} />
+              <MapEmbed location={project.location} locale={locale} />
             </div>
 
             {/* FAQ */}
@@ -235,10 +241,10 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             <div className="sticky top-24 space-y-6">
               <div id="documents" className="scroll-mt-24 rounded-xl border border-[var(--color-sand-line)] bg-white p-6">
                 <h3 className="font-display text-lg text-[var(--color-text)]">
-                  Documents &amp; Pricing
+                  {t.project.documentsTitle}
                 </h3>
                 <p className="mt-1 text-sm text-[var(--color-text-muted)]">
-                  Share your details and our sales team will send these to you directly.
+                  {t.project.documentsBody}
                 </p>
                 <div className="mt-5 space-y-3">
                   {project.documents.map((doc) => (
@@ -247,18 +253,19 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                       projectSlug={project.slug}
                       projectName={project.name}
                       document={doc}
+                      locale={locale}
                     />
                   ))}
                 </div>
               </div>
 
               <a
-                href={whatsappLink(`Hi, I'm interested in ${project.name}.`)}
+                href={whatsappLink(t.project.whatsappMessage(project.name))}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] py-4 text-sm font-medium text-white transition-opacity hover:opacity-90"
               >
-                Chat on WhatsApp
+                {t.project.whatsappCta}
               </a>
             </div>
           </div>
