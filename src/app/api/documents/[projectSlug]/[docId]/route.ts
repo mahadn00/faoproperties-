@@ -111,6 +111,18 @@ const DOCUMENT_FILES: Record<string, Record<string, string>> = {
     brochure: "The-Wow-Tower-Brochure.pdf",
     "sale-offer": "The-Wow-Tower-Sale-Offer.pdf",
   },
+  "barari-palace": {
+    brochure: "barari-palace-brochure.pdf",
+    "payment-plan": "barari-palace-payment-plan.pdf",
+  },
+  "empire-jebel-ali": {
+    "elevation-renders": "Empire-Jebel-Ali-Elevation-Renders.pdf",
+    "sale-offer": "Empire-Jebel-Ali-Sale-Offer.pdf",
+  },
+  "squarex-one": {
+    brochure: "SquareX-One-Brochure.pdf",
+    "fact-sheet": "SquareX-One-Fact-Sheet.pdf",
+  },
 };
 
 const CONTENT_TYPES: Record<string, string> = {

@@ -1404,4 +1404,139 @@ export const projectTranslationsSr: Record<string, ProjectTranslation> = {
       { id: "sale-offer", label: "Prodajna ponuda i plan plaćanja", description: "Zvanična prodajna ponuda sa kompletnim investicionim planom plaćanja 60/40 do useljenja i završetka posle useljenja." },
     ],
   },
+
+  "barari-palace": {
+    tagline: "Gde se moć susreće sa mirom",
+    summary:
+      "Butik stambeni toranj kompanije ARY & MAZ Developments koji se izdiže u Majan-u na ivici zelenila Al Barari-ja, sa garsonjerama, stanovima od 1 i 2 spavaće sobe i Sky Vilama u ukupno 221 domu, planom plaćanja 60/40 posle useljenja i očekivanim završetkom u Q4 2028.",
+    description: [
+      "Barari Palace je debitantski projekat kompanije ARY & MAZ Developments, koji se izdiže u Majan-u na ivici Al Barari-ja — jedne od najetabliranijih zelenih zajednica Dubaija. Pozicioniran svega nekoliko minuta od ključnih gradskih atrakcija, a opet izolovan od buke, toranj se nalazi 8 minuta od Global Village-a, 10 minuta od Dubai Miracle Garden-a, 20 minuta od Dubai Hills Mall-a i aerodroma u Dubaiju, 22 minuta od Downtown Dubaija i 25 minuta od Palm Jumeirah-e. Investitor pozicionira projekat pod sloganom „Gde se moć susreće sa mirom” — rezidenciju zamišljenu kao privatno, sabrano utočište čim stanari pređu njen prag.",
+      "Fasada tornja se otvara u zaobljenim balkonima obloženim toplim tonovima fasadnih materijala, ublaženim u prizemlju odraslim palmama i bazenskom terasom na postolju. Unutra, lobi odlikuju otvorenost i biran materijal — mermerni pultovi recepcije, drvene pregrade i toplo ambijentalno osvetljenje stvaraju ekskluzivan, nedvosmisleno luksuzan prvi utisak.",
+      "Rezidencije obuhvataju garsonjere do stanova sa 2 spavaće sobe, plus ograničenu kolekciju od pet Sky Vila. Garsonjere počinju od 770.000 AED na 485 kvadratnih stopa, stanovi sa 1 spavaćom sobom od 1,25 miliona AED na 834 kvadratne stope, a stanovi sa 2 spavaće sobe od 2,4 miliona AED na 1.632 kvadratne stope; Sky Vile počinju od 6,5 miliona AED. Enterijeri favorizuju kuhinje preplavljene svetlošću sa jednostavnim ormarićima i prirodnim materijalima, mirne glavne spavaće sobe završene simetrično uparenim mermerom, a u Sky Vilama — dnevne prostore na celom spratu koji se otvaraju ka panoramskim pogledima. Kroz 221 dom u zgradi (58 garsonjera, 99 jednosobnih, 59 dvosobnih stanova i 5 Sky Vila), svaki raspored je, rečima investitora, osmišljen za „stil života izgrađen na jasnoći, udobnosti i sofisticiranom življenju.”",
+      "Sadržaji su koncentrisani oko bazena na postolju u stilu plaže uokvirenog odraslim palmama, klupske kuće i lounge-a na krovu s panoramskim pogledom na grad, performansno orijentisanog fitnes centra, saune i parnog kupatila za privatni oporavak, uređenog vrta zajednice i posebnih dečijih prostora za igru. Očekuje se da će Barari Palace biti završen u Q4 2028, uz kupovinu po planu plaćanja 60/40 posle useljenja: 15% prilikom rezervacije, 10% u 12. mesecu, 1% mesečno tokom 35 meseci do dostizanja 60% pre useljenja, a preostalih 40% plaća se u jednakim mesečnim ratama od 1% tokom 40 meseci posle useljenja.",
+    ],
+    community: "Majan, Al Barari, Dubai",
+    startingPriceNote:
+      "Početne cene i veličine za garsonjere / 1BR / 2BR date su prema investitorovom potvrđenom cenovniku. Napomena: tabela strukture jedinica u samoj brošuri navodi nešto drugačije (niže) početne cene za ova tri tipa — 725.000 AED / 1,1 miliona AED / 1,56 miliona AED — verovatno raniju verziju cenovnika; u celom tekstu korišćene su potvrđene cifre navedene iznad. Cena i broj jedinica za Sky Vilu potiču isključivo iz brošure; veličina Sky Vile nije navedena u izvornom materijalu.",
+    apartmentTypes: [
+      { label: "Garsonjera", sizeRange: "485 kvadratnih stopa" },
+      { label: "1 spavaća soba", sizeRange: "834 kvadratne stope" },
+      { label: "2 spavaće sobe", sizeRange: "1.632 kvadratne stope" },
+      { label: "Sky Vila" },
+    ],
+    totalUnits: "221 stambena jedinica (58 garsonjera, 99 jednosobnih, 59 dvosobnih stanova, 5 Sky Vila)",
+    handover: "Q4 2028. (očekivani završetak)",
+    paymentPlan: [
+      { label: "Učešće", timing: "Prilikom rezervacije" },
+      { label: "Rata", timing: "U 12. mesecu od rezervacije" },
+      { label: "Rate tokom izgradnje", timing: "1% mesečno tokom 35 meseci (tokom izgradnje)" },
+      { label: "Rate posle useljenja", timing: "1% mesečno tokom 40 meseci (posle useljenja)" },
+    ],
+    amenities: [
+      "Bazen u stilu plaže",
+      "Klupska kuća i lounge na krovu",
+      "Fitnes centar",
+      "Sauna i parno kupatilo",
+      "Vrt zajednice",
+      "Dečiji prostori za igru",
+      "Veliki dvovisinski lobi sa mermernom recepcijom i toplo osvetljenim lounge sedištima",
+    ],
+    location: { label: "Majan, Al Barari, Dubai — približna lokacija zajednice, tačna parcela na potvrdi" },
+    documents: [
+      { id: "brochure", label: "Brošura projekta", description: "Kompletna lifestyle brošura koja pokriva koncept dizajna, rezidencije, sadržaje i lokaciju Barari Palace-a." },
+      { id: "payment-plan", label: "Plan plaćanja", description: "Struktura plana plaćanja 60/40 posle useljenja sa rasporedom rata i očekivanim završetkom u Q4 2028." },
+    ],
+  },
+
+  "empire-jebel-ali": {
+    tagline: "Nova adresa koja se izdiže u Jebel Ali-ju",
+    summary:
+      "Empire Jebel Ali je stambeni toranj srednje visine kompanije Empire Developments u Jebel Ali-ju, Dubai, koji nudi stanove od garsonjera do 3 spavaće sobe od 790.000 AED, uz prodajnu ponudu objavljene garsonjere koja potvrđuje cene i plan otplate na 80 meseci koji uključuje DLD taksu.",
+    description: [
+      "Empire Jebel Ali je stambeni projekat kompanije Empire Developments, pozicioniran duž uređene magistralne saobraćajnice u delu Dubaija Jebel Ali. Elevacioni renderi prikazuju toranj uvučen iza uređenog zelenog pojasa i ogradnog zida, sa parking mestima uz ulicu i odraslim palmama i žbunastim rastinjem koji ublažavaju ivicu zgrade duž prometne višetračne saobraćajnice, dok su u okolini vidljivi stanica metroa i niske poslovne zgrade.",
+      "Zgrada se izdiže iznad postolja od dva do tri nivoa u kremastim i bronzanim tonovima, sa maloprodajnim jedinicama u prizemlju i posebnim ulazom za parking vidljivim iza ostakljenih izloga. Iznad postolja, stambeni spratovi se povlače unazad u fasadu od stakla i balkona — ostakljenje od poda do plafona uparen sa privatnim balkonima na svakoj strani, uokvireno tamnim vertikalnim lamelama na uglovima zgrade koje tornju daju jasan, kockast profil naspram panorame grada.",
+      "Empire Jebel Ali se nudi kroz četiri tipa stanova: garsonjere od 790.000 AED na 372 kvadratne stope, stanovi sa 1 spavaćom sobom od 1,17 miliona AED na 720 kvadratnih stopa, stanovi sa 2 spavaće sobe od 1,8 miliona AED na 1.160 kvadratnih stopa i stanovi sa 3 spavaće sobe od 2,2 miliona AED na 1.560 kvadratnih stopa. Objavljena jedinica-garsonjera — Jedinica 306, predmet prodajne ponude korišćene za izradu plana plaćanja u ovoj ponudi — cenjena je na 799.777 AED na istih 372 kvadratne stope, čime se potvrđuje veličina garsonjere koju navodi investitor kroz stvarnu referencu transakcije.",
+      "Prodajna ponuda za Garsonjeru 306 strukturira plaćanje kao početno učešće od 20% plus 4% DLD taksa za registraciju i fiksna administrativna/procesna taksa, sve dospelo u roku od 30 dana od datuma ponude, nakon čega sledi 80 jednakih mesečnih rata od po 1% kupoprodajne cene počevši od drugog meseca — linearan raspored koji ravnomerno raspoređuje preostali iznos tokom više od šest i po godina, umesto da plaćanje veže za fazu izgradnje ili datum useljenja.",
+    ],
+    community: "Jebel Ali, Dubai",
+    startingPriceNote:
+      "Početna cena za garsonjeru i cene svih tipova jedinica date su prema investitorovoj opštoj ponudi projekta. Cena garsonjere potvrđena je prodajnom ponudom za Garsonjeru 306, gde je ista jedinica od 372 kvadratne stope cenjena na 799.777 AED. Ukupan broj jedinica i datum useljenja nisu navedeni u izvornim materijalima.",
+    apartmentTypes: [
+      { label: "Garsonjera", sizeRange: "372 kvadratne stope" },
+      { label: "1 spavaća soba", sizeRange: "720 kvadratnih stopa" },
+      { label: "2 spavaće sobe", sizeRange: "1.160 kvadratnih stopa" },
+      { label: "3 spavaće sobe", sizeRange: "1.560 kvadratnih stopa" },
+    ],
+    paymentPlan: [
+      { label: "Učešće", timing: "Dospeva u roku od 30 dana od datuma ponude" },
+      { label: "DLD taksa za registraciju", timing: "Dospeva u roku od 30 dana od datuma ponude" },
+      { label: "Administrativna i procesna taksa", timing: "Fiksna taksa od 6.340 AED, dospeva u roku od 30 dana od datuma ponude" },
+      { label: "Rate posle rezervacije", timing: "80 jednakih mesečnih rata od po 1%, počevši 60 dana posle datuma ponude i nastavljajući mesečno tokom 80 meseci" },
+    ],
+    amenities: [
+      "Maloprodajne jedinice u prizemlju",
+      "Natkriveni parking na lokaciji",
+    ],
+    location: { label: "Jebel Ali, Dubai — približna lokacija, tačna parcela na potvrdi" },
+    documents: [
+      { id: "elevation-renders", label: "Elevacioni renderi", description: "Kompletan set spoljašnjih elevacionih rendera koji prikazuju fasadu zgrade, postolje i izgled na nivou ulice." },
+      { id: "sale-offer", label: "Primer prodajne ponude (Garsonjera 306)", description: "Zvanična prodajna ponuda za Garsonjeru 306 koja prikazuje tačnu cenu i kompletan raspored rata na 80 meseci." },
+    ],
+  },
+
+  "squarex-one": {
+    tagline: "Osmišljen za stil života, izgrađen za vrednost u srcu JVC-a",
+    summary:
+      "Stambeni toranj sa prizemljem, tri nivoa parkinga na postolju i 16 spratova, u realizaciji kompanije Tasmeer Indigo Properties u Distriktu 12 Jumeirah Village Circle-a, sa rezidencijama od garsonjera do stanova sa 2 spavaće sobe i sobom za osoblje od 800.000 AED, klupskom kućom i lenjom rekom na krovu, i useljenjem planiranim za Q1 2028.",
+    description: [
+      "SquareX One je savremeni stambeni toranj osmišljen za moderan urbani život u srcu Jumeirah Village Circle-a. U realizaciji kompanije Tasmeer Indigo Properties pod sloganom „Premium Quality, Smart Price” (vrhunski kvalitet, pametna cena), zgrada se izdiže kao prizemlje plus tri nivoa parkinga na postolju, 16 stambenih spratova i krovni nivo, sa maloprodajnim i ugostiteljskim prostorom utkanim u prizemlje i nivoe postolja. Strukturu jedinica čine garsonjere, jednosobni i dvosobni stanovi, namenjeni kako krajnjim korisnicima tako i investitorima koji traže funkcionalne rasporede u jednoj od najbrže rastućih stambenih zajednica Dubaija.",
+      "Arhitektura favorizuje uravnotežene, savremene proporcije: zaobljena bela fasada obavijena balkonima obraslim biljkama i ostakljenim terasama izdiže se iznad postolja sa lamelama, sa osvetljenim ulaznim natpisom SquareX One, drvenim akcentima i staklenim frontom okrenutim ka ulici. Unutra, lobi u stilu zvezdanog neba završen je simetrično uparenim mermerom, rebrastim drvenim panelima i visećim rasvetnim telima sa mesinganim detaljima, dok su liftovski holovi obloženi tamnim mermerom i metalnim elementima u bronzanim tonovima.",
+      "Rezidencije su potpuno opremljene po visokim standardima: Siemens ili Bosch kuhinjski aparati, Kohler kupatilska armatura i sanitarije u mat crnoj boji, Häfele ili Hettich okov za garderobere i ormariće, ostakljenje od poda do plafona i Simpolo porcelanski podovi kroz ceo stan, sa Quick Step drvenim laminatom na balkonima. Smart-home funkcije obuhvataju biometrijske/otisak-prsta brave na glavnim vratima, Schneider/Legrand razvodne uređaje i automatizaciju, upravljanje putem mobilne aplikacije i Google Home-a, i Honeywell termostate — vrstu svakodnevne pogodnosti namenjene kako vlasnicima koji žive u stanu tako i zakupcima.",
+      "Lifestyle sadržaji se prostiru kroz nivo postolja i krova: unutrašnja i spoljašnja teretana sa posebnim studiom za jogu i aerobik, klupska kuća, sauna, parno kupatilo i soba za oporavak, niz bazena u stilu odmarališta sa lenjom rekom, uvučenim lounge sedištima i vodopadom, poseban dečiji splash park i prostor za igru, kao i terase na krovu sa lounge-om za zalazak sunca, barom, sedištima oko vatre, padel terenom i stonim tenisom. Sa procenjenih 150–175 stambenih jedinica ukupno, prosečnim rokom završetka projekata od 2,5 godine u portfoliju Tasmeer Indigo-a i useljenjem planiranim za Q1 2028, SquareX One je pozicioniran oko stabilne tražnje za izdavanjem u JVC-u i stalnog rasta infrastrukture zajednice.",
+    ],
+    community: "Jumeirah Village Circle, Distrikt 12, Dubai",
+    startingPriceNote:
+      "Početna cena odnosi se na tip Garsonjera (Tip A1/A2/A3), 362 – 389 kvadratnih stopa ukupne stambene površine — što se približno poklapa sa garsonjerom od ~371 kvadratne stope navedenom u investitorovom početnom cenovniku (primer Garsonjere 208, 372 kvadratne stope, cena 816.791 AED). Pogledajte tipove stanova ispod za cene 1-sobnih, 2-sobnih i 2-sobnih stanova sa sobom za osoblje kroz kompletnu strukturu jedinica Tip A–D. U izvornim materijalima nije bilo inventara sa 3 spavaće sobe ili većeg.",
+    apartmentTypes: [
+      { label: "Garsonjera", sizeRange: "362 – 389 kvadratnih stopa" },
+      { label: "1 spavaća soba", sizeRange: "747 – 1.213 kvadratnih stopa" },
+      { label: "2 spavaće sobe", sizeRange: "1.120 – 1.270 kvadratnih stopa" },
+      { label: "2 spavaće sobe + soba za osoblje", sizeRange: "1.431 – 1.435 kvadratnih stopa" },
+    ],
+    totalUnits: "Procenjeno 150 – 175 stambenih jedinica (potvrda u toku prema investitorovom informativnom pregledu)",
+    handover: "Q1 2028.",
+    paymentPlan: [
+      { label: "Učešće", timing: "Prilikom rezervacije (avgust 2026.)" },
+      { label: "Rate tokom izgradnje", timing: "Mesečne rate od 1%, sep 2026. – maj 2028. (pre useljenja)" },
+      { label: "Rate posle useljenja", timing: "Mesečne rate od 1%, od juna 2028. nadalje (približno 67–68 meseci)" },
+    ],
+    amenities: [
+      "Bazen u stilu odmarališta sa lenjom rekom",
+      "Uvučena lounge sedišta uz bazen",
+      "Vodeni element sa vodopadom i džakuzi",
+      "Dečiji splash park, dečiji bazen i prostor za igru",
+      "Dečiji zid za penjanje",
+      "Unutrašnja i spoljašnja teretana",
+      "Unutrašnji studio za aerobik i zona za jogu",
+      "Soba za oporavak, ledeno kupatilo i kiseonička komora",
+      "Parno kupatilo, sauna i infracrvena sauna",
+      "Klupska kuća i biznis lounge",
+      "Co-working prostor i kabina za sastanke",
+      "Biblioteka",
+      "Unutrašnja soba za igre (stoni fudbal, bilijar)",
+      "Terasa na krovu sa padel terenom i stonim tenisom",
+      "Prostor za roštilj i sedišta za sunčanje na terasi",
+      "Zen vrt i staza za trčanje",
+      "Porodični prostor za sedenje",
+      "Muške i ženske svlačionice",
+      "Lobi u stilu zvezdanog neba i osvetljenje fasade",
+      "Tri nivoa parkinga na postolju sa stanicama za punjenje električnih vozila",
+      "Smart home integracija (mobilna aplikacija, Google Home, biometrijska brava)",
+    ],
+    location: { label: "Jumeirah Village Circle, Distrikt 12, Dubai — približna lokacija zajednice, tačna parcela na potvrdi" },
+    documents: [
+      { id: "brochure", label: "Digitalna brošura", description: "Kompletna lifestyle brošura koja pokriva koncept dizajna, tipove rezidencija i sadržaje SquareX One-a." },
+      { id: "fact-sheet", label: "Informativni pregled", description: "Investitorov informativni pregled sa konfiguracijom projekta, vremenskim okvirom izgradnje, specifikacijom opreme i kontekstom lokacije." },
+    ],
+  },
 };

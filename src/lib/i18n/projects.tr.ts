@@ -1360,4 +1360,142 @@ export const projectTranslationsTr: Record<string, ProjectTranslation> = {
       { id: "sale-offer", label: "Satış Teklifi ve Ödeme Planı", description: "Teslime ve teslim sonrası tamamlanmaya kadar tam %60/40 yatırım ödeme planını içeren resmi Satış Teklifi." },
     ],
   },
+
+  "barari-palace": {
+    tagline: "Gücün Huzurla Buluştuğu Yer",
+    summary:
+      "ARY & MAZ Developments imzalı, Al Barari'nin yeşilliklerinin kıyısında Majan'da yükselen butik bir rezidans kulesi — 221 konut genelinde stüdyo, 1 ve 2 yatak odalı daireler ve Sky Villa'lar, %60/40 teslim sonrası ödeme planı ve 2028'in 4. Çeyreği'nde tamamlanması öngörülüyor.",
+    description: [
+      "Barari Palace, ARY & MAZ Developments'ın ilk projesi olarak, Dubai'nin en köklü yeşil topluluklarından biri olan Al Barari'nin kıyısında, Majan'da yükseliyor. Şehrin başlıca cazibe merkezlerine dakikalar mesafede, ancak gürültüsünden yalıtılmış bir konumda yer alan kule; Global Village'a 8 dakika, Dubai Miracle Garden'a 10 dakika, Dubai Hills Mall ve Dubai Havalimanı'na 20 dakika, Downtown Dubai'ye 22 dakika ve Palm Jumeirah'a 25 dakika mesafede. Geliştirici, projeyi \"Gücün Huzurla Buluştuğu Yer\" sloganı altında konumlandırıyor — sakinler eşiğini geçtiği andan itibaren özel, dingin bir alan olarak tasarlanmış bir rezidans.",
+      "Kulenin cephesi, sıcak tonlu kaplamayla sarılmış geniş kavisli balkonlarla açılıyor; zemin katta ise olgun palmiye peyzajı ve bir podyum havuz terasıyla yumuşatılıyor. İçeride lobi, açıklık ve rafine malzemelerle şekillenir — mermer resepsiyon bankoları, ahşap perdeleme ve sıcak ortam aydınlatması, ilk izlenimden itibaren ayrıcalıklı ve tartışmasız lüks bir hava yaratır.",
+      "Rezidanslar stüdyodan iki yatak odalı dairelere kadar uzanıyor, ayrıca sınırlı sayıda beş Sky Villa'dan oluşan özel bir koleksiyon sunuluyor. Stüdyolar 485 sq ft'te 770.000 AED'den, 1 yatak odalı daireler 834 sq ft'te 1,25 milyon AED'den, 2 yatak odalı daireler ise 1.632 sq ft'te 2,4 milyon AED'den başlıyor; Sky Villa'lar 6,5 milyon AED'den başlıyor. İç mekânlar; sade dolap sistemleri ve doğal malzemelerle ışık dolu mutfakları, kitap eşleşmeli mermerle kaplanmış sakin tonlu ebeveyn yatak odalarını ve — Sky Villa'larda — panoramik manzaraya açılan tam kat yaşam alanlarını önceliklendiriyor. Binanın 221 konutu genelinde (58 stüdyo, 99 tek yatak odalı, 59 iki yatak odalı daire ve 5 Sky Villa), geliştiricinin ifadesiyle her yerleşim \"netlik, konfor ve zarif bir yaşam üzerine kurulu bir yaşam tarzı\" için tasarlandı.",
+      "Olanaklar; olgun palmiyelerle çevrelenmiş plaj tarzı bir podyum havuzu, panoramik şehir manzaralı bir kulüp evi ve çatı lounge'ı, performans odaklı bir fitness merkezi, özel toparlanma için bir sauna ve buhar odası süiti, peyzajlı bir topluluk bahçesi ve özel çocuk oyun alanları etrafında toplanıyor. Barari Palace'ın 2028'in 4. Çeyreği'nde tamamlanması öngörülüyor; satın alma %60/40 teslim sonrası ödeme planıyla yapılıyor: rezervasyonda %15, 12. ayda %10, teslime kadar %60'a ulaşacak şekilde 35 ay boyunca aylık %1 ve kalan %40'ın teslim sonrası 40 ay boyunca eşit aylık %1 taksitlerle ödenmesi.",
+    ],
+    community: "Majan, Al Barari, Dubai",
+    startingPrice: "770.000 AED",
+    startingPriceNote:
+      "Stüdyo / 1YO / 2YO başlangıç fiyatları ve boyutları, geliştiricinin onaylı fiyat listesine göredir. Not: broşürün kendi birim dağılım tablosunda bu üç tip için biraz farklı (daha düşük) başlangıç fiyatları listeleniyor — sırasıyla 725.000 AED / 1,1 milyon AED / 1,56 milyon AED — muhtemelen daha eski bir fiyat listesi sürümü; yukarıdaki onaylı rakamlar tüm metin boyunca kullanılmıştır. Sky Villa fiyatı ve birim sayısı yalnızca broşürden alınmıştır; kaynak materyalde Sky Villa boyutu belirtilmemiştir.",
+    apartmentTypes: [
+      { label: "Stüdyo", sizeRange: "485 sq ft" },
+      { label: "1 Yatak Odalı", sizeRange: "834 sq ft" },
+      { label: "2 Yatak Odalı", sizeRange: "1.632 sq ft" },
+      { label: "Sky Villa" },
+    ],
+    totalUnits: "221 konut (58 Stüdyo, 99 Tek Yatak Odalı, 59 İki Yatak Odalı, 5 Sky Villa)",
+    handover: "2028'in 4. Çeyreği (tahmini tamamlanma)",
+    paymentPlan: [
+      { label: "Peşinat", timing: "Rezervasyonda" },
+      { label: "Taksit", timing: "Rezervasyondan İtibaren 12. Ay" },
+      { label: "İnşaat Dönemi Taksitleri", timing: "İnşaat Süresince 35 Ay Boyunca Aylık %1" },
+      { label: "Teslim Sonrası Taksitler", timing: "Teslim Sonrası 40 Ay Boyunca Aylık %1" },
+    ],
+    amenities: [
+      "Plaj Havuzu",
+      "Kulüp Evi ve Çatı Lounge'ı",
+      "Fitness Merkezi",
+      "Sauna ve Buhar Odası",
+      "Topluluk Bahçesi",
+      "Çocuk Oyun Alanları",
+      "Mermer resepsiyonlu ve sıcak ışıklı lounge oturma alanlı, çift yükseklikli görkemli lobi",
+    ],
+    location: { label: "Majan, Al Barari, Dubai — yaklaşık topluluk konumu, kesin parsel onay bekliyor" },
+    documents: [
+      { id: "brochure", label: "Proje Broşürü", description: "Barari Palace için tasarım konsepti, rezidanslar, olanaklar ve konumu içeren tam lifestyle broşürü." },
+      { id: "payment-plan", label: "Ödeme Planı", description: "Taksit takvimi ve 2028'in 4. Çeyreği'nde öngörülen tamamlanmayla %60/40 teslim sonrası ödeme planı yapısı." },
+    ],
+  },
+
+  "empire-jebel-ali": {
+    tagline: "Jebel Ali'de yükselen yeni bir adres",
+    summary:
+      "Empire Jebel Ali, Empire Developments'ın Dubai'nin Jebel Ali bölgesindeki orta yükseklikli rezidans kulesi — 790.000 AED'den başlayan stüdyodan 3 yatak odalıya kadar daireler sunuyor; satışa çıkan bir stüdyo biriminin satış teklifi fiyatlandırmayı ve DLD dahil 80 aylık bir taksit planını doğruluyor.",
+    description: [
+      "Empire Jebel Ali, Empire Developments imzalı, Dubai'nin Jebel Ali bölgesinde peyzajlı bir ana arter yolu boyunca konumlanan bir rezidans projesidir. Cephe render görselleri, kuleyi peyzajlı bir şerit ve çevre çitinin gerisinde, sokak kenarı park alanları ile olgun palmiye ve çalı peyzajının binanın kenarını yumuşattığı, yoğun çok şeritli bir yol boyunca gösteriyor; çevrede bir metro istasyonu ve alçak katlı ticari binalar görülüyor.",
+      "Bina, iki ila üç katlı, bantlı krem ve bronz tonlu bir podyum üzerinde yükseliyor; zemin kat perakende üniteleri ve camlı vitrinlerin arkasında görünen özel bir otopark girişi bulunuyor. Podyumun üzerinde, rezidans katları cam ve balkon cepheli bir profile geri çekiliyor — her cephede özel balkonlarla eşleşen tam yükseklikte cam kaplama, binanın köşelerindeki koyu renkli dikey kanatlarla çerçevelenerek kuleye şehir silüetine karşı keskin, kutu formunda bir profil kazandırıyor.",
+      "Empire Jebel Ali dört daire tipinde sunuluyor: stüdyolar 372 sq ft'te 790.000 AED'den, 1 yatak odalı daireler 720 sq ft'te 1,17 milyon AED'den, 2 yatak odalı daireler 1.160 sq ft'te 1,8 milyon AED'den ve 3 yatak odalı daireler 1.560 sq ft'te 2,2 milyon AED'den başlıyor. Satışa çıkan bir stüdyo birimi — bu listelemenin ödeme planının oluşturulmasında kullanılan satış teklifinin konusu olan Ünite 306 — aynı 372 sq ft boyutunda 799.777 AED'den fiyatlandırılmış olup, geliştiricinin belirttiği stüdyo boyutunu gerçek bir işlem referansıyla doğruluyor.",
+      "Stüdyo 306 satış teklifi, ödemeyi başlangıçta %20 peşinat artı %4 DLD kayıt ücreti ve sabit bir idari/işlem ücreti olarak yapılandırıyor; tümü teklif tarihinden itibaren 30 gün içinde ödeniyor, ardından ikinci aydan itibaren başlayan satış bedelinin %1'i tutarında 80 eşit aylık taksit geliyor — bu, ödemeyi bir inşaat aşamasına veya teslim tarihine bağlamak yerine bakiyeyi altı buçuk yılı aşan bir süreye eşit olarak yayan doğrusal bir takvimdir.",
+    ],
+    community: "Jebel Ali, Dubai",
+    startingPrice: "790.000 AED",
+    startingPriceNote:
+      "Stüdyo başlangıç fiyatı ve tüm birim tipi fiyatlandırması, geliştirici tarafından projenin genel satışı için sağlanan bilgilere dayanmaktadır. Stüdyo fiyatlandırması, aynı 372 sq ft'lik birimin 799.777 AED'den fiyatlandırıldığı Stüdyo 306 satış teklifiyle doğrulanmaktadır. Toplam birim sayısı ve teslim tarihi kaynak materyallerde belirtilmemiştir.",
+    apartmentTypes: [
+      { label: "Stüdyo", sizeRange: "372 sq ft" },
+      { label: "1 Yatak Odalı", sizeRange: "720 sq ft" },
+      { label: "2 Yatak Odalı", sizeRange: "1.160 sq ft" },
+      { label: "3 Yatak Odalı", sizeRange: "1.560 sq ft" },
+    ],
+    paymentPlan: [
+      { label: "Peşinat", timing: "Teklif tarihinden itibaren 30 gün içinde ödenir" },
+      { label: "DLD Kayıt Ücreti", timing: "Teklif tarihinden itibaren 30 gün içinde ödenir" },
+      { label: "İdari ve İşlem Ücreti", timing: "Sabit 6.340 AED ücret, teklif tarihinden itibaren 30 gün içinde ödenir" },
+      { label: "Rezervasyon Sonrası Taksitler", timing: "Teklif tarihinden 60 gün sonra başlayıp sonrasında 80 ay boyunca aylık olarak devam eden, her biri %1 tutarında 80 eşit taksit" },
+    ],
+    amenities: [
+      "Zemin Kat Perakende Üniteleri",
+      "Site İçi Kapalı Otopark",
+    ],
+    location: { label: "Jebel Ali, Dubai — yaklaşık bölge konumu, kesin parsel onay bekliyor" },
+    documents: [
+      { id: "elevation-renders", label: "Cephe Render Görselleri", description: "Binanın cephesini, podyumunu ve sokak seviyesi sunumunu gösteren eksiksiz cephe render seti." },
+      { id: "sale-offer", label: "Örnek Satış Teklifi (Stüdyo 306)", description: "Tam fiyatlandırmayı ve eksiksiz 80 aylık taksit takvimini gösteren Stüdyo Ünite 306 için resmi satış teklifi." },
+    ],
+  },
+
+  "squarex-one": {
+    tagline: "JVC'nin kalbinde, yaşam tarzı için tasarlandı, değer için inşa edildi",
+    summary:
+      "Jumeirah Village Circle'ın 12. Bölgesi'nde, Tasmeer Indigo Properties imzalı Zemin+3 Podyum+16 katlı bir rezidans kulesi — 800.000 AED'den başlayan stüdyodan hizmetçi odalı 2 yatak odalıya kadar rezidanslar, bir çatı kulüp evi ve tembel nehir, teslimin 2028'in 1. Çeyreği'nde hedeflendiği bir proje.",
+    description: [
+      "SquareX One, Jumeirah Village Circle'ın kalbinde modern kentsel yaşam için tasarlanmış çağdaş bir rezidans kulesidir. 'Premium Kalite, Akıllı Fiyat' sloganı altında Tasmeer Indigo Properties tarafından geliştirilen bina; Zemin Kat artı üç podyum otopark katı, 16 rezidans katı ve bir çatı katı olarak yükseliyor, zemin ve podyum katlarına perakende ve yeme-içme alanları işleniyor. Stüdyo, tek yatak odalı ve iki yatak odalı rezidanslar birim dağılımını oluşturuyor; hem son kullanıcıları hem de Dubai'nin en hızlı büyüyen rezidans topluluklarından birinde verimli yerleşimler arayan yatırımcıları hedefliyor.",
+      "Mimari, dengeli ve çağdaş oranları tercih ediyor: bitkilerle çevrili balkonlar ve camlı teraslarla sarılı kavisli beyaz bir cephe, aydınlatılmış SquareX One giriş tabelası, ahşap detaylar ve sokağa bakan cam cepheye sahip panjurlu bir podyumun üzerinde yükseliyor. İçeride, yıldızlı lobi kitap eşleşmeli mermer, yivli ahşap panel kaplama ve pirinç detaylı sarkıt aydınlatmayla tamamlanıyor; asansör lobileri koyu mermer ve bronz tonlu metal işçiliğiyle kaplanmış.",
+      "Rezidanslar yüksek bir donanım standardında tam donatılmıştır: Siemens veya Bosch mutfak cihazları, Kohler mat siyah banyo armatürleri ve sıhhi tesisat, Häfele veya Hettich dolap ve mobilya donanımı, her yerde tavana kadar cam kaplama ve Simpolo porselen zemin kaplaması, balkonlarda ise Quick Step ahşap laminat zemin. Akıllı ev özellikleri arasında biyometrik/parmak izi ana kapı kilitleri, Schneider/Legrand şalt cihazları ve otomasyon, mobil uygulama ve Google Home kontrolü ile Honeywell termostatlar bulunuyor — hem mülk sahibi oturanları hem de kiracıları hedefleyen günlük konfor özellikleri.",
+      "Lifestyle olanakları hem podyum hem de çatı katlarına yayılıyor: özel bir yoga ve aerobik stüdyolu iç-dış mekân spor salonu, bir kulüp evi, sauna, buhar odası ve toparlanma odası, tembel nehirli, gömme lounge oturma alanlı ve şelale özellikli otel konseptli bir havuz dizisi, özel bir çocuk sıçrama parkı ve oyun alanı, ayrıca gün batımı lounge'ı, bar, ateş çukuru oturma alanı, padel ve masa tenisi bulunan çatı terasları. Tahmini 150–175 toplam rezidans birimi, Tasmeer Indigo'nun portföyünde ortalama 2,5 yıllık bir proje tamamlama geçmişi ve 2028'in 1. Çeyreği'nde hedeflenen teslimle SquareX One, JVC'nin istikrarlı kira talebi ve devam eden topluluk altyapı büyümesi etrafında konumlandırılıyor.",
+    ],
+    community: "Jumeirah Village Circle, Bölge 12, Dubai",
+    startingPrice: "800.000 AED",
+    startingPriceNote:
+      "Başlangıç fiyatı, 362 – 389 sq ft toplam yaşam alanına sahip Stüdyo tipini (Tip A1/A2/A3) yansıtıyor — geliştiricinin ilk satış fiyatlandırmasında referans gösterilen ~371 sq ft'lik stüdyoya (örnek Stüdyo Ünite 208, 372 sq ft, 816.791 AED'den fiyatlandırılmış) yakından uyuyor. Tam A–D Tip birim dağılımı genelinde 1, 2 yatak odalı ve hizmetçi odalı 2 yatak odalı fiyatlandırma için aşağıdaki daire tiplerine bakın. Kaynak materyallerde 3 yatak odalı veya daha büyük stok yer almamaktadır.",
+    apartmentTypes: [
+      { label: "Stüdyo", sizeRange: "362 – 389 sq ft" },
+      { label: "1 Yatak Odalı", sizeRange: "747 – 1.213 sq ft" },
+      { label: "2 Yatak Odalı", sizeRange: "1.120 – 1.270 sq ft" },
+      { label: "2 Yatak Odalı + Hizmetçi Odası", sizeRange: "1.431 – 1.435 sq ft" },
+    ],
+    totalUnits: "Tahmini 150 – 175 rezidans birimi (geliştiricinin bilgi föyüne göre teyit edilecek)",
+    handover: "2028'in 1. Çeyreği",
+    paymentPlan: [
+      { label: "Peşinat", timing: "Rezervasyonda (Ağu 2026)" },
+      { label: "İnşaat Dönemi Taksitleri", timing: "Aylık %1 taksitler, Eyl 2026 – May 2028 (teslim öncesi)" },
+      { label: "Teslim Sonrası Taksitler", timing: "Haz 2028'den itibaren aylık %1 taksitler (yaklaşık 67–68 ay)" },
+    ],
+    amenities: [
+      "Tembel nehirli otel konseptli yüzme havuzu",
+      "Gömme havuz lounge oturma alanı",
+      "Şelale özelliği ve jakuzi",
+      "Çocuk sıçrama parkı, çocuk havuzu ve çocuk oyun alanı",
+      "Çocuklar için tırmanma duvarı",
+      "İç-dış mekân spor salonu",
+      "İç mekân aerobik stüdyosu ve yoga alanı",
+      "Toparlanma odası, buz banyosu ve oksijen odası",
+      "Buhar odası, sauna ve kızılötesi sauna",
+      "Kulüp evi ve iş lounge'ı",
+      "Ortak çalışma alanı ve toplantı kabini",
+      "Kütüphane",
+      "İç mekân oyun odası (langırt, bilardo masası)",
+      "Padel ve masa tenisli çatı terası",
+      "Barbekü alanı ve güneşlenme/deck oturma alanı",
+      "Zen bahçesi ve koşu parkuru",
+      "Aile oturma alanı",
+      "Erkek ve kadın soyunma odaları",
+      "Yıldızlı lobi ve cephe aydınlatması",
+      "EV şarj istasyonlu üç podyum otopark katı",
+      "Akıllı ev entegrasyonu (mobil uygulama, Google Home, biyometrik kapı kilidi)",
+    ],
+    location: { label: "Jumeirah Village Circle, Bölge 12, Dubai — yaklaşık topluluk konumu, kesin parsel onay bekliyor" },
+    documents: [
+      { id: "brochure", label: "Dijital Broşür", description: "SquareX One için tasarım konsepti, rezidans tipleri ve olanakları içeren tam lifestyle broşürü." },
+      { id: "fact-sheet", label: "Bilgi Föyü", description: "Proje konfigürasyonu, inşaat takvimi, donanım özellikleri ve konum bağlamını içeren geliştirici bilgi föyü." },
+    ],
+  },
 };
