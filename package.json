@@ -8,9 +8,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "og": "node scripts/generate-og-images.mjs"
+    "og": "node scripts/generate-og-images.mjs",
+    "images:optimize": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
+    "better-sqlite3": "^13.0.3",
     "exceljs": "^4.4.0",
     "lucide-react": "^1.31.0",
     "next": "16.3.1",
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.1",
     "@types/react": "^19",

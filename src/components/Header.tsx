@@ -13,6 +13,7 @@ import {
   LOCALE_NATIVE_NAME,
   type Locale,
 } from "@/lib/i18n/dictionary";
+import { localizedPath, stripLocalePrefix } from "@/lib/i18n/paths";
 
 export default function Header({ locale = "en" as Locale }: { locale?: Locale }) {
   const pathname = usePathname();
@@ -22,18 +23,9 @@ export default function Header({ locale = "en" as Locale }: { locale?: Locale })
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Strips whichever locale prefix is currently active off the pathname, so
-  // switching locales can re-prefix the same page with the new one.
-  const unprefixedPath = (() => {
-    const prefix = LOCALE_PREFIX[locale];
-    if (!prefix) return pathname; // already unprefixed (en)
-    return pathname === prefix ? "" : pathname.slice(prefix.length);
-  })();
-
-  const hrefForLocale = (target: Locale) => {
-    const targetPrefix = LOCALE_PREFIX[target];
-    return `${targetPrefix}${unprefixedPath}` || "/";
-  };
+  // The same page in another language: strip the current prefix, add the target's.
+  const unprefixedPath = stripLocalePrefix(pathname);
+  const hrefForLocale = (target: Locale) => localizedPath(target, unprefixedPath);
 
   const navLinks = [
     { href: home, label: t.nav.home },

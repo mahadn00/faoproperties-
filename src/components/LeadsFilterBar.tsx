@@ -1,3 +1,5 @@
+import { LEAD_STATUSES, LEAD_STATUS_LABEL, type LeadStatus } from "@/lib/lead-status";
+
 const PRESETS = [
   { value: "all", label: "All Time" },
   { value: "week", label: "This Week" },
@@ -8,10 +10,12 @@ export default function LeadsFilterBar({
   activeRange,
   from,
   to,
+  status,
 }: {
   activeRange: string;
   from: string;
   to: string;
+  status: LeadStatus | null;
 }) {
   return (
     <form
@@ -36,6 +40,27 @@ export default function LeadsFilterBar({
           </button>
         ))}
       </div>
+
+      <div className="mx-2 hidden h-8 w-px bg-[var(--color-navy-line)] sm:block" />
+
+      {/* Part of the same GET form, so every button above and below keeps it. */}
+      <label className="text-sm">
+        <span className="mb-1 block text-xs uppercase tracking-wide text-[var(--color-text-on-dark-muted)]">
+          Status
+        </span>
+        <select
+          name="status"
+          defaultValue={status ?? ""}
+          className="rounded-md border border-[var(--color-navy-line)] bg-[var(--color-navy-2)] px-3 py-2 text-sm text-white outline-none focus:border-[var(--color-gold)]"
+        >
+          <option value="">All statuses</option>
+          {LEAD_STATUSES.map((s) => (
+            <option key={s} value={s}>
+              {LEAD_STATUS_LABEL[s]}
+            </option>
+          ))}
+        </select>
+      </label>
 
       <div className="mx-2 hidden h-8 w-px bg-[var(--color-navy-line)] sm:block" />
 

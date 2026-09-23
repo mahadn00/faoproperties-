@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { CONTACT_EMAIL, SITE_NAME, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/constants";
+import { CONTACT_EMAIL, OFFICE_ADDRESS, RERA_ORN, SITE_NAME, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/constants";
 import { projects } from "@/lib/projects";
 import { dictionary, type Locale } from "@/lib/i18n/dictionary";
-import { projectPath } from "@/lib/i18n/paths";
+import { localizedPath, projectPath } from "@/lib/i18n/paths";
 
 export default function Footer({ locale = "en" as Locale }: { locale?: Locale }) {
   const t = dictionary[locale];
@@ -24,7 +24,9 @@ export default function Footer({ locale = "en" as Locale }: { locale?: Locale })
           <ul className="space-y-2 text-sm">
             {projects.map((p) => (
               <li key={p.slug}>
-                <Link href={projectPath(locale, p.slug)} className="hover:text-white transition-colors">
+                {/* No prefetch: 27 links scrolling into view at once would each fetch a
+                    project page in the background. */}
+                <Link href={projectPath(locale, p.slug)} prefetch={false} className="hover:text-white transition-colors">
                   {p.name}
                 </Link>
               </li>
@@ -52,6 +54,11 @@ export default function Footer({ locale = "en" as Locale }: { locale?: Locale })
                 WhatsApp {WHATSAPP_DISPLAY}
               </a>
             </li>
+            <li className="pt-2">
+              <span className="block text-xs uppercase tracking-wide text-[var(--color-gold)]/80">{t.footer.office}</span>
+              {OFFICE_ADDRESS.street}, {OFFICE_ADDRESS.city}
+            </li>
+            {RERA_ORN && <li>RERA ORN {RERA_ORN}</li>}
           </ul>
         </div>
       </div>
@@ -59,7 +66,12 @@ export default function Footer({ locale = "en" as Locale }: { locale?: Locale })
       <div className="border-t border-[var(--color-navy-line)]">
         <div className="mx-auto max-w-7xl px-6 md:px-10 py-6 text-xs flex flex-col md:flex-row gap-2 justify-between">
           <span>{t.footer.rights(new Date().getFullYear(), SITE_NAME)}</span>
-          <span>{t.footer.priceNote}</span>
+          <span className="flex flex-wrap gap-x-6 gap-y-2">
+            <span>{t.footer.priceNote}</span>
+            <Link href={localizedPath(locale, "/privacy")} className="underline-offset-4 hover:text-white hover:underline">
+              {t.footer.privacy}
+            </Link>
+          </span>
         </div>
       </div>
     </footer>

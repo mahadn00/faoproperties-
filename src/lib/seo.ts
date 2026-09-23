@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { LOCALES, dictionary, type Locale } from "./i18n/dictionary";
 import { localizedPath } from "./i18n/paths";
-import { SITE_NAME, CONTACT_EMAIL, WHATSAPP_NUMBER } from "./constants";
+import { SITE_NAME, CONTACT_EMAIL, OFFICE_ADDRESS, WHATSAPP_NUMBER } from "./constants";
 import { startingPriceAed, type Project } from "./projects";
 
 // Falls back to a placeholder so local/staging builds don't crash, but every
@@ -19,9 +19,9 @@ export const OG_LOCALE: Record<Locale, string> = {
 
 const BUSINESS_ADDRESS = {
   "@type": "PostalAddress",
-  streetAddress: "i Rise Tower, TECOM",
-  addressLocality: "Dubai",
-  addressCountry: "AE",
+  streetAddress: OFFICE_ADDRESS.street,
+  addressLocality: OFFICE_ADDRESS.city,
+  addressCountry: OFFICE_ADDRESS.countryCode,
 } as const;
 
 export { localizedPath };

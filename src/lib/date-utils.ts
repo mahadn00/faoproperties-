@@ -17,6 +17,13 @@ export function formatDubai(iso: string): string {
   );
 }
 
+/** "2026-09-23 18:40" in Dubai time — sorts correctly as text, for spreadsheets. */
+export function formatDubaiSortable(iso: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return iso;
+  return new Date(date.getTime() + DUBAI_OFFSET_MS).toISOString().slice(0, 16).replace("T", " ");
+}
+
 /** Start of the current ISO week (Monday 00:00) in Dubai local time, as a UTC instant. */
 export function startOfWeekDubai(): Date {
   const dubaiMs = Date.now() + DUBAI_OFFSET_MS;
