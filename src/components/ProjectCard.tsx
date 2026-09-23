@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/lib/projects";
 import { dictionary, type Locale } from "@/lib/i18n/dictionary";
+import { projectPath } from "@/lib/i18n/paths";
 
 export default function ProjectCard({
   project,
@@ -12,7 +13,7 @@ export default function ProjectCard({
   locale?: Locale;
 }) {
   const t = dictionary[locale].card;
-  const href = locale === "sr" ? `/sr/projects/${project.slug}` : `/projects/${project.slug}`;
+  const href = projectPath(locale, project.slug);
   return (
     <Link
       href={href}

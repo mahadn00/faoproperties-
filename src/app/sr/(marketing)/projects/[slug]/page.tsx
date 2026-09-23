@@ -7,6 +7,7 @@ import { dictionary } from "@/lib/i18n/dictionary";
 import Gallery from "@/components/Gallery";
 import MapEmbed from "@/components/MapEmbed";
 import DownloadGate from "@/components/DownloadGate";
+import MobileCtaBar from "@/components/MobileCtaBar";
 import JsonLd from "@/components/JsonLd";
 import ProjectFaq from "@/components/ProjectFaq";
 import { whatsappLink } from "@/lib/constants";
@@ -18,6 +19,7 @@ import {
   faqJsonLd,
   absoluteUrl,
   localizedPath,
+  shareImagePath,
 } from "@/lib/seo";
 
 const t = dictionary.sr;
@@ -37,7 +39,7 @@ export async function generateMetadata({
     path: `/projects/${project.slug}`,
     title: project.developer ? `${project.name} — ${project.developer}` : project.name,
     description: project.summary,
-    image: project.heroImage,
+    image: shareImagePath(project.slug),
   });
 }
 
@@ -177,9 +179,9 @@ export default async function SerbianProjectPage({ params }: PageProps<"/sr/proj
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-white text-start text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
-                        <th className="px-4 py-3">{t.project.milestone}</th>
-                        <th className="px-4 py-3">{t.project.percentage}</th>
-                        <th className="px-4 py-3">{t.project.timing}</th>
+                        <th className="px-4 py-3 text-start">{t.project.milestone}</th>
+                        <th className="px-4 py-3 text-start">{t.project.percentage}</th>
+                        <th className="px-4 py-3 text-start">{t.project.timing}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -233,7 +235,7 @@ export default async function SerbianProjectPage({ params }: PageProps<"/sr/proj
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              <div className="rounded-xl border border-[var(--color-sand-line)] bg-white p-6">
+              <div id="documents" className="scroll-mt-24 rounded-xl border border-[var(--color-sand-line)] bg-white p-6">
                 <h3 className="font-display text-lg text-[var(--color-text)]">
                   {t.project.documentsTitle}
                 </h3>
@@ -265,6 +267,11 @@ export default async function SerbianProjectPage({ params }: PageProps<"/sr/proj
           </div>
         </div>
       </div>
+      <MobileCtaBar
+        documentsLabel={t.project.documentsTitle}
+        whatsappLabel={t.contact.whatsapp}
+        whatsappHref={whatsappLink(t.project.whatsappMessage(project.name))}
+      />
     </>
   );
 }

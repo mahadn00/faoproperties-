@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { whatsappLink } from "@/lib/constants";
 
 export default function WhatsAppButton({
@@ -9,13 +10,17 @@ export default function WhatsAppButton({
   message?: string;
   ariaLabel?: string;
 }) {
+  // Project pages show MobileCtaBar (with its own WhatsApp button) on phones,
+  // so the floating bubble only appears there from the md breakpoint up.
+  const onProjectPage = usePathname().includes("/projects/");
+
   return (
     <a
       href={whatsappLink(message)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={ariaLabel}
-      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg shadow-black/20 transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold)]"
+      className={`fixed bottom-6 right-6 z-50 ${onProjectPage ? "hidden md:flex" : "flex"} h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg shadow-black/20 transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold)]`}
     >
       <svg
         aria-hidden="true"

@@ -4,6 +4,14 @@ import { appendLead } from "@/lib/leads-store";
 import { sendLeadNotification } from "@/lib/mailer";
 import { createDownloadToken } from "@/lib/download-token";
 import { getProjectBySlug } from "@/lib/projects";
+import { clientIp, rateLimit } from "@/lib/rate-limit";
+import { verifyTurnstile } from "@/lib/turnstile";
+
+// Generous for a person (someone requesting every brochure on a couple of
+// projects), tight enough that a bot can't flood the lead sheet or burn
+// through the Gmail daily sending limit.
+const LEADS_PER_IP = 8;
+const LEADS_WINDOW_MS = 10 * 60 * 1000;
 
 const leadSchema = z.object({
   name: z.string().trim().min(2).max(120),
@@ -13,9 +21,21 @@ const leadSchema = z.object({
   projectSlug: z.string().trim().max(80).optional(),
   documentId: z.string().trim().max(80).optional(),
   source: z.enum(["gated-download", "general-enquiry"]),
+  // Honeypot: hidden from people, so anything in it came from a bot.
+  leave_blank: z.string().max(500).optional(),
+  turnstileToken: z.string().max(4096).optional(),
 });
 
 export async function POST(request: NextRequest) {
+  const ip = clientIp(request.headers);
+  const limit = rateLimit(`lead:${ip}`, LEADS_PER_IP, LEADS_WINDOW_MS);
+  if (!limit.ok) {
+    return NextResponse.json(
+      { ok: false, code: "rate_limited", error: "Too many requests. Please try again in a few minutes." },
+      { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } }
+    );
+  }
+
   let body: unknown;
   try {
     body = await request.json();
@@ -32,6 +52,20 @@ export async function POST(request: NextRequest) {
   }
 
   const data = parsed.data;
+
+  // A filled honeypot gets a normal-looking success so the bot has nothing to
+  // adapt to — but nothing is saved or emailed.
+  if (data.leave_blank) {
+    return NextResponse.json({ ok: true });
+  }
+
+  if (!(await verifyTurnstile(data.turnstileToken, ip))) {
+    return NextResponse.json(
+      { ok: false, code: "verification_failed", error: "Please complete the security check and try again." },
+      { status: 400 }
+    );
+  }
+
   const project = data.projectSlug ? getProjectBySlug(data.projectSlug) : undefined;
   const document = project?.documents.find((d) => d.id === data.documentId);
 

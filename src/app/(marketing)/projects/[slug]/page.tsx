@@ -5,6 +5,7 @@ import { getProjectBySlug, projects } from "@/lib/projects";
 import Gallery from "@/components/Gallery";
 import MapEmbed from "@/components/MapEmbed";
 import DownloadGate from "@/components/DownloadGate";
+import MobileCtaBar from "@/components/MobileCtaBar";
 import JsonLd from "@/components/JsonLd";
 import ProjectFaq from "@/components/ProjectFaq";
 import { whatsappLink } from "@/lib/constants";
@@ -17,6 +18,7 @@ import {
   faqJsonLd,
   absoluteUrl,
   localizedPath,
+  shareImagePath,
 } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -34,7 +36,7 @@ export async function generateMetadata({
     path: `/projects/${project.slug}`,
     title: project.developer ? `${project.name} — ${project.developer}` : project.name,
     description: project.summary,
-    image: project.heroImage,
+    image: shareImagePath(project.slug),
   });
 }
 
@@ -175,9 +177,9 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="bg-white text-start text-xs uppercase tracking-wide text-[var(--color-text-muted)]">
-                        <th className="px-4 py-3">Milestone</th>
-                        <th className="px-4 py-3">Percentage</th>
-                        <th className="px-4 py-3">Timing</th>
+                        <th className="px-4 py-3 text-start">Milestone</th>
+                        <th className="px-4 py-3 text-start">Percentage</th>
+                        <th className="px-4 py-3 text-start">Timing</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -231,7 +233,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              <div className="rounded-xl border border-[var(--color-sand-line)] bg-white p-6">
+              <div id="documents" className="scroll-mt-24 rounded-xl border border-[var(--color-sand-line)] bg-white p-6">
                 <h3 className="font-display text-lg text-[var(--color-text)]">
                   Documents &amp; Pricing
                 </h3>
@@ -262,6 +264,11 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           </div>
         </div>
       </div>
+      <MobileCtaBar
+        documentsLabel={t.project.documentsTitle}
+        whatsappLabel={t.contact.whatsapp}
+        whatsappHref={whatsappLink(t.project.whatsappMessage(project.name))}
+      />
     </>
   );
 }

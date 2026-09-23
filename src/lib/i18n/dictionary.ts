@@ -14,6 +14,14 @@ export const LOCALE_PREFIX: Record<Locale, string> = {
   ar: "/ar",
   fa: "/fa",
 };
+// Each language named in itself, for the mobile menu where there is room.
+export const LOCALE_NATIVE_NAME: Record<Locale, string> = {
+  en: "English",
+  sr: "Srpski",
+  tr: "Türkçe",
+  ar: "العربية",
+  fa: "فارسی",
+};
 export const LOCALE_LABEL: Record<Locale, string> = {
   en: "EN",
   sr: "SR",
@@ -24,7 +32,15 @@ export const LOCALE_LABEL: Record<Locale, string> = {
 
 export const dictionary = {
   en: {
-    nav: { home: "Home", projects: "Projects", enquire: "Enquire" },
+    nav: {
+      home: "Home",
+      projects: "Projects",
+      enquire: "Enquire",
+      menu: "Menu",
+      openMenu: "Open menu",
+      closeMenu: "Close menu",
+      language: "Language",
+    },
     hero: {
       eyebrow: "Luxury Off-Plan Residences, Dubai",
       heading: "Distinct addresses. One standard of living.",
@@ -37,8 +53,6 @@ export const dictionary = {
       startingFrom: "Starting From",
       onRequest: "On Request",
       districts: "Prime Dubai Districts",
-      enquiries: "Enquiries",
-      enquiriesValue: "WhatsApp & Email",
     },
     portfolio: {
       eyebrow: "Our Portfolio",
@@ -112,6 +126,8 @@ export const dictionary = {
       successGeneral: "We've received your enquiry and will be in touch shortly.",
       genericError: "Something went wrong. Please try again.",
       networkError: "Network error. Please check your connection and try again.",
+      rateLimited: "Too many requests. Please wait a few minutes and try again, or message us on WhatsApp.",
+      verificationFailed: "Please complete the security check and try again.",
     },
     footer: {
       blurb: "Curated luxury off-plan residences in Dubai. We connect discerning buyers with the city's most considered new developments.",
@@ -147,7 +163,15 @@ export const dictionary = {
     },
   },
   sr: {
-    nav: { home: "Početna", projects: "Projekti", enquire: "Upit" },
+    nav: {
+      home: "Početna",
+      projects: "Projekti",
+      enquire: "Upit",
+      menu: "Meni",
+      openMenu: "Otvori meni",
+      closeMenu: "Zatvori meni",
+      language: "Jezik",
+    },
     hero: {
       eyebrow: "Luksuzne rezidencije u izgradnji, Dubai",
       heading: "Različite adrese. Jedan standard življenja.",
@@ -160,8 +184,6 @@ export const dictionary = {
       startingFrom: "Cena od",
       onRequest: "Na upit",
       districts: "Vodećih lokacija u Dubaiju",
-      enquiries: "Upiti",
-      enquiriesValue: "WhatsApp i email",
     },
     portfolio: {
       eyebrow: "Naš portfolio",
@@ -235,6 +257,8 @@ export const dictionary = {
       successGeneral: "Primili smo vaš upit i uskoro ćemo vas kontaktirati.",
       genericError: "Došlo je do greške. Pokušajte ponovo.",
       networkError: "Greška u mreži. Proverite internet konekciju i pokušajte ponovo.",
+      rateLimited: "Previše zahteva. Sačekajte nekoliko minuta i pokušajte ponovo, ili nam pišite na WhatsApp.",
+      verificationFailed: "Molimo vas da završite sigurnosnu proveru i pokušate ponovo.",
     },
     footer: {
       blurb: "Pažljivo odabrane luksuzne rezidencije u izgradnji u Dubaiju. Povezujemo zahtevne kupce sa najznačajnijim novim projektima u gradu.",
@@ -270,7 +294,15 @@ export const dictionary = {
     },
   },
   tr: {
-    nav: { home: "Ana Sayfa", projects: "Projeler", enquire: "İletişim" },
+    nav: {
+      home: "Ana Sayfa",
+      projects: "Projeler",
+      enquire: "İletişim",
+      menu: "Menü",
+      openMenu: "Menüyü aç",
+      closeMenu: "Menüyü kapat",
+      language: "Dil",
+    },
     hero: {
       eyebrow: "Dubai'de Lüks İnşaat Halindeki Konutlar",
       heading: "Farklı adresler. Tek bir yaşam standardı.",
@@ -283,8 +315,6 @@ export const dictionary = {
       startingFrom: "Başlangıç Fiyatı",
       onRequest: "Talep Üzerine",
       districts: "Dubai'nin Seçkin Bölgesi",
-      enquiries: "İletişim",
-      enquiriesValue: "WhatsApp ve E-posta",
     },
     portfolio: {
       eyebrow: "Portföyümüz",
@@ -358,6 +388,8 @@ export const dictionary = {
       successGeneral: "Talebiniz alındı, kısa süre içinde sizinle iletişime geçeceğiz.",
       genericError: "Bir hata oluştu. Lütfen tekrar deneyin.",
       networkError: "Ağ hatası. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
+      rateLimited: "Çok fazla istek gönderildi. Lütfen birkaç dakika bekleyip tekrar deneyin veya bize WhatsApp üzerinden yazın.",
+      verificationFailed: "Lütfen güvenlik doğrulamasını tamamlayıp tekrar deneyin.",
     },
     footer: {
       blurb: "Dubai'de özenle seçilmiş, inşaat halindeki lüks konutlar. Seçici alıcıları şehrin en özenle tasarlanmış yeni projeleriyle buluşturuyoruz.",
@@ -393,7 +425,15 @@ export const dictionary = {
     },
   },
   ar: {
-    nav: { home: "الرئيسية", projects: "المشاريع", enquire: "تواصل معنا" },
+    nav: {
+      home: "الرئيسية",
+      projects: "المشاريع",
+      enquire: "تواصل معنا",
+      menu: "القائمة",
+      openMenu: "فتح القائمة",
+      closeMenu: "إغلاق القائمة",
+      language: "اللغة",
+    },
     hero: {
       eyebrow: "مساكن فاخرة قيد الإنشاء في دبي",
       heading: "عناوين متميزة. معيار واحد للحياة الراقية.",
@@ -406,8 +446,6 @@ export const dictionary = {
       startingFrom: "الأسعار تبدأ من",
       onRequest: "عند الطلب",
       districts: "من أرقى مناطق دبي",
-      enquiries: "التواصل",
-      enquiriesValue: "واتساب والبريد الإلكتروني",
     },
     portfolio: {
       eyebrow: "مشاريعنا",
@@ -481,6 +519,8 @@ export const dictionary = {
       successGeneral: "تم استلام استفسارك وسنتواصل معك قريبًا.",
       genericError: "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
       networkError: "حدث خطأ في الشبكة. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.",
+      rateLimited: "عدد كبير من الطلبات. يُرجى الانتظار بضع دقائق ثم المحاولة مرة أخرى، أو راسلنا عبر واتساب.",
+      verificationFailed: "يُرجى إكمال التحقق الأمني ثم المحاولة مرة أخرى.",
     },
     footer: {
       blurb: "مساكن فاخرة قيد الإنشاء في دبي، تم اختيارها بعناية. نربط بين المشترين المميزين وأرقى المشاريع الجديدة في المدينة.",
@@ -516,7 +556,15 @@ export const dictionary = {
     },
   },
   fa: {
-    nav: { home: "خانه", projects: "پروژه‌ها", enquire: "تماس با ما" },
+    nav: {
+      home: "خانه",
+      projects: "پروژه‌ها",
+      enquire: "تماس با ما",
+      menu: "منو",
+      openMenu: "باز کردن منو",
+      closeMenu: "بستن منو",
+      language: "زبان",
+    },
     hero: {
       eyebrow: "املاک لوکس در حال ساخت در دبی",
       heading: "آدرس‌های متمایز. یک استاندارد از زندگی.",
@@ -529,8 +577,6 @@ export const dictionary = {
       startingFrom: "شروع قیمت از",
       onRequest: "بر اساس درخواست",
       districts: "منطقه برتر دبی",
-      enquiries: "ارتباط با ما",
-      enquiriesValue: "واتساپ و ایمیل",
     },
     portfolio: {
       eyebrow: "نمونه‌کارهای ما",
@@ -604,6 +650,8 @@ export const dictionary = {
       successGeneral: "درخواست شما دریافت شد و به‌زودی با شما تماس خواهیم گرفت.",
       genericError: "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
       networkError: "خطای شبکه. لطفاً اتصال اینترنت خود را بررسی کرده و دوباره تلاش کنید.",
+      rateLimited: "تعداد درخواست‌ها زیاد است. لطفاً چند دقیقه صبر کنید و دوباره تلاش کنید، یا از طریق واتساپ به ما پیام دهید.",
+      verificationFailed: "لطفاً بررسی امنیتی را تکمیل کرده و دوباره تلاش کنید.",
     },
     footer: {
       blurb: "املاک لوکس در حال ساخت در دبی، با دقت انتخاب‌شده. ما خریداران باسلیقه را به برجسته‌ترین پروژه‌های جدید شهر متصل می‌کنیم.",

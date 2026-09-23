@@ -10,6 +10,7 @@ export default async function AdminLoginPage({
 
   const params = await searchParams;
   const hasError = params?.error !== undefined;
+  const isLocked = params?.error === "locked";
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6">
@@ -48,7 +49,11 @@ export default async function AdminLoginPage({
           </div>
 
           {hasError && (
-            <p className="text-sm text-red-400">Incorrect username or password.</p>
+            <p className="text-sm text-red-400">
+              {isLocked
+                ? "Too many sign-in attempts. Please wait 15 minutes and try again."
+                : "Incorrect username or password."}
+            </p>
           )}
 
           <button
