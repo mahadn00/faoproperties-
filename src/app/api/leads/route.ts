@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { appendLead } from "@/lib/leads-store";
+import { appendLead } from "@/lib/leads-db";
 import { sendLeadNotification } from "@/lib/mailer";
 import { createDownloadToken } from "@/lib/download-token";
 import { getProjectBySlug } from "@/lib/projects";
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
       message: data.message ?? "",
     });
   } catch (err) {
-    console.error("Failed to save lead to Excel:", err);
+    console.error("Failed to save lead to the database:", err);
     // Continue — we still want to try emailing.
   }
 
