@@ -69,6 +69,27 @@ update copy, prices, or add a new project (drop assets into
 register the document filenames in
 `src/app/api/documents/[projectSlug]/[docId]/route.ts`).
 
+## Project photos
+
+Photos in `public/projects/<slug>/gallery/` are stored at most 2,560 px on
+the long side, as ~80-quality JPEGs (the originals were print renders of up
+to 5,334 px and 2.5 MB). After adding a new project's photos, run:
+
+```bash
+npm run images:optimize
+```
+
+It only touches photos that are oversized or heavy, so re-running is safe
+(`-- --dry` to preview). The site serves resized WebP versions through
+`next/image`, cached for 31 days. **When replacing a photo, give the new file
+a new name** — the same name keeps serving the cached old version until the
+cache expires.
+
+For production, put the site behind a CDN such as Cloudflare (orange-cloud
+proxy on the domain) so photos and pages are served from edge caches near
+visitors instead of the VPS. Make sure the proxy forwards the `Accept` header,
+which `next/image` uses to choose WebP.
+
 ## Link-preview images
 
 `public/og/` holds a 1200×630, ~120 KB share image per project (plus
