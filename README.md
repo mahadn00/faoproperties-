@@ -152,4 +152,4 @@ part of the git history and never will be.
 PII) plus it's regenerated at runtime.
 
 Everything else — the app code and `public/` (the gallery images actually
-shown on the live site) — is meant to be committed and deployed normally.
+shown on the live site) — is meant to be committed and deployed normally.+
