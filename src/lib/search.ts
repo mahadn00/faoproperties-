@@ -8,6 +8,18 @@ export type PropertyType = "studio" | "1br" | "2br" | "3br" | "villa";
 
 export const PROPERTY_TYPES: PropertyType[] = ["studio", "1br", "2br", "3br", "villa"];
 
+// Budget ranges offered as one-tap choices (AED, [min, max], null = open).
+// Typing "1500000" into a number box on a phone was the old way.
+export const BUDGET_PRESETS = {
+  any: [null, null],
+  under1m: [null, 1_000_000],
+  from1to2m: [1_000_000, 2_000_000],
+  from2to5m: [2_000_000, 5_000_000],
+  over5m: [5_000_000, null],
+} as const satisfies Record<string, readonly [number | null, number | null]>;
+export type BudgetPreset = keyof typeof BUDGET_PRESETS;
+export const BUDGET_PRESET_KEYS = Object.keys(BUDGET_PRESETS) as BudgetPreset[];
+
 // Buckets an apartment-type label into one of the five types the search
 // filter offers. Works on the label in ANY of the site's languages (the
 // search component is handed whichever locale's project list is on screen,
