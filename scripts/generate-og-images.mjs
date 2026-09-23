@@ -34,11 +34,20 @@ function readProjectHeroes() {
   return heroes;
 }
 
+// Which source each image was last made from, so pointing a project at a
+// different heroImage regenerates it even when that file is older.
+const manifestFile = path.join(outDir, ".sources.json");
+const previousSources = fs.existsSync(manifestFile) ? JSON.parse(fs.readFileSync(manifestFile, "utf8")) : {};
+
 async function generate({ slug, src }) {
   const input = path.join(root, "public", src);
   const output = path.join(outDir, `${slug}.jpg`);
   if (!fs.existsSync(input)) throw new Error(`Hero image for "${slug}" not found: public${src}`);
-  if (fs.existsSync(output) && fs.statSync(output).mtimeMs >= fs.statSync(input).mtimeMs) return false;
+  const upToDate =
+    fs.existsSync(output) &&
+    previousSources[slug] === src &&
+    fs.statSync(output).mtimeMs >= fs.statSync(input).mtimeMs;
+  if (upToDate) return false;
 
   await sharp(input)
     .resize(1200, 630, { fit: "cover", position: "centre" })
@@ -50,5 +59,6 @@ async function generate({ slug, src }) {
 fs.mkdirSync(outDir, { recursive: true });
 const jobs = [{ slug: "home", src: HOME_SOURCE }, ...readProjectHeroes()];
 const results = await Promise.all(jobs.map(generate));
+fs.writeFileSync(manifestFile, JSON.stringify(Object.fromEntries(jobs.map((j) => [j.slug, j.src])), null, 2));
 const made = results.filter(Boolean).length;
 console.log(`og images: ${made} generated, ${jobs.length - made} up to date (public/og/)`);

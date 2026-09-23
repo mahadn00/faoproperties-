@@ -3,7 +3,7 @@ import ExcelJS from "exceljs";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { listLeads } from "@/lib/leads-db";
 import { parseLeadFilters } from "@/lib/lead-filters";
-import { LEAD_STATUS_LABEL } from "@/lib/lead-status";
+import { CONTACT_METHOD_LABEL, LEAD_STATUS_LABEL, PURPOSE_LABEL } from "@/lib/lead-status";
 import { formatDubaiSortable } from "@/lib/date-utils";
 
 // "Export to Excel" on /admin/leads: the leads currently in view (same
@@ -24,6 +24,9 @@ export async function GET(request: NextRequest) {
     { header: "Name", key: "name", width: 24 },
     { header: "Email", key: "email", width: 30 },
     { header: "Phone", key: "phone", width: 18 },
+    { header: "Contact via", key: "contactVia", width: 13 },
+    { header: "Purpose", key: "purpose", width: 12 },
+    { header: "Language", key: "language", width: 10 },
     { header: "Project", key: "project", width: 30 },
     { header: "Requested Document", key: "document", width: 26 },
     { header: "Source", key: "source", width: 16 },
@@ -37,13 +40,16 @@ export async function GET(request: NextRequest) {
       name: lead.name,
       email: lead.email,
       phone: lead.phone,
+      contactVia: CONTACT_METHOD_LABEL[lead.contactMethod] ?? "",
+      purpose: PURPOSE_LABEL[lead.purpose] ?? "",
+      language: lead.locale.toUpperCase(),
       project: lead.projectName,
       document: lead.documentLabel,
       source: lead.source,
       message: lead.message,
     });
   }
-  sheet.autoFilter = { from: "A1", to: "I1" };
+  sheet.autoFilter = { from: "A1", to: "L1" };
 
   const buffer = await workbook.xlsx.writeBuffer();
   const today = formatDubaiSortable(new Date().toISOString()).slice(0, 10);

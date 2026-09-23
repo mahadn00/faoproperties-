@@ -86,3 +86,8 @@ html[dir="rtl"] {
     padding-bottom: calc(76px + env(safe-area-inset-bottom));
   }
 }
+
+/* Keep the floating WhatsApp bubble clear of the homepage compare tray. */
+body:has([data-compare-tray]) .whatsapp-float {
+  bottom: calc(5.5rem + env(safe-area-inset-bottom));
+}
