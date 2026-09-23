@@ -174,7 +174,7 @@ export const projects: Project[] = [
     ],
     totalUnits: "420 total residences (143 units in the currently released 1-bedroom inventory)",
     handover: "Q2 2029 (est.)",
-    heroImage: "/projects/sky-level-1/gallery/hero.jpg",
+    heroImage: "/projects/sky-level-1/cover.jpg",
     gallery: [
       { src: "/projects/sky-level-1/gallery/hero.jpg", alt: "Sky Level 1 pool deck with skyline view", category: "exterior" },
       { src: "/projects/sky-level-1/gallery/lobby.jpg", alt: "Lobby", category: "amenity" },
@@ -261,7 +261,7 @@ export const projects: Project[] = [
       { label: "7th Instalment", percentage: "10%", timing: "Mar 2029 (90% construction)" },
       { label: "8th Instalment (Final)", percentage: "20%", timing: "Mar 2030 (100% / Completion)" },
     ],
-    heroImage: "/projects/terra-woods/gallery/hero.jpg",
+    heroImage: "/projects/terra-woods/cover.jpg",
     gallery: [
       { src: "/projects/terra-woods/gallery/hero.jpg", alt: "Terra Woods twilight exterior with Expo Metro", category: "exterior" },
       { src: "/projects/terra-woods/gallery/lobby-entrance.jpg", alt: "Lobby entrance and drop-off", category: "amenity" },
@@ -415,7 +415,7 @@ export const projects: Project[] = [
       { label: "6th Instalment", percentage: "10%", timing: "Apr 2028" },
       { label: "Final Instalment", percentage: "25%", timing: "Apr 2030 (Handover)" },
     ],
-    heroImage: "/projects/city-walk-crestlane/gallery/01_exterior_aerial_twilight.jpg",
+    heroImage: "/projects/city-walk-crestlane/cover.jpg",
     gallery: [
       { src: "/projects/city-walk-crestlane/gallery/01_exterior_aerial_twilight.jpg", alt: "City Walk Crestlane aerial twilight exterior", category: "exterior" },
       { src: "/projects/city-walk-crestlane/gallery/02_exterior_towers_park.jpg", alt: "Crestlane towers overlooking the park", category: "exterior" },
@@ -502,7 +502,7 @@ export const projects: Project[] = [
       { label: "Handover (Sea View)", percentage: "60%", timing: "Jan 2028" },
       { label: "Handover (Boulevard View)", percentage: "70%", timing: "Jan 2028" },
     ],
-    heroImage: "/projects/dubai-harbour-residence/gallery/01_exterior_beachfront_twilight.jpg",
+    heroImage: "/projects/dubai-harbour-residence/cover.jpg",
     gallery: [
       { src: "/projects/dubai-harbour-residence/gallery/01_exterior_beachfront_twilight.jpg", alt: "Dubai Harbour Residences beachfront exterior with Marina skyline", category: "exterior" },
       { src: "/projects/dubai-harbour-residence/gallery/02_twin_towers_marina_view.jpg", alt: "Twin low-rise buildings framing the marina view", category: "exterior" },
@@ -569,7 +569,7 @@ export const projects: Project[] = [
       { label: "7 Bedroom Penthouse" },
     ],
     totalUnits: "29 total residences",
-    heroImage: "/projects/jumeirah-asora-bay/gallery/01_full_building_beachfront_dusk.jpg",
+    heroImage: "/projects/jumeirah-asora-bay/gallery/02_hillside_residence_ocean_view.jpg",
     gallery: [
       { src: "/projects/jumeirah-asora-bay/gallery/01_full_building_beachfront_dusk.jpg", alt: "Jumeirah Asora Bay full building viewed from the beach at dusk", category: "exterior" },
       { src: "/projects/jumeirah-asora-bay/gallery/02_hillside_residence_ocean_view.jpg", alt: "Hillside residence amid olive trees overlooking the ocean", category: "exterior" },
@@ -830,7 +830,7 @@ export const projects: Project[] = [
       { label: "9th Instalment", percentage: "5%", timing: "On completion of 50% construction" },
       { label: "Final Instalment", percentage: "30%", timing: "On Completion (Handover)" },
     ],
-    heroImage: "/projects/meriva-sunset/gallery/04_tower_closeup_sunset.jpg",
+    heroImage: "/projects/meriva-sunset/cover.jpg",
     gallery: [
       { src: "/projects/meriva-sunset/gallery/04_tower_closeup_sunset.jpg", alt: "Meriva Sunset tower close-up at sunset", category: "exterior" },
       { src: "/projects/meriva-sunset/gallery/02_aerial_welcome_from_ocean.jpg", alt: "Aerial view welcoming from the ocean", category: "location" },
@@ -986,7 +986,7 @@ export const projects: Project[] = [
       { label: "6 Bedroom Beach Mansion", sizeRange: "12,646 sq ft", priceFrom: "AED 98.29M", units: "6 total" },
     ],
     totalUnits: "625 residences across two towers (Passo Avita and Passo Bella), plus 5 penthouses and 6 standalone beach mansions",
-    heroImage: "/projects/passo/gallery/01_towers_aerial_twilight.jpg",
+    heroImage: "/projects/passo/cover.jpg",
     gallery: [
       { src: "/projects/passo/gallery/01_towers_aerial_twilight.jpg", alt: "Passo towers aerial view at twilight", category: "exterior" },
       { src: "/projects/passo/gallery/02_twin_towers_dusk_facade.jpg", alt: "Passo Avita and Passo Bella twin towers at dusk", category: "exterior" },
@@ -1083,7 +1083,7 @@ export const projects: Project[] = [
       { label: "9th Instalment", percentage: "5%", timing: "On completion of 50% construction" },
       { label: "Final Instalment", percentage: "30%", timing: "On Completion" },
     ],
-    heroImage: "/projects/meriva-gardens/gallery/01_twin_towers_aerial_twilight.jpg",
+    heroImage: "/projects/meriva-gardens/cover.jpg",
     gallery: [
       { src: "/projects/meriva-gardens/gallery/01_twin_towers_aerial_twilight.jpg", alt: "Meriva Gardens twin towers aerial view at twilight", category: "exterior" },
       { src: "/projects/meriva-gardens/gallery/02_building_facade_pool_twilight.jpg", alt: "Building facade and pool deck at twilight", category: "exterior" },
@@ -1532,7 +1532,7 @@ export const projects: Project[] = [
       { label: "3rd Instalment", percentage: "5%", timing: "After 15 months of booking" },
       { label: "Final Instalment", percentage: "65%", timing: "On Completion" },
     ],
-    heroImage: "/projects/kaia-residences/gallery/01_brand_cover_water.jpg",
+    heroImage: "/projects/kaia-residences/cover.jpg",
     gallery: [
       {
         src: "/projects/kaia-residences/gallery/01_brand_cover_water.jpg",
@@ -1592,7 +1592,7 @@ export const projects: Project[] = [
       { label: "On Completion", percentage: "35%", timing: "Q1 2028 (est.)" },
       { label: "Post-Handover Instalments", percentage: "35%", timing: "35 equal monthly instalments of 1%, April 2028 – February 2031" },
     ],
-    heroImage: "/projects/floarea-breeze/gallery/01_exterior_building_render.jpg",
+    heroImage: "/projects/floarea-breeze/cover.jpg",
     gallery: [
       { src: "/projects/floarea-breeze/gallery/01_exterior_building_render.jpg", alt: "Floarea Breeze building exterior render", category: "exterior" },
       { src: "/projects/floarea-breeze/gallery/02_dubai_islands_aerial_masterplan.jpg", alt: "Dubai Islands aerial masterplan view", category: "location" },
@@ -1752,7 +1752,7 @@ export const projects: Project[] = [
         { label: "59th Post-Handover Instalment", percentage: "0.7%", timing: "59 Months from Handover" },
         { label: "60th Post-Handover Instalment", percentage: "0.7%", timing: "60 Months from Handover" },
     ],
-    heroImage: "/projects/mirari-lagoon/gallery/01_exterior_aerial_waterfront_daytime.jpg",
+    heroImage: "/projects/mirari-lagoon/gallery/19_exterior_round_pool_daytime.jpg",
     gallery: [
       { src: "/projects/mirari-lagoon/gallery/01_exterior_aerial_waterfront_daytime.jpg", alt: "Aerial daytime exterior of Mirari Lagoon with landscaped podium pool", category: "exterior" },
       { src: "/projects/mirari-lagoon/gallery/02_amenity_pool_courtyard_aerial.jpg", alt: "Aerial view of the lagoon-style courtyard pool and gardens", category: "amenity" },
@@ -1931,7 +1931,7 @@ export const projects: Project[] = [
       { label: "6th Instalment", percentage: "5%", timing: "15 November 2028" },
       { label: "Final Instalment", percentage: "40%", timing: "On Completion (Q2 2029)" },
     ],
-    heroImage: "/projects/the-symphony-imtiaz/gallery/01_exterior_aerial_canal_burj_khalifa.jpg",
+    heroImage: "/projects/the-symphony-imtiaz/cover.jpg",
     gallery: [
       { src: "/projects/the-symphony-imtiaz/gallery/01_exterior_aerial_canal_burj_khalifa.jpg", alt: "The Symphony by Imtiaz aerial exterior with canal and Burj Khalifa skyline", category: "exterior" },
       { src: "/projects/the-symphony-imtiaz/gallery/02_exterior_night_illuminated_facade.jpg", alt: "Tower exterior illuminated at night with palm-lined entrance", category: "exterior" },
@@ -2087,7 +2087,7 @@ export const projects: Project[] = [
       { label: "34th Instalment (Post-Completion)", percentage: "1%", timing: "10 Apr 2031" },
       { label: "35th Instalment (Post-Completion)", percentage: "1%", timing: "10 May 2031" },
     ],
-    heroImage: "/projects/omya-residences/gallery/01_exterior_twilight.jpg",
+    heroImage: "/projects/omya-residences/gallery/02_exterior_low_angle_day.jpg",
     gallery: [
       { src: "/projects/omya-residences/gallery/01_exterior_twilight.jpg", alt: "Omya Residences exterior at twilight", category: "exterior" },
       { src: "/projects/omya-residences/gallery/02_exterior_low_angle_day.jpg", alt: "Low angle daytime exterior of the building facade", category: "exterior" },
@@ -2256,7 +2256,7 @@ export const projects: Project[] = [
       { label: "Construction Instalments", percentage: "35%", timing: "1% Monthly for 35 Months (During Construction)" },
       { label: "Post-Handover Instalments", percentage: "40%", timing: "1% Monthly for 40 Months (Post Handover)" },
     ],
-    heroImage: "/projects/barari-palace/gallery/01_exterior_twilight_tower.jpg",
+    heroImage: "/projects/barari-palace/cover.jpg",
     gallery: [
       { src: "/projects/barari-palace/gallery/01_exterior_twilight_tower.jpg", alt: "Barari Palace tower exterior render at twilight", category: "exterior" },
       { src: "/projects/barari-palace/gallery/02_exterior_aerial_daytime.jpg", alt: "Aerial daytime exterior view of Barari Palace framed by greenery", category: "exterior" },
@@ -2329,7 +2329,7 @@ export const projects: Project[] = [
       { label: "Admin & Processing Fee", percentage: "0.79%", timing: "Flat AED 6,340 fee, due within 30 days of offer date" },
       { label: "Post-Booking Instalments", percentage: "80%", timing: "80 equal monthly instalments of 1% each, starting 60 days after the offer date and running monthly for 80 months thereafter" },
     ],
-    heroImage: "/projects/empire-jebel-ali/gallery/01_frontal_facade_daytime_exterior.jpg",
+    heroImage: "/projects/empire-jebel-ali/cover.jpg",
     gallery: [
       { src: "/projects/empire-jebel-ali/gallery/01_frontal_facade_daytime_exterior.jpg", alt: "Empire Jebel Ali frontal facade daytime exterior render", category: "exterior" },
       { src: "/projects/empire-jebel-ali/gallery/02_aerial_street_view_exterior.jpg", alt: "Empire Jebel Ali aerial street view exterior render", category: "exterior" },
@@ -2383,7 +2383,7 @@ export const projects: Project[] = [
       { label: "Construction-Period Instalments", percentage: "27%", timing: "1% monthly instalments, Sep 2026 – May 2028 (pre-handover)" },
       { label: "Post-Handover Instalments", percentage: "68%", timing: "1% monthly instalments, Jun 2028 onward (approx. 67–68 months)" },
     ],
-    heroImage: "/projects/squarex-one/gallery/01_exterior_tower_twilight.jpg",
+    heroImage: "/projects/squarex-one/cover.jpg",
     gallery: [
       { src: "/projects/squarex-one/gallery/01_exterior_tower_twilight.jpg", alt: "SquareX One tower exterior at twilight", category: "exterior" },
       { src: "/projects/squarex-one/gallery/02_exterior_tower_daytime.jpg", alt: "SquareX One full tower exterior, daytime view", category: "exterior" },
