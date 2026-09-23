@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 import ProjectSearch from "@/components/ProjectSearch";
@@ -5,6 +6,15 @@ import LeadForm from "@/components/LeadForm";
 import { projects } from "@/lib/projects";
 import { CONTACT_EMAIL, SITE_TAGLINE, WHATSAPP_DISPLAY } from "@/lib/constants";
 import { parseAedValue, formatAedShort } from "@/lib/format";
+import { dictionary } from "@/lib/i18n/dictionary";
+import { buildPageMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+  locale: "en",
+  path: "/",
+  title: dictionary.en.meta.homeTitle,
+  description: dictionary.en.meta.homeDescription,
+});
 
 const lowestStartingPrice = projects
   .map((p) => parseAedValue(p.startingPrice))

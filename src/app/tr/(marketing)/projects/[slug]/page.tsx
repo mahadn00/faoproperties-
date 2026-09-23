@@ -7,7 +7,18 @@ import { dictionary } from "@/lib/i18n/dictionary";
 import Gallery from "@/components/Gallery";
 import MapEmbed from "@/components/MapEmbed";
 import DownloadGate from "@/components/DownloadGate";
+import JsonLd from "@/components/JsonLd";
+import ProjectFaq from "@/components/ProjectFaq";
 import { whatsappLink } from "@/lib/constants";
+import {
+  buildPageMetadata,
+  projectJsonLd,
+  breadcrumbJsonLd,
+  projectFaqs,
+  faqJsonLd,
+  absoluteUrl,
+  localizedPath,
+} from "@/lib/seo";
 
 const t = dictionary.tr;
 
@@ -21,10 +32,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getLocalizedProjectBySlug(slug, "tr");
   if (!project) return {};
-  return {
-    title: `${project.name} | ${project.developer || "FAO Properties"}`,
+  return buildPageMetadata({
+    locale: "tr",
+    path: `/projects/${project.slug}`,
+    title: project.developer ? `${project.name} — ${project.developer}` : project.name,
     description: project.summary,
-  };
+    image: project.heroImage,
+  });
 }
 
 export default async function TurkishProjectPage({ params }: PageProps<"/tr/projects/[slug]">) {
@@ -32,8 +46,20 @@ export default async function TurkishProjectPage({ params }: PageProps<"/tr/proj
   const project = getLocalizedProjectBySlug(slug, "tr");
   if (!project) notFound();
 
+  const homeUrl = absoluteUrl(localizedPath("tr", "/"));
+  const faqs = projectFaqs(project, "tr");
+
   return (
     <>
+      <JsonLd data={projectJsonLd(project, "tr")} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: t.nav.home, url: homeUrl },
+          { name: t.nav.projects, url: `${homeUrl}#projects` },
+          { name: project.name, url: absoluteUrl(localizedPath("tr", `/projects/${project.slug}`)) },
+        ])}
+      />
+      <JsonLd data={faqJsonLd(faqs)} />
       {/* Hero */}
       <section className="relative flex min-h-[70vh] items-end overflow-hidden bg-[var(--color-ink)]">
         <Image
@@ -199,6 +225,9 @@ export default async function TurkishProjectPage({ params }: PageProps<"/tr/proj
               <div className="rule-gold mt-4 mb-6" />
               <MapEmbed location={project.location} locale="tr" />
             </div>
+
+            {/* FAQ */}
+            <ProjectFaq heading={t.faq.heading} items={faqs} />
           </div>
 
           {/* Sidebar */}

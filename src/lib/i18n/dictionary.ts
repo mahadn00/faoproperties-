@@ -124,6 +124,27 @@ export const dictionary = {
       defaultMessage: "Hi, I'd like to enquire about a property.",
       ariaLabel: "Chat with us on WhatsApp",
     },
+    meta: {
+      homeTitle: "Luxury Off-Plan Properties in Dubai",
+      homeDescription:
+        "Curated off-plan residences in Dubai — waterfront towers, sky-deck apartments, palm-frond villas and branded addresses. Enquire directly with FAO Properties.",
+    },
+    faq: {
+      heading: "Frequently Asked Questions",
+      priceQ: (name: string) => `What is the starting price of ${name}?`,
+      priceA: (name: string, price: string) => `${name} starts from ${price}.`,
+      locationQ: (name: string) => `Where is ${name} located?`,
+      locationA: (name: string, community: string) => `${name} is located in ${community}.`,
+      typesQ: (name: string) => `What apartment types are available at ${name}?`,
+      typesA: (name: string, types: string) => `${name} offers ${types}.`,
+      developerQ: (name: string) => `Who is developing ${name}?`,
+      developerA: (name: string, developer: string) => `${name} is developed by ${developer}.`,
+      handoverQ: (name: string) => `When is the handover date for ${name}?`,
+      handoverA: (name: string, handover: string) => `${name} is expected to hand over ${handover}.`,
+      paymentPlanQ: (name: string) => `What is the payment plan for ${name}?`,
+      paymentPlanA: (name: string, down: string, final: string) =>
+        `${name} offers a payment plan starting with a ${down} down payment, with the balance due in instalments through a final ${final} on completion.`,
+    },
   },
   sr: {
     nav: { home: "Početna", projects: "Projekti", enquire: "Upit" },
@@ -225,6 +246,27 @@ export const dictionary = {
     whatsapp: {
       defaultMessage: "Zdravo, zanima me nekretnina.",
       ariaLabel: "Ćaskajte sa nama na WhatsApp-u",
+    },
+    meta: {
+      homeTitle: "Luksuzne nekretnine u izgradnji u Dubaiju",
+      homeDescription:
+        "Pažljivo odabrane rezidencije u izgradnji u Dubaiju — tornjevi na obali, rezidencije sa bazenima na krovu, vile na palminim ostrvima i brendirane adrese. Kontaktirajte FAO Properties direktno.",
+    },
+    faq: {
+      heading: "Često postavljana pitanja",
+      priceQ: (name: string) => `Koja je početna cena za ${name}?`,
+      priceA: (name: string, price: string) => `Cena za ${name} počinje od ${price}.`,
+      locationQ: (name: string) => `Gde se nalazi ${name}?`,
+      locationA: (name: string, community: string) => `${name} se nalazi u ${community}.`,
+      typesQ: (name: string) => `Koji tipovi stanova su dostupni u ${name}?`,
+      typesA: (name: string, types: string) => `${name} nudi sledeće tipove stanova: ${types}.`,
+      developerQ: (name: string) => `Ko je investitor projekta ${name}?`,
+      developerA: (name: string, developer: string) => `Investitor projekta ${name} je ${developer}.`,
+      handoverQ: (name: string) => `Kada je useljenje za ${name}?`,
+      handoverA: (name: string, handover: string) => `Useljenje za ${name} je planirano za ${handover}.`,
+      paymentPlanQ: (name: string) => `Kakav je plan plaćanja za ${name}?`,
+      paymentPlanA: (name: string, down: string, final: string) =>
+        `Plan plaćanja za ${name} počinje sa učešćem od ${down}, a preostali iznos se plaća u ratama do konačne rate od ${final} po useljenju.`,
     },
   },
   tr: {
@@ -328,6 +370,27 @@ export const dictionary = {
       defaultMessage: "Merhaba, bir mülk hakkında bilgi almak istiyorum.",
       ariaLabel: "WhatsApp'tan bizimle sohbet edin",
     },
+    meta: {
+      homeTitle: "Dubai'de Lüks İnşaat Halindeki Gayrimenkuller",
+      homeDescription:
+        "Dubai'de özenle seçilmiş inşaat halindeki konutlar — sahil kuleleri, gökyüzü teraslı rezidanslar, palmiye adası villaları ve marka konutlar. FAO Properties ile doğrudan iletişime geçin.",
+    },
+    faq: {
+      heading: "Sıkça Sorulan Sorular",
+      priceQ: (name: string) => `${name} projesinin başlangıç fiyatı nedir?`,
+      priceA: (name: string, price: string) => `${name} projesi ${price} başlangıç fiyatıyla sunulmaktadır.`,
+      locationQ: (name: string) => `${name} nerede yer alıyor?`,
+      locationA: (name: string, community: string) => `${name}, ${community} bölgesinde yer almaktadır.`,
+      typesQ: (name: string) => `${name} projesinde hangi daire tipleri mevcut?`,
+      typesA: (name: string, types: string) => `${name} projesinde şu daire tipleri sunulmaktadır: ${types}.`,
+      developerQ: (name: string) => `${name} projesinin geliştiricisi kimdir?`,
+      developerA: (name: string, developer: string) => `${name} projesi ${developer} tarafından geliştirilmektedir.`,
+      handoverQ: (name: string) => `${name} projesinin teslim tarihi nedir?`,
+      handoverA: (name: string, handover: string) => `${name} projesinin teslim tarihi ${handover} olarak planlanmaktadır.`,
+      paymentPlanQ: (name: string) => `${name} için ödeme planı nasıldır?`,
+      paymentPlanA: (name: string, down: string, final: string) =>
+        `${name} için ödeme planı ${down} peşinatla başlar, kalan tutar taksitler halinde ödenir ve teslimde ${final} ile tamamlanır.`,
+    },
   },
   ar: {
     nav: { home: "الرئيسية", projects: "المشاريع", enquire: "تواصل معنا" },
@@ -430,6 +493,27 @@ export const dictionary = {
       defaultMessage: "مرحبًا، أرغب في الاستفسار عن أحد العقارات.",
       ariaLabel: "تواصل معنا عبر واتساب",
     },
+    meta: {
+      homeTitle: "عقارات فاخرة قيد الإنشاء في دبي",
+      homeDescription:
+        "مساكن فاخرة قيد الإنشاء في دبي تم اختيارها بعناية — أبراج على الواجهة المائية، مساكن بمسابح على السطح، فلل على جزر النخيل وعناوين ذات علامات تجارية. تواصل مباشرة مع FAO Properties.",
+    },
+    faq: {
+      heading: "الأسئلة الشائعة",
+      priceQ: (name: string) => `ما هو السعر الابتدائي لمشروع ${name}؟`,
+      priceA: (name: string, price: string) => `تبدأ أسعار ${name} من ${price}.`,
+      locationQ: (name: string) => `أين يقع مشروع ${name}؟`,
+      locationA: (name: string, community: string) => `يقع ${name} في ${community}.`,
+      typesQ: (name: string) => `ما هي أنواع الوحدات المتوفرة في ${name}؟`,
+      typesA: (name: string, types: string) => `يوفر ${name} أنواع الوحدات التالية: ${types}.`,
+      developerQ: (name: string) => `من هو مطوّر مشروع ${name}؟`,
+      developerA: (name: string, developer: string) => `يقوم بتطوير ${name} شركة ${developer}.`,
+      handoverQ: (name: string) => `متى موعد تسليم مشروع ${name}؟`,
+      handoverA: (name: string, handover: string) => `من المقرر تسليم ${name} في ${handover}.`,
+      paymentPlanQ: (name: string) => `ما هي خطة السداد الخاصة بمشروع ${name}؟`,
+      paymentPlanA: (name: string, down: string, final: string) =>
+        `تبدأ خطة سداد ${name} بدفعة أولى بنسبة ${down}، ويتم سداد الباقي على دفعات وصولًا إلى دفعة أخيرة بنسبة ${final} عند التسليم.`,
+    },
   },
   fa: {
     nav: { home: "خانه", projects: "پروژه‌ها", enquire: "تماس با ما" },
@@ -531,6 +615,27 @@ export const dictionary = {
     whatsapp: {
       defaultMessage: "سلام، می‌خواهم درباره یک ملک اطلاعات بگیرم.",
       ariaLabel: "در واتساپ با ما گفتگو کنید",
+    },
+    meta: {
+      homeTitle: "املاک لوکس در حال ساخت در دبی",
+      homeDescription:
+        "املاکی لوکس و با دقت انتخاب‌شده در حال ساخت در دبی — برج‌های ساحلی، مجتمع‌های با استخر روی پشت‌بام، ویلاهای جزیره نخل و آدرس‌های برند‌دار. مستقیماً با FAO Properties در تماس باشید.",
+    },
+    faq: {
+      heading: "سوالات متداول",
+      priceQ: (name: string) => `قیمت شروع پروژه ${name} چقدر است؟`,
+      priceA: (name: string, price: string) => `قیمت ${name} از ${price} شروع می‌شود.`,
+      locationQ: (name: string) => `${name} کجا واقع شده است؟`,
+      locationA: (name: string, community: string) => `${name} در ${community} واقع شده است.`,
+      typesQ: (name: string) => `چه نوع واحدهایی در ${name} موجود است؟`,
+      typesA: (name: string, types: string) => `${name} این نوع واحدها را ارائه می‌دهد: ${types}.`,
+      developerQ: (name: string) => `سازنده پروژه ${name} کیست؟`,
+      developerA: (name: string, developer: string) => `${name} توسط ${developer} ساخته می‌شود.`,
+      handoverQ: (name: string) => `تاریخ تحویل پروژه ${name} چه زمانی است؟`,
+      handoverA: (name: string, handover: string) => `تحویل ${name} برای ${handover} برنامه‌ریزی شده است.`,
+      paymentPlanQ: (name: string) => `طرح پرداخت پروژه ${name} چگونه است؟`,
+      paymentPlanA: (name: string, down: string, final: string) =>
+        `طرح پرداخت ${name} با پیش‌پرداخت ${down} آغاز می‌شود و باقی‌مانده به‌صورت اقساط تا قسط نهایی ${final} در زمان تحویل پرداخت می‌شود.`,
     },
   },
 } as const;

@@ -23,6 +23,8 @@ Edit `.env.local` (already gitignored — never commit it):
 | `ADMIN_USERNAME` / `ADMIN_PASSWORD` | Credentials for `/admin/leads`. Leave blank and the admin page stays inaccessible (safe default). |
 | `LEAD_NOTIFY_EMAIL` | Already set to `fao@faoproperties.com`. |
 | `SESSION_SECRET` | Already auto-generated. Signs admin sessions and download links — do not share or rotate casually (rotating logs everyone out and invalidates in-flight download links). |
+| `NEXT_PUBLIC_SITE_URL` | Already set to `https://faoproperties.com`. Drives the sitemap, canonical/hreflang links and Open Graph URLs — update it first if the real domain ever changes. |
+| `GOOGLE_SITE_VERIFICATION` | Blank by default. Paste the verification code from Google Search Console (Settings → Ownership verification → HTML tag → just the `content="..."` value) once you've added the property. |
 
 ## How leads work
 
@@ -49,6 +51,65 @@ update copy, prices, or add a new project (drop assets into
 `public/projects/<slug>/` and `protected-documents/<slug>/`, then also
 register the document filenames in
 `src/app/api/documents/[projectSlug]/[docId]/route.ts`).
+
+## SEO
+
+The site is fully wired for search-engine indexing:
+
+- **`/sitemap.xml`** and **`/robots.txt`** are generated automatically
+  ([`src/app/sitemap.ts`](src/app/sitemap.ts), [`src/app/robots.ts`](src/app/robots.ts))
+  from `src/lib/projects.ts` — every project you add is included with no
+  extra work. `/admin` and `/api` are disallowed.
+- Every page (home + each project, in all 5 locales) has a localized
+  `<title>`, meta description, canonical URL, `hreflang` alternates across
+  en/sr/tr/ar/fa, Open Graph and Twitter Card tags. See
+  [`src/lib/seo.ts`](src/lib/seo.ts) for the shared helpers, and
+  `dictionary.<locale>.meta` in
+  [`src/lib/i18n/dictionary.ts`](src/lib/i18n/dictionary.ts) for the
+  homepage copy.
+- JSON-LD structured data: a site-wide `RealEstateAgent` block (root
+  layout) plus an `ApartmentComplex`/`Offer`, a `BreadcrumbList` and a
+  `FAQPage` block on every project page.
+
+### GEO (showing up in ChatGPT, Perplexity, Google AI Overviews, etc.)
+
+AI answer engines mostly reuse the same crawlability signals as classic SEO
+(sitemap, robots, structured data), plus two things aimed at them
+specifically:
+
+- **A visible FAQ section on every project page** ("What is the starting
+  price of X?", location, unit types, developer, handover, payment plan —
+  built from whatever fields that project actually has in `projects.ts`,
+  see `projectFaqs()` in [`src/lib/seo.ts`](src/lib/seo.ts)), paired with
+  matching `FAQPage` JSON-LD. It's rendered as plain visible text on
+  purpose — structured data has to match what's actually on the page, and
+  direct Q&A is exactly the format these engines like to quote.
+- **`/llms.txt`** ([`src/app/llms.txt/route.ts`](src/app/llms.txt/route.ts)) —
+  an emerging (unofficial) convention some AI crawlers check for a clean,
+  plain-text summary of the site: what the business is, contact info, and
+  a list of every project with its price/developer/community. Regenerated
+  from `projects.ts` on every request, so it never goes stale.
+- `robots.txt`'s `Allow: /` for `User-Agent: *` already covers AI crawlers
+  (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.) — nothing
+  blocks them.
+
+**Manual steps to actually show up in Google** (code can't do these for you):
+
+1. Verify the domain in [Google Search Console](https://search.google.com/search-console),
+   then submit `https://faoproperties.com/sitemap.xml`. Either use the "HTML
+   tag" method and paste the code into `GOOGLE_SITE_VERIFICATION` above, or
+   verify via DNS.
+2. Create/claim a **Google Business Profile** for the Dubai office (i Rise
+   Tower, TECOM) — this is what actually gets a real estate agency to show
+   up on Google Maps and local "near me" searches, and code alone can't do
+   it.
+3. Submit the sitemap to [Bing Webmaster Tools](https://www.bing.com/webmasters) too.
+4. Once real backlinks/citations exist (property portals, social profiles),
+   add them to `sameAs` in the `organizationJsonLd()` helper in `seo.ts`.
+5. Keep an eye on Core Web Vitals in Search Console — the gallery images are
+   already served through `next/image`, but a persistent host with a CDN in
+   front of it will help real-world load times more than any further code
+   change here.
 
 ## Known open items
 

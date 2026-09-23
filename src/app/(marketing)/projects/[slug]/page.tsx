@@ -5,7 +5,19 @@ import { getProjectBySlug, projects } from "@/lib/projects";
 import Gallery from "@/components/Gallery";
 import MapEmbed from "@/components/MapEmbed";
 import DownloadGate from "@/components/DownloadGate";
+import JsonLd from "@/components/JsonLd";
+import ProjectFaq from "@/components/ProjectFaq";
 import { whatsappLink } from "@/lib/constants";
+import { dictionary } from "@/lib/i18n/dictionary";
+import {
+  buildPageMetadata,
+  projectJsonLd,
+  breadcrumbJsonLd,
+  projectFaqs,
+  faqJsonLd,
+  absoluteUrl,
+  localizedPath,
+} from "@/lib/seo";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -17,10 +29,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return {};
-  return {
-    title: `${project.name} | ${project.developer || "FAO Properties"}`,
+  return buildPageMetadata({
+    locale: "en",
+    path: `/projects/${project.slug}`,
+    title: project.developer ? `${project.name} — ${project.developer}` : project.name,
     description: project.summary,
-  };
+    image: project.heroImage,
+  });
 }
 
 export default async function ProjectPage({ params }: PageProps<"/projects/[slug]">) {
@@ -28,8 +43,21 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
+  const t = dictionary.en;
+  const homeUrl = absoluteUrl(localizedPath("en", "/"));
+  const faqs = projectFaqs(project, "en");
+
   return (
     <>
+      <JsonLd data={projectJsonLd(project, "en")} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: t.nav.home, url: homeUrl },
+          { name: t.nav.projects, url: `${homeUrl}#projects` },
+          { name: project.name, url: absoluteUrl(localizedPath("en", `/projects/${project.slug}`)) },
+        ])}
+      />
+      <JsonLd data={faqJsonLd(faqs)} />
       {/* Hero */}
       <section className="relative flex min-h-[70vh] items-end overflow-hidden bg-[var(--color-ink)]">
         <Image
@@ -195,6 +223,9 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
               <div className="rule-gold mt-4 mb-6" />
               <MapEmbed location={project.location} />
             </div>
+
+            {/* FAQ */}
+            <ProjectFaq heading={t.faq.heading} items={faqs} />
           </div>
 
           {/* Sidebar */}

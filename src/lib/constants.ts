@@ -1,7 +1,7 @@
 export const SITE_NAME = "FAO Properties";
 export const SITE_TAGLINE = "Luxury Off-Plan Residences, Dubai";
 export const SITE_DESCRIPTION =
-  "Curated luxury off-plan residences in Dubai — explore Eltiera Views, Sky Level 1 and Terra Woods, and enquire directly with FAO Properties.";
+  "Curated luxury off-plan residences in Dubai — waterfront towers, sky-deck apartments, palm-frond villas and branded addresses. Enquire directly with FAO Properties.";
 
 export const CONTACT_EMAIL = "fao@faoproperties.com";
 

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 import ProjectSearch from "@/components/ProjectSearch";
@@ -6,8 +7,16 @@ import { localizeProjects } from "@/lib/i18n/localize";
 import { CONTACT_EMAIL, WHATSAPP_DISPLAY } from "@/lib/constants";
 import { dictionary } from "@/lib/i18n/dictionary";
 import { parseAedValue, formatAedShort } from "@/lib/format";
+import { buildPageMetadata } from "@/lib/seo";
 
 const t = dictionary.sr;
+
+export const metadata: Metadata = buildPageMetadata({
+  locale: "sr",
+  path: "/",
+  title: t.meta.homeTitle,
+  description: t.meta.homeDescription,
+});
 const projects = localizeProjects("sr");
 
 const lowestStartingPrice = projects
