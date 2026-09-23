@@ -331,7 +331,7 @@ export const projects: Project[] = [
       { label: "7th Instalment", percentage: "10%", timing: "Dec 2028 (80% construction)" },
       { label: "8th Instalment (Final)", percentage: "20%", timing: "Sep 2029 (100% / Completion)" },
     ],
-    heroImage: "/projects/albero-creek/gallery/01_twin_towers_twilight_exterior.jpg",
+    heroImage: "/projects/albero-creek/cover.jpg",
     gallery: [
       { src: "/projects/albero-creek/gallery/01_twin_towers_twilight_exterior.jpg", alt: "Albero twin towers at twilight", category: "exterior" },
       { src: "/projects/albero-creek/gallery/02_tower_facade_dusk.jpg", alt: "Tower facade at dusk", category: "exterior" },
@@ -1163,7 +1163,7 @@ export const projects: Project[] = [
       { label: "Coral Collection — 7-Bedroom Villa", sizeRange: "16,745 – 21,944 sq ft plot" },
     ],
     totalUnits: "216 villas in this collection (152 Beach Collection + 64 Coral Collection), part of Palm Jebel Ali's wider masterplan of c. 2,002 villas",
-    heroImage: "/projects/palm-jebel-ali-villas/gallery/01_villa_bluejay_exterior_twilight_pool.jpg",
+    heroImage: "/projects/palm-jebel-ali-villas/cover.jpg",
     gallery: [
       { src: "/projects/palm-jebel-ali-villas/gallery/01_villa_bluejay_exterior_twilight_pool.jpg", alt: "Villa Bluejay exterior with pool at twilight", category: "exterior" },
       { src: "/projects/palm-jebel-ali-villas/gallery/02_villa_coral_dune_exterior_beachfront_day.jpg", alt: "Villa Coral Dune beachfront exterior by day", category: "exterior" },
@@ -1360,7 +1360,7 @@ export const projects: Project[] = [
       { label: "34th Instalment", percentage: "1%", timing: "Within 35 months of Sale Date" },
       { label: "Final Instalment", percentage: "40%", timing: "On Completion" },
     ],
-    heroImage: "/projects/safa-gate/gallery/01_tower_wave_pool_twilight.jpg",
+    heroImage: "/projects/safa-gate/cover.jpg",
     gallery: [
       { src: "/projects/safa-gate/gallery/01_tower_wave_pool_twilight.jpg", alt: "Safa Gate tower at twilight above the wave-shaped podium pool", category: "exterior" },
       { src: "/projects/safa-gate/gallery/02_full_building_dusk_exterior.jpg", alt: "Full building exterior at dusk with planted sky-garden balconies", category: "exterior" },
@@ -2170,7 +2170,7 @@ export const projects: Project[] = [
       { label: "Post-Handover 2nd Instalment", percentage: "15%", timing: "Within 12 months after handover" },
       { label: "Post-Handover 3rd Instalment", percentage: "10%", timing: "Within 18 months after handover" },
     ],
-    heroImage: "/projects/the-wow-tower/gallery/01_exterior_tower_day_skyline.jpg",
+    heroImage: "/projects/the-wow-tower/cover.jpg",
     gallery: [
       { src: "/projects/the-wow-tower/gallery/01_exterior_tower_day_skyline.jpg", alt: "The WOW Tower exterior by day against the Dubai skyline and Burj Khalifa", category: "exterior" },
       { src: "/projects/the-wow-tower/gallery/02_exterior_facade_skyline_dusk.jpg", alt: "Tower facade and balcony detail with the Dubai skyline at dusk", category: "exterior" },
