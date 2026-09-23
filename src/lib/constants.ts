@@ -5,6 +5,18 @@ export const SITE_DESCRIPTION =
 
 export const CONTACT_EMAIL = "fao@faoproperties.com";
 
+export const OFFICE_ADDRESS = {
+  street: "i Rise Tower, TECOM",
+  city: "Dubai",
+  country: "United Arab Emirates",
+  countryCode: "AE",
+};
+
+// The brokerage's RERA Office Registration Number (ORN). Dubai brokers are
+// expected to show it in their advertising — fill it in and it appears in the
+// footer of every page. Left empty, nothing is shown.
+export const RERA_ORN = "";
+
 // WhatsApp number 00971585281027 in international wa.me format (digits only, no leading zeros)
 export const WHATSAPP_NUMBER = "971585281027";
 export const WHATSAPP_DISPLAY = "+971 58 528 1027";

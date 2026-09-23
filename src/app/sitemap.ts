@@ -14,6 +14,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: { languages: languageAlternates("/") },
     });
 
+    entries.push({
+      url: absoluteUrl(localizedPath(locale, "/privacy")),
+      changeFrequency: "yearly",
+      priority: 0.2,
+      alternates: { languages: languageAlternates("/privacy") },
+    });
+
     for (const project of projects) {
       const path = `/projects/${project.slug}`;
       entries.push({

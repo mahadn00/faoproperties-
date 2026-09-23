@@ -10,11 +10,12 @@ import { LOCALES } from "@/lib/i18n/dictionary";
 const PREFIXED_LOCALES = new Set<string>(LOCALES.filter((l) => l !== "en"));
 const SLUGS = new Set(projects.map((p) => p.slug));
 
-/** The only public pages: each language's homepage and project pages. */
+/** The only public pages: each language's homepage, privacy page and project pages. */
 function isKnownPage(pathname: string): boolean {
   const parts = pathname.split("/").filter(Boolean);
   if (parts.length > 0 && PREFIXED_LOCALES.has(parts[0])) parts.shift();
   if (parts.length === 0) return true;
+  if (parts.length === 1) return parts[0] === "privacy";
   return parts.length === 2 && parts[0] === "projects" && SLUGS.has(parts[1]);
 }
 

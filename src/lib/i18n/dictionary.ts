@@ -57,6 +57,9 @@ export const dictionary = {
       body: "The page you're looking for doesn't exist or has moved.",
       cta: "Back to all projects",
     },
+    privacyPage: {
+      englishOnly: "",
+    },
     stats: {
       developments: "Signature Developments",
       startingFrom: "Starting From",
@@ -139,6 +142,8 @@ export const dictionary = {
       verificationFailed: "Please complete the security check and try again.",
     },
     footer: {
+      privacy: "Privacy Policy",
+      office: "Office",
       blurb: "Curated luxury off-plan residences in Dubai. We connect discerning buyers with the city's most considered new developments.",
       projects: "Projects",
       contact: "Contact",
@@ -193,6 +198,9 @@ export const dictionary = {
       title: "Stranica nije pronađena",
       body: "Stranica koju tražite ne postoji ili je premeštena.",
       cta: "Nazad na sve projekte",
+    },
+    privacyPage: {
+      englishOnly: "Ova politika je trenutno dostupna na engleskom jeziku.",
     },
     stats: {
       developments: "Ekskluzivnih projekata",
@@ -276,6 +284,8 @@ export const dictionary = {
       verificationFailed: "Molimo vas da završite sigurnosnu proveru i pokušate ponovo.",
     },
     footer: {
+      privacy: "Politika privatnosti",
+      office: "Kancelarija",
       blurb: "Pažljivo odabrane luksuzne rezidencije u izgradnji u Dubaiju. Povezujemo zahtevne kupce sa najznačajnijim novim projektima u gradu.",
       projects: "Projekti",
       contact: "Kontakt",
@@ -330,6 +340,9 @@ export const dictionary = {
       title: "Sayfa bulunamadı",
       body: "Aradığınız sayfa mevcut değil veya taşınmış.",
       cta: "Tüm projelere dön",
+    },
+    privacyPage: {
+      englishOnly: "Bu politika şu anda yalnızca İngilizce olarak mevcuttur.",
     },
     stats: {
       developments: "Ayrıcalıklı Proje",
@@ -413,6 +426,8 @@ export const dictionary = {
       verificationFailed: "Lütfen güvenlik doğrulamasını tamamlayıp tekrar deneyin.",
     },
     footer: {
+      privacy: "Gizlilik Politikası",
+      office: "Ofis",
       blurb: "Dubai'de özenle seçilmiş, inşaat halindeki lüks konutlar. Seçici alıcıları şehrin en özenle tasarlanmış yeni projeleriyle buluşturuyoruz.",
       projects: "Projeler",
       contact: "İletişim",
@@ -467,6 +482,9 @@ export const dictionary = {
       title: "الصفحة غير موجودة",
       body: "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
       cta: "العودة إلى جميع المشاريع",
+    },
+    privacyPage: {
+      englishOnly: "هذه السياسة متاحة حاليًا باللغة الإنجليزية فقط.",
     },
     stats: {
       developments: "مشروعًا مميزًا",
@@ -550,6 +568,8 @@ export const dictionary = {
       verificationFailed: "يُرجى إكمال التحقق الأمني ثم المحاولة مرة أخرى.",
     },
     footer: {
+      privacy: "سياسة الخصوصية",
+      office: "المكتب",
       blurb: "مساكن فاخرة قيد الإنشاء في دبي، تم اختيارها بعناية. نربط بين المشترين المميزين وأرقى المشاريع الجديدة في المدينة.",
       projects: "المشاريع",
       contact: "التواصل",
@@ -604,6 +624,9 @@ export const dictionary = {
       title: "صفحه پیدا نشد",
       body: "صفحه‌ای که به دنبال آن هستید وجود ندارد یا منتقل شده است.",
       cta: "بازگشت به همه پروژه‌ها",
+    },
+    privacyPage: {
+      englishOnly: "این سیاست در حال حاضر فقط به زبان انگلیسی در دسترس است.",
     },
     stats: {
       developments: "پروژه اختصاصی",
@@ -687,6 +710,8 @@ export const dictionary = {
       verificationFailed: "لطفاً بررسی امنیتی را تکمیل کرده و دوباره تلاش کنید.",
     },
     footer: {
+      privacy: "سیاست حفظ حریم خصوصی",
+      office: "دفتر",
       blurb: "املاک لوکس در حال ساخت در دبی، با دقت انتخاب‌شده. ما خریداران باسلیقه را به برجسته‌ترین پروژه‌های جدید شهر متصل می‌کنیم.",
       projects: "پروژه‌ها",
       contact: "تماس",

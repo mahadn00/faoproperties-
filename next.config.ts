@@ -38,6 +38,7 @@ const nextConfig: NextConfig = {
       afterFiles: [
         { source: "/", destination: "/en" },
         { source: "/projects/:slug", destination: "/en/projects/:slug" },
+        { source: "/privacy", destination: "/en/privacy" },
       ],
       fallback: [],
     };

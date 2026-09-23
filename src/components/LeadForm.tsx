@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import Link from "next/link";
 import { dictionary, type Locale } from "@/lib/i18n/dictionary";
+import { localizedPath } from "@/lib/i18n/paths";
 import { track } from "@/lib/analytics";
 import Turnstile from "./Turnstile";
 
@@ -195,7 +197,10 @@ export default function LeadForm({
       </button>
 
       <p className="text-xs text-[var(--color-text-muted)] text-center">
-        {t.consent}
+        {t.consent}{" "}
+        <Link href={localizedPath(locale, "/privacy")} className="underline underline-offset-2 hover:text-[var(--color-text)]">
+          {dictionary[locale].footer.privacy}
+        </Link>
       </p>
     </form>
   );
