@@ -78,3 +78,11 @@ html[dir="rtl"] {
   background: var(--color-gold-soft);
   color: var(--color-ink);
 }
+
+/* Project pages pin MobileCtaBar to the bottom on phones — pad the footer by
+   the bar's height so its last line is never hidden behind it. */
+@media (max-width: 767px) {
+  body:has([data-mobile-cta]) footer {
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}

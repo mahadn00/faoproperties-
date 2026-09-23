@@ -3,9 +3,9 @@ import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 import ProjectSearch from "@/components/ProjectSearch";
 import LeadForm from "@/components/LeadForm";
-import { projects } from "@/lib/projects";
+import { projects, startingPriceAed } from "@/lib/projects";
 import { CONTACT_EMAIL, SITE_TAGLINE, WHATSAPP_DISPLAY } from "@/lib/constants";
-import { parseAedValue, formatAedShort } from "@/lib/format";
+import { formatAedShort } from "@/lib/format";
 import { dictionary } from "@/lib/i18n/dictionary";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -16,8 +16,11 @@ export const metadata: Metadata = buildPageMetadata({
   description: dictionary.en.meta.homeDescription,
 });
 
-const lowestStartingPrice = projects
-  .map((p) => parseAedValue(p.startingPrice))
+// Numeric prices come from the English data: translated price text (e.g.
+// "601,000 درهم") can't be parsed, which used to skew "Starting from".
+const startingPrices = Object.fromEntries(projects.map((p) => [p.slug, startingPriceAed(p.slug)]));
+
+const lowestStartingPrice = Object.values(startingPrices)
   .filter((v): v is number => v !== null)
   .reduce((min, v) => (v < min ? v : min), Infinity);
 
@@ -70,14 +73,13 @@ export default function HomePage() {
 
       {/* Stats strip */}
       <section className="border-b border-[var(--color-sand-line)] bg-white">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-10 md:grid-cols-4 md:px-10">
+        <div className="mx-auto grid max-w-7xl grid-cols-3 gap-4 px-6 py-10 sm:gap-8 md:px-10">
           <Stat label="Signature Developments" value={String(projects.length)} />
           <Stat
             label="Starting From"
             value={Number.isFinite(lowestStartingPrice) ? formatAedShort(lowestStartingPrice) : "On Request"}
           />
-          <Stat label="Prime Dubai Districts" value={`${districtCount}+`} />
-          <Stat label="Enquiries" value="WhatsApp & Email" />
+          <Stat label="Prime Dubai Districts" value={String(districtCount)} />
         </div>
       </section>
 
@@ -94,7 +96,7 @@ export default function HomePage() {
           </div>
 
           <div className="mt-14">
-            <ProjectSearch projects={projects} locale="en" />
+            <ProjectSearch projects={projects} startingPrices={startingPrices} locale="en" />
           </div>
         </div>
       </section>
@@ -137,7 +139,7 @@ export default function HomePage() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex h-full flex-col justify-between gap-2">
-      <div className="font-display text-2xl leading-tight text-[var(--color-text)] md:text-3xl">
+      <div className="font-display text-xl leading-tight text-[var(--color-text)] sm:text-2xl md:text-3xl">
         {value}
       </div>
       <div className="text-xs uppercase tracking-wide text-[var(--color-text-muted)]">

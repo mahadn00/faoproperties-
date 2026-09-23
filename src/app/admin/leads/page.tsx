@@ -78,14 +78,14 @@ export default async function AdminLeadsPage({
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-[var(--color-navy)] text-left text-xs uppercase tracking-wide text-[var(--color-text-on-dark-muted)]">
-              <th className="px-4 py-3">Submitted</th>
-              <th className="px-4 py-3">Name</th>
-              <th className="px-4 py-3">Email</th>
-              <th className="px-4 py-3">Phone</th>
-              <th className="px-4 py-3">Project</th>
-              <th className="px-4 py-3">Document</th>
-              <th className="px-4 py-3">Source</th>
-              <th className="px-4 py-3">Message</th>
+              <th className="px-4 py-3 text-start">Submitted</th>
+              <th className="px-4 py-3 text-start">Name</th>
+              <th className="px-4 py-3 text-start">Email</th>
+              <th className="px-4 py-3 text-start">Phone</th>
+              <th className="px-4 py-3 text-start">Project</th>
+              <th className="px-4 py-3 text-start">Document</th>
+              <th className="px-4 py-3 text-start">Source</th>
+              <th className="px-4 py-3 text-start">Message</th>
             </tr>
           </thead>
           <tbody>

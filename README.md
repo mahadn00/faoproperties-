@@ -24,6 +24,8 @@ Edit `.env.local` (already gitignored — never commit it):
 | `LEAD_NOTIFY_EMAIL` | Already set to `fao@faoproperties.com`. |
 | `SESSION_SECRET` | Already auto-generated. Signs admin sessions and download links — do not share or rotate casually (rotating logs everyone out and invalidates in-flight download links). |
 | `NEXT_PUBLIC_SITE_URL` | Already set to `https://faoproperties.com`. Drives the sitemap, canonical/hreflang links and Open Graph URLs — update it first if the real domain ever changes. |
+| `NEXT_PUBLIC_GA_ID` | Optional. GA4 measurement ID (`G-…`). Loads Google Analytics and tracks `generate_lead`, `whatsapp_click` and `email_click` events. Blank = no analytics at all. Rebuild after changing. |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY` | Optional. Cloudflare Turnstile keys: adds an invisible bot check to every lead form. Without them the forms still have a honeypot field and a per-IP rate limit. Set both, then rebuild. |
 | `GOOGLE_SITE_VERIFICATION` | Blank by default. Paste the verification code from Google Search Console (Settings → Ownership verification → HTML tag → just the `content="..."` value) once you've added the property. |
 
 ## How leads work
@@ -33,11 +35,18 @@ Edit `.env.local` (already gitignored — never commit it):
 2. `POST /api/leads` validates the input, appends a row to
    `data/leads.xlsx` (auto-created), and emails `LEAD_NOTIFY_EMAIL` via
    Gmail SMTP.
-3. For gated downloads, the response includes a signed, 15-minute
-   download link (`/api/documents/[project]/[doc]?token=...`) which the
-   browser opens automatically.
+3. For gated downloads, the notification email includes a signed, 7-day
+   download link (`/api/documents/[project]/[doc]?token=...`) for the sales
+   team to send on. The visitor is told the team will share the file; they
+   don't get the link themselves. Files are streamed from disk, so large
+   brochures don't load into server memory.
 4. All leads (from both entry points) are visible at `/admin/leads`
    after signing in at `/admin/login`.
+
+Spam protection: each IP can submit 8 leads per 10 minutes, a hidden
+honeypot field silently discards bot submissions, and Cloudflare Turnstile
+kicks in when its keys are set (see above). The admin login allows 10
+attempts per IP per 15 minutes.
 
 `data/leads.xlsx` and the source PDFs in `protected-documents/` are **not**
 in `/public` — they're only reachable through the signed-token route, so
@@ -51,6 +60,15 @@ update copy, prices, or add a new project (drop assets into
 `public/projects/<slug>/` and `protected-documents/<slug>/`, then also
 register the document filenames in
 `src/app/api/documents/[projectSlug]/[docId]/route.ts`).
+
+## Link-preview images
+
+`public/og/` holds a 1200×630, ~120 KB share image per project (plus
+`home.jpg`), generated from each project's `heroImage` by
+[`scripts/generate-og-images.mjs`](scripts/generate-og-images.mjs). It runs
+automatically before every `npm run build` (or on demand with `npm run og`)
+and only redoes images whose source changed. The folder is gitignored, so
+there's nothing to do by hand when adding a project.
 
 ## SEO
 

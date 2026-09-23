@@ -4,6 +4,7 @@ import "./globals.css";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
 import { SITE_URL, organizationJsonLd } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
+import Analytics from "@/components/Analytics";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-[var(--color-sand)]">
         <JsonLd data={organizationJsonLd()} />
         {children}
+        <Analytics />
       </body>
     </html>
   );

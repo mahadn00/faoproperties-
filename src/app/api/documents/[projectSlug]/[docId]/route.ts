@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "node:fs";
 import path from "node:path";
+import { Readable } from "node:stream";
 import { getProjectBySlug } from "@/lib/projects";
 import { verifyDownloadToken } from "@/lib/download-token";
 
@@ -160,17 +161,27 @@ export async function GET(
   }
 
   const filePath = path.join(process.cwd(), "protected-documents", projectSlug, filename);
-  if (!fs.existsSync(filePath)) {
+  let size: number;
+  try {
+    const stat = await fs.promises.stat(filePath);
+    if (!stat.isFile()) throw new Error("Not a file");
+    size = stat.size;
+  } catch {
     return NextResponse.json({ error: "File is currently unavailable." }, { status: 404 });
   }
 
   const ext = path.extname(filename).toLowerCase();
   const contentType = CONTENT_TYPES[ext] || "application/octet-stream";
-  const fileBuffer = fs.readFileSync(filePath);
 
-  return new NextResponse(new Uint8Array(fileBuffer), {
+  // Stream from disk rather than reading the file into memory: several
+  // brochures are 100MB+, and buffering them (plus the Uint8Array copy) held
+  // ~2× the file size in RAM per download — three at once added ~730MB.
+  const body = Readable.toWeb(fs.createReadStream(filePath)) as ReadableStream<Uint8Array>;
+
+  return new NextResponse(body, {
     headers: {
       "Content-Type": contentType,
+      "Content-Length": String(size),
       "Content-Disposition": `attachment; filename="${filename}"`,
       "Cache-Control": "no-store",
     },

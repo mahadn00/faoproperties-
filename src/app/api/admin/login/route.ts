@@ -1,7 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ADMIN_COOKIE_NAME, createSessionToken, verifyCredentials } from "@/lib/admin-auth";
+import { clientIp, rateLimit } from "@/lib/rate-limit";
+
+// Caps password guessing: 10 attempts per IP per 15 minutes.
+const LOGIN_ATTEMPTS = 10;
+const LOGIN_WINDOW_MS = 15 * 60 * 1000;
 
 export async function POST(request: NextRequest) {
+  if (!rateLimit(`admin-login:${clientIp(request.headers)}`, LOGIN_ATTEMPTS, LOGIN_WINDOW_MS).ok) {
+    return NextResponse.redirect(new URL("/admin/login?error=locked", request.url), { status: 303 });
+  }
+
   const form = await request.formData();
   const username = String(form.get("username") || "");
   const password = String(form.get("password") || "");

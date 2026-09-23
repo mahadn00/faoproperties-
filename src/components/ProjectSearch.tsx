@@ -8,9 +8,12 @@ import { PROPERTY_TYPES, projectMatchesSearch, type PropertyType } from "@/lib/s
 
 export default function ProjectSearch({
   projects,
+  startingPrices,
   locale = "en",
 }: {
   projects: Project[];
+  /** Numeric AED starting price per slug — see startingPriceAed() in lib/projects. */
+  startingPrices: Record<string, number | null>;
   locale?: Locale;
 }) {
   const t = dictionary[locale].search;
@@ -24,9 +27,15 @@ export default function ProjectSearch({
   const filtered = useMemo(
     () =>
       projects.filter((p) =>
-        projectMatchesSearch(p, selectedTypes, Number.isFinite(min as number) ? min : null, Number.isFinite(max as number) ? max : null)
+        projectMatchesSearch(
+          p,
+          selectedTypes,
+          Number.isFinite(min as number) ? min : null,
+          Number.isFinite(max as number) ? max : null,
+          startingPrices[p.slug] ?? null
+        )
       ),
-    [projects, selectedTypes, min, max]
+    [projects, startingPrices, selectedTypes, min, max]
   );
 
   const hasFilters = selectedTypes.size > 0 || minBudget !== "" || maxBudget !== "";

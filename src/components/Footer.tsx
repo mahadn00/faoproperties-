@@ -2,10 +2,10 @@ import Link from "next/link";
 import { CONTACT_EMAIL, SITE_NAME, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/constants";
 import { projects } from "@/lib/projects";
 import { dictionary, type Locale } from "@/lib/i18n/dictionary";
+import { projectPath } from "@/lib/i18n/paths";
 
 export default function Footer({ locale = "en" as Locale }: { locale?: Locale }) {
   const t = dictionary[locale];
-  const projectHref = (slug: string) => (locale === "sr" ? `/sr/projects/${slug}` : `/projects/${slug}`);
 
   return (
     <footer className="bg-[var(--color-ink)] text-[var(--color-text-on-dark-muted)]">
@@ -24,7 +24,7 @@ export default function Footer({ locale = "en" as Locale }: { locale?: Locale })
           <ul className="space-y-2 text-sm">
             {projects.map((p) => (
               <li key={p.slug}>
-                <Link href={projectHref(p.slug)} className="hover:text-white transition-colors">
+                <Link href={projectPath(locale, p.slug)} className="hover:text-white transition-colors">
                   {p.name}
                 </Link>
               </li>

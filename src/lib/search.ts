@@ -83,7 +83,8 @@ export function projectMatchesSearch(
   project: Project,
   selectedTypes: ReadonlySet<PropertyType>,
   minBudget: number | null,
-  maxBudget: number | null
+  maxBudget: number | null,
+  startingPrice: number | null
 ): boolean {
   const info = getProjectSearchInfo(project);
 
@@ -105,7 +106,8 @@ export function projectMatchesSearch(
   if (candidatePrices.length > 0) return candidatePrices.some((p) => p >= min && p <= max);
 
   // No per-type price among the relevant types — fall back to the project's
-  // overall starting price rather than excluding it outright.
-  const overall = parseAedValue(project.startingPrice);
-  return overall !== null && overall >= min && overall <= max;
+  // overall starting price rather than excluding it outright. It's passed in
+  // as a number (see startingPriceAed) because `project.startingPrice` may be
+  // translated text like "601,000 درهم" that parseAedValue can't read.
+  return startingPrice !== null && startingPrice >= min && startingPrice <= max;
 }
