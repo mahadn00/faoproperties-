@@ -1,3 +1,5 @@
+import { parseAedValue } from "./format";
+
 export type ApartmentType = {
   label: string; // e.g. "1 Bedroom"
   sizeRange?: string; // e.g. "594 - 732 sq ft"
@@ -50,7 +52,6 @@ export type Project = {
     approximate?: boolean;
   };
   documents: ProjectDocument[];
-  hasUnitLayouts: boolean;
 };
 
 export const projects: Project[] = [
@@ -150,7 +151,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full lifestyle brochure with amenities and design concept." },
       { id: "payment-plan", label: "Payment Plan", description: "20/10/5×8/30 instalment structure through completion." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "sky-level-1",
@@ -174,7 +174,7 @@ export const projects: Project[] = [
     ],
     totalUnits: "420 total residences (143 units in the currently released 1-bedroom inventory)",
     handover: "Q2 2029 (est.)",
-    heroImage: "/projects/sky-level-1/gallery/hero.jpg",
+    heroImage: "/projects/sky-level-1/cover.jpg",
     gallery: [
       { src: "/projects/sky-level-1/gallery/hero.jpg", alt: "Sky Level 1 pool deck with skyline view", category: "exterior" },
       { src: "/projects/sky-level-1/gallery/lobby.jpg", alt: "Lobby", category: "amenity" },
@@ -224,7 +224,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full brochure with amenities, specs and community overview." },
       { id: "price-list", label: "Unit Price List", description: "Full 1-bedroom availability with sizes and pricing." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "terra-woods",
@@ -262,7 +261,7 @@ export const projects: Project[] = [
       { label: "7th Instalment", percentage: "10%", timing: "Mar 2029 (90% construction)" },
       { label: "8th Instalment (Final)", percentage: "20%", timing: "Mar 2030 (100% / Completion)" },
     ],
-    heroImage: "/projects/terra-woods/gallery/hero.jpg",
+    heroImage: "/projects/terra-woods/cover.jpg",
     gallery: [
       { src: "/projects/terra-woods/gallery/hero.jpg", alt: "Terra Woods twilight exterior with Expo Metro", category: "exterior" },
       { src: "/projects/terra-woods/gallery/lobby-entrance.jpg", alt: "Lobby entrance and drop-off", category: "amenity" },
@@ -294,7 +293,6 @@ export const projects: Project[] = [
     documents: [
       { id: "fact-sheet", label: "Project Fact Sheet", description: "Full fact sheet with unit mix, amenities and payment plan." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "albero-creek",
@@ -333,7 +331,7 @@ export const projects: Project[] = [
       { label: "7th Instalment", percentage: "10%", timing: "Dec 2028 (80% construction)" },
       { label: "8th Instalment (Final)", percentage: "20%", timing: "Sep 2029 (100% / Completion)" },
     ],
-    heroImage: "/projects/albero-creek/gallery/01_twin_towers_twilight_exterior.jpg",
+    heroImage: "/projects/albero-creek/cover.jpg",
     gallery: [
       { src: "/projects/albero-creek/gallery/01_twin_towers_twilight_exterior.jpg", alt: "Albero twin towers at twilight", category: "exterior" },
       { src: "/projects/albero-creek/gallery/02_tower_facade_dusk.jpg", alt: "Tower facade at dusk", category: "exterior" },
@@ -377,7 +375,6 @@ export const projects: Project[] = [
       { id: "floor-plans", label: "Unit Floor Plans", description: "Dimensioned 1, 2 and 3 bedroom apartment and townhouse layouts." },
       { id: "payment-plan", label: "Payment Plan", description: "10/10/10/10/10/10/10/10/20 instalment structure through completion." },
     ],
-    hasUnitLayouts: true,
   },
   {
     slug: "city-walk-crestlane",
@@ -418,7 +415,7 @@ export const projects: Project[] = [
       { label: "6th Instalment", percentage: "10%", timing: "Apr 2028" },
       { label: "Final Instalment", percentage: "25%", timing: "Apr 2030 (Handover)" },
     ],
-    heroImage: "/projects/city-walk-crestlane/gallery/01_exterior_aerial_twilight.jpg",
+    heroImage: "/projects/city-walk-crestlane/cover.jpg",
     gallery: [
       { src: "/projects/city-walk-crestlane/gallery/01_exterior_aerial_twilight.jpg", alt: "City Walk Crestlane aerial twilight exterior", category: "exterior" },
       { src: "/projects/city-walk-crestlane/gallery/02_exterior_towers_park.jpg", alt: "Crestlane towers overlooking the park", category: "exterior" },
@@ -468,7 +465,6 @@ export const projects: Project[] = [
       { id: "prices-payment-plan", label: "Prices & Payment Plan", description: "Starting prices and instalment schedule for Crestlane 4 and 5." },
       { id: "project-briefing", label: "Project Briefing", description: "Full investment briefing with location, unit mix and floor plans." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "dubai-harbour-residence",
@@ -506,7 +502,7 @@ export const projects: Project[] = [
       { label: "Handover (Sea View)", percentage: "60%", timing: "Jan 2028" },
       { label: "Handover (Boulevard View)", percentage: "70%", timing: "Jan 2028" },
     ],
-    heroImage: "/projects/dubai-harbour-residence/gallery/01_exterior_beachfront_twilight.jpg",
+    heroImage: "/projects/dubai-harbour-residence/cover.jpg",
     gallery: [
       { src: "/projects/dubai-harbour-residence/gallery/01_exterior_beachfront_twilight.jpg", alt: "Dubai Harbour Residences beachfront exterior with Marina skyline", category: "exterior" },
       { src: "/projects/dubai-harbour-residence/gallery/02_twin_towers_marina_view.jpg", alt: "Twin low-rise buildings framing the marina view", category: "exterior" },
@@ -548,7 +544,6 @@ export const projects: Project[] = [
       { id: "factsheet", label: "Project Factsheet", description: "Unit mix, amenities and location overview." },
       { id: "payment-plan", label: "Payment Plan", description: "Instalment schedule for Sea View and Boulevard View units." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "jumeirah-asora-bay",
@@ -574,7 +569,7 @@ export const projects: Project[] = [
       { label: "7 Bedroom Penthouse" },
     ],
     totalUnits: "29 total residences",
-    heroImage: "/projects/jumeirah-asora-bay/gallery/01_full_building_beachfront_dusk.jpg",
+    heroImage: "/projects/jumeirah-asora-bay/gallery/02_hillside_residence_ocean_view.jpg",
     gallery: [
       { src: "/projects/jumeirah-asora-bay/gallery/01_full_building_beachfront_dusk.jpg", alt: "Jumeirah Asora Bay full building viewed from the beach at dusk", category: "exterior" },
       { src: "/projects/jumeirah-asora-bay/gallery/02_hillside_residence_ocean_view.jpg", alt: "Hillside residence amid olive trees overlooking the ocean", category: "exterior" },
@@ -622,7 +617,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full brochure covering the vision, architecture, residences and Meraas/Jumeirah Residences partnership." },
       { id: "master-plan", label: "Master Plan", description: "Site master plan showing the residences, hotel and amenity zones." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "eltiera-views-towers-1-2",
@@ -714,7 +708,6 @@ export const projects: Project[] = [
       { id: "payment-plan", label: "Payment Plan", description: "20/10/5×8/30 instalment structure through completion." },
       { id: "location-map", label: "Location Map", description: "Community location relative to Dubai Marina, JLT, Downtown Dubai and Sheikh Zayed Road." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "fairmont-solara-tower",
@@ -797,7 +790,6 @@ export const projects: Project[] = [
     documents: [
       { id: "brochure", label: "Project Brochure", description: "Full brochure with tower configuration, amenities, unit layouts, pricing and payment plan." },
     ],
-    hasUnitLayouts: true,
   },
   {
     slug: "meriva-sunset",
@@ -838,7 +830,7 @@ export const projects: Project[] = [
       { label: "9th Instalment", percentage: "5%", timing: "On completion of 50% construction" },
       { label: "Final Instalment", percentage: "30%", timing: "On Completion (Handover)" },
     ],
-    heroImage: "/projects/meriva-sunset/gallery/04_tower_closeup_sunset.jpg",
+    heroImage: "/projects/meriva-sunset/cover.jpg",
     gallery: [
       { src: "/projects/meriva-sunset/gallery/04_tower_closeup_sunset.jpg", alt: "Meriva Sunset tower close-up at sunset", category: "exterior" },
       { src: "/projects/meriva-sunset/gallery/02_aerial_welcome_from_ocean.jpg", alt: "Aerial view welcoming from the ocean", category: "location" },
@@ -890,7 +882,6 @@ export const projects: Project[] = [
       { id: "typical-plan", label: "Typical Floor Plans", description: "Floor-by-floor typical plan showing unit distribution from the 1st to 20th floor." },
       { id: "the-meriva-collection-brochure", label: "The Meriva Collection Brochure", description: "Full lifestyle brochure covering the wider Meriva Collection concept, architecture, amenities and residences." },
     ],
-    hasUnitLayouts: true,
   },
   {
     slug: "mercedes-benz-places-binghatti-city",
@@ -966,7 +957,6 @@ export const projects: Project[] = [
       { id: "maybach-vision", label: "Mercedes-Maybach Ultimate Luxury Vision", description: "Design vision booklet for the ultra-luxury Vision Mercedes-Maybach towers." },
       { id: "maybach-6-brochure", label: "Project Maybach 6 Brochure", description: "Brochure for the Vision Mercedes-Maybach 6 towers within the masterplan." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "passo",
@@ -996,7 +986,7 @@ export const projects: Project[] = [
       { label: "6 Bedroom Beach Mansion", sizeRange: "12,646 sq ft", priceFrom: "AED 98.29M", units: "6 total" },
     ],
     totalUnits: "625 residences across two towers (Passo Avita and Passo Bella), plus 5 penthouses and 6 standalone beach mansions",
-    heroImage: "/projects/passo/gallery/01_towers_aerial_twilight.jpg",
+    heroImage: "/projects/passo/cover.jpg",
     gallery: [
       { src: "/projects/passo/gallery/01_towers_aerial_twilight.jpg", alt: "Passo towers aerial view at twilight", category: "exterior" },
       { src: "/projects/passo/gallery/02_twin_towers_dusk_facade.jpg", alt: "Passo Avita and Passo Bella twin towers at dusk", category: "exterior" },
@@ -1049,7 +1039,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full lifestyle brochure covering the residences, beach mansions, amenities and design concept." },
       { id: "availability-pricing", label: "Availability & Pricing", description: "Current released unit inventory with sizes, orientations and selling prices across Passo Avita and Passo Bella." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "meriva-gardens",
@@ -1094,7 +1083,7 @@ export const projects: Project[] = [
       { label: "9th Instalment", percentage: "5%", timing: "On completion of 50% construction" },
       { label: "Final Instalment", percentage: "30%", timing: "On Completion" },
     ],
-    heroImage: "/projects/meriva-gardens/gallery/01_twin_towers_aerial_twilight.jpg",
+    heroImage: "/projects/meriva-gardens/cover.jpg",
     gallery: [
       { src: "/projects/meriva-gardens/gallery/01_twin_towers_aerial_twilight.jpg", alt: "Meriva Gardens twin towers aerial view at twilight", category: "exterior" },
       { src: "/projects/meriva-gardens/gallery/02_building_facade_pool_twilight.jpg", alt: "Building facade and pool deck at twilight", category: "exterior" },
@@ -1147,7 +1136,6 @@ export const projects: Project[] = [
       { id: "amenities-plan", label: "Amenities Master Plan", description: "Ground floor amenities master plan showing pools, gardens, sports courts and retail." },
       { id: "availability", label: "Unit Availability & Pricing", description: "Live availability sheet with unit numbers, sizes and current pricing across The Meriva Collection." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "palm-jebel-ali-villas",
@@ -1175,7 +1163,7 @@ export const projects: Project[] = [
       { label: "Coral Collection — 7-Bedroom Villa", sizeRange: "16,745 – 21,944 sq ft plot" },
     ],
     totalUnits: "216 villas in this collection (152 Beach Collection + 64 Coral Collection), part of Palm Jebel Ali's wider masterplan of c. 2,002 villas",
-    heroImage: "/projects/palm-jebel-ali-villas/gallery/01_villa_bluejay_exterior_twilight_pool.jpg",
+    heroImage: "/projects/palm-jebel-ali-villas/cover.jpg",
     gallery: [
       { src: "/projects/palm-jebel-ali-villas/gallery/01_villa_bluejay_exterior_twilight_pool.jpg", alt: "Villa Bluejay exterior with pool at twilight", category: "exterior" },
       { src: "/projects/palm-jebel-ali-villas/gallery/02_villa_coral_dune_exterior_beachfront_day.jpg", alt: "Villa Coral Dune beachfront exterior by day", category: "exterior" },
@@ -1216,7 +1204,6 @@ export const projects: Project[] = [
       { id: "project-briefing", label: "Project Briefing", description: "Full project briefing covering the Palm Jebel Ali masterplan, villa types and specifications." },
       { id: "masterplan", label: "Master Plan", description: "Palm Jebel Ali island masterplan showing fronds, crescents and amenity zones." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "palm-central",
@@ -1312,7 +1299,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full lifestyle brochure covering the design concept, residences and amenities." },
       { id: "prices-payment-plan", label: "Prices & Payment Plan", description: "Starting prices by unit type and the 20/5/5/10/10/10/5/5/30 instalment schedule." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "safa-gate",
@@ -1374,7 +1360,7 @@ export const projects: Project[] = [
       { label: "34th Instalment", percentage: "1%", timing: "Within 35 months of Sale Date" },
       { label: "Final Instalment", percentage: "40%", timing: "On Completion" },
     ],
-    heroImage: "/projects/safa-gate/gallery/01_tower_wave_pool_twilight.jpg",
+    heroImage: "/projects/safa-gate/cover.jpg",
     gallery: [
       { src: "/projects/safa-gate/gallery/01_tower_wave_pool_twilight.jpg", alt: "Safa Gate tower at twilight above the wave-shaped podium pool", category: "exterior" },
       { src: "/projects/safa-gate/gallery/02_full_building_dusk_exterior.jpg", alt: "Full building exterior at dusk with planted sky-garden balconies", category: "exterior" },
@@ -1421,7 +1407,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full concept brochure covering the architecture, residences and amenities." },
       { id: "price-list", label: "Unit Price List & Payment Plan", description: "Current 1-bedroom availability with sizes, pricing and the 36-month instalment schedule." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "w-residences",
@@ -1513,7 +1498,6 @@ export const projects: Project[] = [
       { id: "price-list-towers-1-2", label: "Tower 1 & 2 Price List", description: "Sample unit availability, sizes and pricing for Towers 1 and 2, plus the payment plan." },
       { id: "price-list-tower-3", label: "Tower 3 Price List", description: "Sample unit availability, sizes and pricing for Tower 3, plus its payment plan." },
     ],
-    hasUnitLayouts: true,
   },
   {
     slug: "kaia-residences",
@@ -1548,7 +1532,7 @@ export const projects: Project[] = [
       { label: "3rd Instalment", percentage: "5%", timing: "After 15 months of booking" },
       { label: "Final Instalment", percentage: "65%", timing: "On Completion" },
     ],
-    heroImage: "/projects/kaia-residences/gallery/01_brand_cover_water.jpg",
+    heroImage: "/projects/kaia-residences/cover.jpg",
     gallery: [
       {
         src: "/projects/kaia-residences/gallery/01_brand_cover_water.jpg",
@@ -1573,7 +1557,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Technical Brochure", description: "Full technical brochure with floor plates and unit mix for every layout type." },
       { id: "sale-offer", label: "Sample Sale Offer", description: "Sample unit sale offer (A-203, 2BR Type 2) showing pricing and payment schedule." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "floarea-breeze",
@@ -1609,7 +1592,7 @@ export const projects: Project[] = [
       { label: "On Completion", percentage: "35%", timing: "Q1 2028 (est.)" },
       { label: "Post-Handover Instalments", percentage: "35%", timing: "35 equal monthly instalments of 1%, April 2028 – February 2031" },
     ],
-    heroImage: "/projects/floarea-breeze/gallery/01_exterior_building_render.jpg",
+    heroImage: "/projects/floarea-breeze/cover.jpg",
     gallery: [
       { src: "/projects/floarea-breeze/gallery/01_exterior_building_render.jpg", alt: "Floarea Breeze building exterior render", category: "exterior" },
       { src: "/projects/floarea-breeze/gallery/02_dubai_islands_aerial_masterplan.jpg", alt: "Dubai Islands aerial masterplan view", category: "location" },
@@ -1652,7 +1635,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full project brochure with lifestyle imagery, amenities and specification details." },
       { id: "payment-plan", label: "Payment Plan", description: "Sample unit (FB-103) sales offer and post-handover payment schedule." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "mirari-lagoon",
@@ -1770,7 +1752,7 @@ export const projects: Project[] = [
         { label: "59th Post-Handover Instalment", percentage: "0.7%", timing: "59 Months from Handover" },
         { label: "60th Post-Handover Instalment", percentage: "0.7%", timing: "60 Months from Handover" },
     ],
-    heroImage: "/projects/mirari-lagoon/gallery/01_exterior_aerial_waterfront_daytime.jpg",
+    heroImage: "/projects/mirari-lagoon/gallery/19_exterior_round_pool_daytime.jpg",
     gallery: [
       { src: "/projects/mirari-lagoon/gallery/01_exterior_aerial_waterfront_daytime.jpg", alt: "Aerial daytime exterior of Mirari Lagoon with landscaped podium pool", category: "exterior" },
       { src: "/projects/mirari-lagoon/gallery/02_amenity_pool_courtyard_aerial.jpg", alt: "Aerial view of the lagoon-style courtyard pool and gardens", category: "amenity" },
@@ -1817,7 +1799,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full lifestyle brochure covering design concept, amenities, connectivity and residence details for Mirari Lagoon by Zoya." },
       { id: "payment-plan", label: "Sales Offer & Payment Plan", description: "Sample unit pricing and the full 20% / 27×1% / 11% / 60×0.7% instalment schedule running to 60 months post-handover." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "the-archive-imtiaz",
@@ -1913,7 +1894,6 @@ export const projects: Project[] = [
           "Full brochure covering the reading-led concept, amenities, residences, location distances, facts, size ranges and both payment plans (50/50 and 60/40 post-handover).",
       },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "the-symphony-imtiaz",
@@ -1951,7 +1931,7 @@ export const projects: Project[] = [
       { label: "6th Instalment", percentage: "5%", timing: "15 November 2028" },
       { label: "Final Instalment", percentage: "40%", timing: "On Completion (Q2 2029)" },
     ],
-    heroImage: "/projects/the-symphony-imtiaz/gallery/01_exterior_aerial_canal_burj_khalifa.jpg",
+    heroImage: "/projects/the-symphony-imtiaz/cover.jpg",
     gallery: [
       { src: "/projects/the-symphony-imtiaz/gallery/01_exterior_aerial_canal_burj_khalifa.jpg", alt: "The Symphony by Imtiaz aerial exterior with canal and Burj Khalifa skyline", category: "exterior" },
       { src: "/projects/the-symphony-imtiaz/gallery/02_exterior_night_illuminated_facade.jpg", alt: "Tower exterior illuminated at night with palm-lined entrance", category: "exterior" },
@@ -2021,7 +2001,6 @@ export const projects: Project[] = [
           "Full brochure covering the Zaha Hadid Architects collaboration, architecture, residential and commercial amenities, and residence interiors.",
       },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "omya-residences",
@@ -2108,7 +2087,7 @@ export const projects: Project[] = [
       { label: "34th Instalment (Post-Completion)", percentage: "1%", timing: "10 Apr 2031" },
       { label: "35th Instalment (Post-Completion)", percentage: "1%", timing: "10 May 2031" },
     ],
-    heroImage: "/projects/omya-residences/gallery/01_exterior_twilight.jpg",
+    heroImage: "/projects/omya-residences/gallery/02_exterior_low_angle_day.jpg",
     gallery: [
       { src: "/projects/omya-residences/gallery/01_exterior_twilight.jpg", alt: "Omya Residences exterior at twilight", category: "exterior" },
       { src: "/projects/omya-residences/gallery/02_exterior_low_angle_day.jpg", alt: "Low angle daytime exterior of the building facade", category: "exterior" },
@@ -2154,7 +2133,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full lifestyle brochure covering location, building specifications and amenities for Omya Residences at Wasl Gate." },
       { id: "sale-offer", label: "Sale Offer & Payment Plan", description: "Official Sale Offer with the full instalment schedule from booking through to post-handover completion." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "the-wow-tower",
@@ -2192,7 +2170,7 @@ export const projects: Project[] = [
       { label: "Post-Handover 2nd Instalment", percentage: "15%", timing: "Within 12 months after handover" },
       { label: "Post-Handover 3rd Instalment", percentage: "10%", timing: "Within 18 months after handover" },
     ],
-    heroImage: "/projects/the-wow-tower/gallery/01_exterior_tower_day_skyline.jpg",
+    heroImage: "/projects/the-wow-tower/cover.jpg",
     gallery: [
       { src: "/projects/the-wow-tower/gallery/01_exterior_tower_day_skyline.jpg", alt: "The WOW Tower exterior by day against the Dubai skyline and Burj Khalifa", category: "exterior" },
       { src: "/projects/the-wow-tower/gallery/02_exterior_facade_skyline_dusk.jpg", alt: "Tower facade and balcony detail with the Dubai skyline at dusk", category: "exterior" },
@@ -2243,7 +2221,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full lifestyle brochure covering location, tower configuration, Sky Club and Grand Park amenities, and residence specifications." },
       { id: "sale-offer", label: "Sale Offer & Payment Plan", description: "Official Sale Offer with the full 60/40 investment payment plan through handover and post-handover completion." },
     ],
-    hasUnitLayouts: false,
   },
 
   {
@@ -2279,7 +2256,7 @@ export const projects: Project[] = [
       { label: "Construction Instalments", percentage: "35%", timing: "1% Monthly for 35 Months (During Construction)" },
       { label: "Post-Handover Instalments", percentage: "40%", timing: "1% Monthly for 40 Months (Post Handover)" },
     ],
-    heroImage: "/projects/barari-palace/gallery/01_exterior_twilight_tower.jpg",
+    heroImage: "/projects/barari-palace/cover.jpg",
     gallery: [
       { src: "/projects/barari-palace/gallery/01_exterior_twilight_tower.jpg", alt: "Barari Palace tower exterior render at twilight", category: "exterior" },
       { src: "/projects/barari-palace/gallery/02_exterior_aerial_daytime.jpg", alt: "Aerial daytime exterior view of Barari Palace framed by greenery", category: "exterior" },
@@ -2320,7 +2297,6 @@ export const projects: Project[] = [
       { id: "brochure", label: "Project Brochure", description: "Full lifestyle brochure covering design concept, residences, amenities and location for Barari Palace." },
       { id: "payment-plan", label: "Payment Plan", description: "60/40 post-handover payment plan structure with instalment schedule and anticipated Q4 2028 completion." },
     ],
-    hasUnitLayouts: false,
   },
   {
     slug: "empire-jebel-ali",
@@ -2353,7 +2329,7 @@ export const projects: Project[] = [
       { label: "Admin & Processing Fee", percentage: "0.79%", timing: "Flat AED 6,340 fee, due within 30 days of offer date" },
       { label: "Post-Booking Instalments", percentage: "80%", timing: "80 equal monthly instalments of 1% each, starting 60 days after the offer date and running monthly for 80 months thereafter" },
     ],
-    heroImage: "/projects/empire-jebel-ali/gallery/01_frontal_facade_daytime_exterior.jpg",
+    heroImage: "/projects/empire-jebel-ali/cover.jpg",
     gallery: [
       { src: "/projects/empire-jebel-ali/gallery/01_frontal_facade_daytime_exterior.jpg", alt: "Empire Jebel Ali frontal facade daytime exterior render", category: "exterior" },
       { src: "/projects/empire-jebel-ali/gallery/02_aerial_street_view_exterior.jpg", alt: "Empire Jebel Ali aerial street view exterior render", category: "exterior" },
@@ -2374,7 +2350,6 @@ export const projects: Project[] = [
       { id: "elevation-renders", label: "Elevation Renders", description: "Full set of exterior elevation renders showing the building's facade, podium and street-level presentation." },
       { id: "sale-offer", label: "Sample Sale Offer (Studio 306)", description: "Official sales offer for Studio Unit 306 showing exact pricing and the full 80-month instalment schedule." },
     ],
-    hasUnitLayouts: false,
   },
 {
     slug: "squarex-one",
@@ -2408,7 +2383,7 @@ export const projects: Project[] = [
       { label: "Construction-Period Instalments", percentage: "27%", timing: "1% monthly instalments, Sep 2026 – May 2028 (pre-handover)" },
       { label: "Post-Handover Instalments", percentage: "68%", timing: "1% monthly instalments, Jun 2028 onward (approx. 67–68 months)" },
     ],
-    heroImage: "/projects/squarex-one/gallery/01_exterior_tower_twilight.jpg",
+    heroImage: "/projects/squarex-one/cover.jpg",
     gallery: [
       { src: "/projects/squarex-one/gallery/01_exterior_tower_twilight.jpg", alt: "SquareX One tower exterior at twilight", category: "exterior" },
       { src: "/projects/squarex-one/gallery/02_exterior_tower_daytime.jpg", alt: "SquareX One full tower exterior, daytime view", category: "exterior" },
@@ -2463,11 +2438,22 @@ export const projects: Project[] = [
       { id: "brochure", label: "Digital Brochure", description: "Full lifestyle brochure covering design concept, residence types and amenities for SquareX One." },
       { id: "fact-sheet", label: "Fact Sheet", description: "Developer fact sheet with project configuration, construction timeline, fitout specification and location context." },
     ],
-    hasUnitLayouts: false,
   },
 
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
+}
+
+/**
+ * Starting price in AED as a number, always read from the English data above.
+ * Translated projects carry localized price text (e.g. "601,000 درهم") that
+ * parseAedValue can't read, so anything that needs the number — homepage
+ * stats, budget search, structured data — must go through this instead of
+ * parsing whichever locale's `startingPrice` is on screen.
+ */
+export function startingPriceAed(slug: string): number | null {
+  const base = getProjectBySlug(slug);
+  return base ? parseAedValue(base.startingPrice) : null;
 }

@@ -1,9 +1,24 @@
-import type { Project } from "./projects";
 import { parseAedValue } from "./format";
+import type { ProjectCardData } from "./project-card";
+
+/** The fields search needs — a homepage card (ProjectCardData) has them. */
+type SearchableProject = Pick<ProjectCardData, "apartmentTypes" | "startingPriceAed">;
 
 export type PropertyType = "studio" | "1br" | "2br" | "3br" | "villa";
 
 export const PROPERTY_TYPES: PropertyType[] = ["studio", "1br", "2br", "3br", "villa"];
+
+// Budget ranges offered as one-tap choices (AED, [min, max], null = open).
+// Typing "1500000" into a number box on a phone was the old way.
+export const BUDGET_PRESETS = {
+  any: [null, null],
+  under1m: [null, 1_000_000],
+  from1to2m: [1_000_000, 2_000_000],
+  from2to5m: [2_000_000, 5_000_000],
+  over5m: [5_000_000, null],
+} as const satisfies Record<string, readonly [number | null, number | null]>;
+export type BudgetPreset = keyof typeof BUDGET_PRESETS;
+export const BUDGET_PRESET_KEYS = Object.keys(BUDGET_PRESETS) as BudgetPreset[];
 
 // Buckets an apartment-type label into one of the five types the search
 // filter offers. Works on the label in ANY of the site's languages (the
@@ -58,7 +73,7 @@ export type ProjectSearchInfo = {
 };
 
 // Always classifies off the base English project (see classifyApartmentType).
-export function getProjectSearchInfo(project: Project): ProjectSearchInfo {
+export function getProjectSearchInfo(project: Pick<SearchableProject, "apartmentTypes">): ProjectSearchInfo {
   const types = new Set<PropertyType>();
   const minPriceByType: Partial<Record<PropertyType, number>> = {};
 
@@ -80,7 +95,7 @@ export function getProjectSearchInfo(project: Project): ProjectSearchInfo {
 // `selectedTypes` empty = no type filter (matches every project). Budget is
 // an open-ended [min, max] range — either side can be left null.
 export function projectMatchesSearch(
-  project: Project,
+  project: SearchableProject,
   selectedTypes: ReadonlySet<PropertyType>,
   minBudget: number | null,
   maxBudget: number | null
@@ -105,7 +120,9 @@ export function projectMatchesSearch(
   if (candidatePrices.length > 0) return candidatePrices.some((p) => p >= min && p <= max);
 
   // No per-type price among the relevant types — fall back to the project's
-  // overall starting price rather than excluding it outright.
-  const overall = parseAedValue(project.startingPrice);
+  // overall starting price rather than excluding it outright. It's the numeric
+  // startingPriceAed because the display `startingPrice` may be translated
+  // text like "601,000 درهم" that parseAedValue can't read.
+  const overall = project.startingPriceAed;
   return overall !== null && overall >= min && overall <= max;
 }

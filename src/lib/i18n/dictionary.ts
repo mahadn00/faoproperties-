@@ -7,12 +7,23 @@ export function isRtlLocale(locale: Locale): boolean {
 
 // Locale metadata for building the language switcher and route prefixes.
 export const LOCALES: Locale[] = ["en", "sr", "tr", "ar", "fa"];
+export function isLocale(value: string): value is Locale {
+  return (LOCALES as string[]).includes(value);
+}
 export const LOCALE_PREFIX: Record<Locale, string> = {
   en: "",
   sr: "/sr",
   tr: "/tr",
   ar: "/ar",
   fa: "/fa",
+};
+// Each language named in itself, for the mobile menu where there is room.
+export const LOCALE_NATIVE_NAME: Record<Locale, string> = {
+  en: "English",
+  sr: "Srpski",
+  tr: "Türkçe",
+  ar: "العربية",
+  fa: "فارسی",
 };
 export const LOCALE_LABEL: Record<Locale, string> = {
   en: "EN",
@@ -24,21 +35,36 @@ export const LOCALE_LABEL: Record<Locale, string> = {
 
 export const dictionary = {
   en: {
-    nav: { home: "Home", projects: "Projects", enquire: "Enquire" },
+    nav: {
+      home: "Home",
+      projects: "Projects",
+      enquire: "Enquire",
+      menu: "Menu",
+      openMenu: "Open menu",
+      closeMenu: "Close menu",
+      language: "Language",
+    },
     hero: {
+      imageAlt: "Luxury off-plan residences in Dubai",
       eyebrow: "Luxury Off-Plan Residences, Dubai",
       heading: "Distinct addresses. One standard of living.",
       body: "Explore our full portfolio of Dubai's most considered new developments — waterfront towers, sky-deck residences, palm-frond villas and branded addresses — and enquire directly with our team.",
       ctaExplore: "Explore Projects",
       ctaContact: "Speak to Our Team",
     },
+    notFound: {
+      title: "Page not found",
+      body: "The page you're looking for doesn't exist or has moved.",
+      cta: "Back to all projects",
+    },
+    privacyPage: {
+      englishOnly: "",
+    },
     stats: {
       developments: "Signature Developments",
       startingFrom: "Starting From",
       onRequest: "On Request",
       districts: "Prime Dubai Districts",
-      enquiries: "Enquiries",
-      enquiriesValue: "WhatsApp & Email",
     },
     portfolio: {
       eyebrow: "Our Portfolio",
@@ -47,12 +73,31 @@ export const dictionary = {
     search: {
       typeLabel: "Property Type",
       budgetLabel: "Budget (AED)",
-      budgetFrom: "From",
-      budgetTo: "To",
       types: { studio: "Studio", "1br": "1 Bedroom", "2br": "2 Bedroom", "3br": "3 Bedroom", villa: "Villas" },
       resultsCount: (n: number) => `${n} propert${n === 1 ? "y" : "ies"} found`,
       noResults: "No properties match your search. Try adjusting your filters.",
       clearFilters: "Clear filters",
+    },
+    browse: {
+      sortLabel: "Sort by",
+      sort: { recommended: "Recommended", priceAsc: "Price: low to high", priceDesc: "Price: high to low", handover: "Handover: soonest" },
+      areaLabel: "Area",
+      allAreas: "All areas",
+      budget: { any: "Any", under1m: "Under 1M", from1to2m: "1M – 2M", from2to5m: "2M – 5M", over5m: "5M+" },
+      showMore: (n: number) => `Show ${n} more`,
+      downPayment: "Down payment",
+      finalPayment: "Final payment",
+      developer: "Developer",
+      area: "Area",
+      compare: "Compare",
+      compareCta: (n: number) => `Compare ${n} projects`,
+      compareHint: "Pick up to 3 projects to compare",
+      compareLimit: "You can compare up to 3 projects",
+      clear: "Clear",
+      remove: "Remove",
+      close: "Close",
+      viewProject: "View project",
+      compareTitle: "Compare projects",
     },
     card: { startingFrom: "Starting from", apartmentTypes: "Apartment types" },
     contact: {
@@ -64,7 +109,7 @@ export const dictionary = {
       submitLabel: "Send Enquiry",
     },
     project: {
-      by: "By",
+      by: (developer: string) => `By ${developer}`,
       startingFrom: "Starting From",
       apartmentTypesLabel: "Apartment Types",
       community: "Community",
@@ -80,7 +125,7 @@ export const dictionary = {
       amenities: "Amenities",
       location: "Location",
       documentsTitle: "Documents & Pricing",
-      documentsBody: "Share your details and our sales team will send these to you directly.",
+      documentsBody: "Share your details and we'll email these to you straight away.",
       whatsappCta: "Chat on WhatsApp",
       whatsappMessage: (name: string) => `Hi, I'm interested in ${name}.`,
     },
@@ -94,7 +139,7 @@ export const dictionary = {
     downloadGate: {
       request: (label: string) => `Request ${label}`,
       shareDetails: (label: string, projectName: string) =>
-        `Share your details and our sales team will send you the ${label.toLowerCase()} for ${projectName} directly.`,
+        `Share your details and we'll email you the ${label.toLowerCase()} for ${projectName} straight away.`,
     },
     leadForm: {
       requesting: "Requesting",
@@ -112,8 +157,19 @@ export const dictionary = {
       successGeneral: "We've received your enquiry and will be in touch shortly.",
       genericError: "Something went wrong. Please try again.",
       networkError: "Network error. Please check your connection and try again.",
+      rateLimited: "Too many requests. Please wait a few minutes and try again, or message us on WhatsApp.",
+      verificationFailed: "Please complete the security check and try again.",
+      countryCode: "Country code",
+      contactVia: "Contact me via",
+      contactOptions: { whatsapp: "WhatsApp", call: "Phone call", email: "Email" },
+      purposeLabel: "Purpose (optional)",
+      purposeOptions: { live: "To live in", invest: "As an investment" },
+      successDocSent: (label: string, email: string) =>
+        `We've emailed the ${label.toLowerCase()} to ${email}. If it isn't in your inbox in a few minutes, please check your spam folder.`,
     },
     footer: {
+      privacy: "Privacy Policy",
+      office: "Office",
       blurb: "Curated luxury off-plan residences in Dubai. We connect discerning buyers with the city's most considered new developments.",
       projects: "Projects",
       contact: "Contact",
@@ -147,21 +203,36 @@ export const dictionary = {
     },
   },
   sr: {
-    nav: { home: "Početna", projects: "Projekti", enquire: "Upit" },
+    nav: {
+      home: "Početna",
+      projects: "Projekti",
+      enquire: "Upit",
+      menu: "Meni",
+      openMenu: "Otvori meni",
+      closeMenu: "Zatvori meni",
+      language: "Jezik",
+    },
     hero: {
+      imageAlt: "Luksuzne rezidencije u izgradnji u Dubaiju",
       eyebrow: "Luksuzne rezidencije u izgradnji, Dubai",
       heading: "Različite adrese. Jedan standard življenja.",
       body: "Istražite naš kompletan portfolio najznačajnijih novih projekata u Dubaiju — tornjeva na obali, rezidencija sa bazenima na krovu, vila na palminim ostrvima i brendiranih adresa — i pošaljite upit direktno našem timu.",
       ctaExplore: "Pogledajte projekte",
       ctaContact: "Kontaktirajte naš tim",
     },
+    notFound: {
+      title: "Stranica nije pronađena",
+      body: "Stranica koju tražite ne postoji ili je premeštena.",
+      cta: "Nazad na sve projekte",
+    },
+    privacyPage: {
+      englishOnly: "Ova politika je trenutno dostupna na engleskom jeziku.",
+    },
     stats: {
       developments: "Ekskluzivnih projekata",
       startingFrom: "Cena od",
       onRequest: "Na upit",
       districts: "Vodećih lokacija u Dubaiju",
-      enquiries: "Upiti",
-      enquiriesValue: "WhatsApp i email",
     },
     portfolio: {
       eyebrow: "Naš portfolio",
@@ -170,12 +241,31 @@ export const dictionary = {
     search: {
       typeLabel: "Tip nekretnine",
       budgetLabel: "Budžet (AED)",
-      budgetFrom: "Od",
-      budgetTo: "Do",
       types: { studio: "Garsonjera", "1br": "1 spavaća soba", "2br": "2 spavaće sobe", "3br": "3 spavaće sobe", villa: "Vile" },
       resultsCount: (n: number) => `${n} ${n === 1 ? "nekretnina pronađena" : n < 5 ? "nekretnine pronađene" : "nekretnina pronađeno"}`,
       noResults: "Nema nekretnina koje odgovaraju pretrazi. Pokušajte da promenite filtere.",
       clearFilters: "Poništi filtere",
+    },
+    browse: {
+      sortLabel: "Sortiraj po",
+      sort: { recommended: "Preporučeno", priceAsc: "Cena: od najniže", priceDesc: "Cena: od najviše", handover: "Useljenje: najranije" },
+      areaLabel: "Lokacija",
+      allAreas: "Sve lokacije",
+      budget: { any: "Bilo koji", under1m: "Do 1M", from1to2m: "1M – 2M", from2to5m: "2M – 5M", over5m: "5M+" },
+      showMore: (n: number) => `Prikaži još ${n}`,
+      downPayment: "Učešće",
+      finalPayment: "Poslednja rata",
+      developer: "Investitor",
+      area: "Lokacija",
+      compare: "Uporedi",
+      compareCta: (n: number) => `Uporedi ${n} projekta`,
+      compareHint: "Izaberite do 3 projekta za poređenje",
+      compareLimit: "Možete uporediti najviše 3 projekta",
+      clear: "Obriši",
+      remove: "Ukloni",
+      close: "Zatvori",
+      viewProject: "Pogledaj projekat",
+      compareTitle: "Poređenje projekata",
     },
     card: { startingFrom: "Cena od", apartmentTypes: "Tipovi stanova" },
     contact: {
@@ -187,7 +277,7 @@ export const dictionary = {
       submitLabel: "Pošalji upit",
     },
     project: {
-      by: "Investitor",
+      by: (developer: string) => `Investitor ${developer}`,
       startingFrom: "Cena od",
       apartmentTypesLabel: "Tipovi stanova",
       community: "Lokacija",
@@ -203,7 +293,7 @@ export const dictionary = {
       amenities: "Sadržaji",
       location: "Lokacija",
       documentsTitle: "Dokumenti i cene",
-      documentsBody: "Podelite svoje podatke i naš tim prodaje će vam ih poslati direktno.",
+      documentsBody: "Podelite svoje podatke i odmah ćemo vam ih poslati na email.",
       whatsappCta: "Ćaskajte na WhatsApp-u",
       whatsappMessage: (name: string) => `Zdravo, zanima me projekat ${name}.`,
     },
@@ -217,7 +307,7 @@ export const dictionary = {
     downloadGate: {
       request: (label: string) => `Zatražite: ${label}`,
       shareDetails: (label: string, projectName: string) =>
-        `Podelite svoje podatke i naš tim prodaje će vam poslati dokument „${label}" za projekat ${projectName} direktno.`,
+        `Podelite svoje podatke i odmah ćemo vam poslati dokument „${label}" za projekat ${projectName} na email.`,
     },
     leadForm: {
       requesting: "Zahtev za",
@@ -235,8 +325,19 @@ export const dictionary = {
       successGeneral: "Primili smo vaš upit i uskoro ćemo vas kontaktirati.",
       genericError: "Došlo je do greške. Pokušajte ponovo.",
       networkError: "Greška u mreži. Proverite internet konekciju i pokušajte ponovo.",
+      rateLimited: "Previše zahteva. Sačekajte nekoliko minuta i pokušajte ponovo, ili nam pišite na WhatsApp.",
+      verificationFailed: "Molimo vas da završite sigurnosnu proveru i pokušate ponovo.",
+      countryCode: "Pozivni broj zemlje",
+      contactVia: "Kontaktirajte me putem",
+      contactOptions: { whatsapp: "WhatsApp", call: "Poziv", email: "Email" },
+      purposeLabel: "Svrha kupovine (opciono)",
+      purposeOptions: { live: "Za stanovanje", invest: "Kao investicija" },
+      successDocSent: (label: string, email: string) =>
+        `Poslali smo dokument „${label}" na ${email}. Ako ga za nekoliko minuta ne vidite u prijemnom sandučetu, proverite folder za neželjenu poštu.`,
     },
     footer: {
+      privacy: "Politika privatnosti",
+      office: "Kancelarija",
       blurb: "Pažljivo odabrane luksuzne rezidencije u izgradnji u Dubaiju. Povezujemo zahtevne kupce sa najznačajnijim novim projektima u gradu.",
       projects: "Projekti",
       contact: "Kontakt",
@@ -270,21 +371,36 @@ export const dictionary = {
     },
   },
   tr: {
-    nav: { home: "Ana Sayfa", projects: "Projeler", enquire: "İletişim" },
+    nav: {
+      home: "Ana Sayfa",
+      projects: "Projeler",
+      enquire: "İletişim",
+      menu: "Menü",
+      openMenu: "Menüyü aç",
+      closeMenu: "Menüyü kapat",
+      language: "Dil",
+    },
     hero: {
+      imageAlt: "Dubai'de lüks inşaat halindeki konutlar",
       eyebrow: "Dubai'de Lüks İnşaat Halindeki Konutlar",
       heading: "Farklı adresler. Tek bir yaşam standardı.",
       body: "Dubai'nin en özenle tasarlanmış yeni projelerinin tamamını keşfedin — sahil kuleleri, gökyüzü teraslı rezidanslar, palmiye adası villaları ve marka konutlar — ve ekibimizle doğrudan iletişime geçin.",
       ctaExplore: "Projeleri İnceleyin",
       ctaContact: "Ekibimizle Görüşün",
     },
+    notFound: {
+      title: "Sayfa bulunamadı",
+      body: "Aradığınız sayfa mevcut değil veya taşınmış.",
+      cta: "Tüm projelere dön",
+    },
+    privacyPage: {
+      englishOnly: "Bu politika şu anda yalnızca İngilizce olarak mevcuttur.",
+    },
     stats: {
       developments: "Ayrıcalıklı Proje",
       startingFrom: "Başlangıç Fiyatı",
       onRequest: "Talep Üzerine",
       districts: "Dubai'nin Seçkin Bölgesi",
-      enquiries: "İletişim",
-      enquiriesValue: "WhatsApp ve E-posta",
     },
     portfolio: {
       eyebrow: "Portföyümüz",
@@ -293,12 +409,31 @@ export const dictionary = {
     search: {
       typeLabel: "Gayrimenkul Tipi",
       budgetLabel: "Bütçe (AED)",
-      budgetFrom: "Başlangıç",
-      budgetTo: "Bitiş",
       types: { studio: "Stüdyo", "1br": "1 Yatak Odalı", "2br": "2 Yatak Odalı", "3br": "3 Yatak Odalı", villa: "Villalar" },
       resultsCount: (n: number) => `${n} mülk bulundu`,
       noResults: "Aramanızla eşleşen mülk bulunamadı. Filtrelerinizi değiştirmeyi deneyin.",
       clearFilters: "Filtreleri temizle",
+    },
+    browse: {
+      sortLabel: "Sırala",
+      sort: { recommended: "Önerilen", priceAsc: "Fiyat: artan", priceDesc: "Fiyat: azalan", handover: "Teslim: en yakın" },
+      areaLabel: "Bölge",
+      allAreas: "Tüm bölgeler",
+      budget: { any: "Tümü", under1m: "1M altı", from1to2m: "1M – 2M", from2to5m: "2M – 5M", over5m: "5M+" },
+      showMore: (n: number) => `${n} proje daha göster`,
+      downPayment: "Peşinat",
+      finalPayment: "Son ödeme",
+      developer: "Geliştirici",
+      area: "Bölge",
+      compare: "Karşılaştır",
+      compareCta: (n: number) => `${n} projeyi karşılaştır`,
+      compareHint: "Karşılaştırmak için en fazla 3 proje seçin",
+      compareLimit: "En fazla 3 proje karşılaştırabilirsiniz",
+      clear: "Temizle",
+      remove: "Kaldır",
+      close: "Kapat",
+      viewProject: "Projeyi incele",
+      compareTitle: "Projeleri karşılaştır",
     },
     card: { startingFrom: "Başlangıç fiyatı", apartmentTypes: "Daire tipleri" },
     contact: {
@@ -310,7 +445,7 @@ export const dictionary = {
       submitLabel: "Talebi Gönder",
     },
     project: {
-      by: "Geliştirici",
+      by: (developer: string) => `Geliştirici ${developer}`,
       startingFrom: "Başlangıç Fiyatı",
       apartmentTypesLabel: "Daire Tipleri",
       community: "Konum",
@@ -326,7 +461,7 @@ export const dictionary = {
       amenities: "Sosyal Olanaklar",
       location: "Konum",
       documentsTitle: "Belgeler ve Fiyatlandırma",
-      documentsBody: "Bilgilerinizi paylaşın, satış ekibimiz bunları doğrudan size gönderecektir.",
+      documentsBody: "Bilgilerinizi paylaşın, belgeleri hemen e-posta adresinize gönderelim.",
       whatsappCta: "WhatsApp'tan Yazın",
       whatsappMessage: (name: string) => `Merhaba, ${name} projesiyle ilgileniyorum.`,
     },
@@ -340,7 +475,7 @@ export const dictionary = {
     downloadGate: {
       request: (label: string) => `Talep Et: ${label}`,
       shareDetails: (label: string, projectName: string) =>
-        `Bilgilerinizi paylaşın, satış ekibimiz "${label}" belgesini ${projectName} projesi için doğrudan size gönderecektir.`,
+        `Bilgilerinizi paylaşın, ${projectName} projesine ait "${label}" belgesini hemen e-posta adresinize gönderelim.`,
     },
     leadForm: {
       requesting: "Talep edilen",
@@ -358,8 +493,19 @@ export const dictionary = {
       successGeneral: "Talebiniz alındı, kısa süre içinde sizinle iletişime geçeceğiz.",
       genericError: "Bir hata oluştu. Lütfen tekrar deneyin.",
       networkError: "Ağ hatası. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
+      rateLimited: "Çok fazla istek gönderildi. Lütfen birkaç dakika bekleyip tekrar deneyin veya bize WhatsApp üzerinden yazın.",
+      verificationFailed: "Lütfen güvenlik doğrulamasını tamamlayıp tekrar deneyin.",
+      countryCode: "Ülke kodu",
+      contactVia: "Bana ulaşın",
+      contactOptions: { whatsapp: "WhatsApp", call: "Telefon", email: "E-posta" },
+      purposeLabel: "Satın alma amacı (opsiyonel)",
+      purposeOptions: { live: "Oturmak için", invest: "Yatırım için" },
+      successDocSent: (label: string, email: string) =>
+        `"${label}" belgesini ${email} adresine gönderdik. Birkaç dakika içinde gelen kutunuzda görünmezse lütfen istenmeyen e-posta klasörünü kontrol edin.`,
     },
     footer: {
+      privacy: "Gizlilik Politikası",
+      office: "Ofis",
       blurb: "Dubai'de özenle seçilmiş, inşaat halindeki lüks konutlar. Seçici alıcıları şehrin en özenle tasarlanmış yeni projeleriyle buluşturuyoruz.",
       projects: "Projeler",
       contact: "İletişim",
@@ -393,21 +539,36 @@ export const dictionary = {
     },
   },
   ar: {
-    nav: { home: "الرئيسية", projects: "المشاريع", enquire: "تواصل معنا" },
+    nav: {
+      home: "الرئيسية",
+      projects: "المشاريع",
+      enquire: "تواصل معنا",
+      menu: "القائمة",
+      openMenu: "فتح القائمة",
+      closeMenu: "إغلاق القائمة",
+      language: "اللغة",
+    },
     hero: {
+      imageAlt: "مساكن فاخرة قيد الإنشاء في دبي",
       eyebrow: "مساكن فاخرة قيد الإنشاء في دبي",
       heading: "عناوين متميزة. معيار واحد للحياة الراقية.",
       body: "استكشف مجموعتنا الكاملة من أرقى المشاريع الجديدة في دبي — أبراج على الواجهة المائية، ومساكن بمسابح على السطح، وفلل على جزر النخيل، وعناوين ذات علامات تجارية عالمية — وتواصل مباشرة مع فريقنا.",
       ctaExplore: "استكشف المشاريع",
       ctaContact: "تحدث مع فريقنا",
     },
+    notFound: {
+      title: "الصفحة غير موجودة",
+      body: "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+      cta: "العودة إلى جميع المشاريع",
+    },
+    privacyPage: {
+      englishOnly: "هذه السياسة متاحة حاليًا باللغة الإنجليزية فقط.",
+    },
     stats: {
       developments: "مشروعًا مميزًا",
       startingFrom: "الأسعار تبدأ من",
       onRequest: "عند الطلب",
       districts: "من أرقى مناطق دبي",
-      enquiries: "التواصل",
-      enquiriesValue: "واتساب والبريد الإلكتروني",
     },
     portfolio: {
       eyebrow: "مشاريعنا",
@@ -416,12 +577,31 @@ export const dictionary = {
     search: {
       typeLabel: "نوع العقار",
       budgetLabel: "الميزانية (درهم إماراتي)",
-      budgetFrom: "من",
-      budgetTo: "إلى",
       types: { studio: "استوديو", "1br": "غرفة نوم واحدة", "2br": "غرفتا نوم", "3br": "ثلاث غرف نوم", villa: "فلل" },
       resultsCount: (n: number) => `تم العثور على ${n} عقار`,
       noResults: "لا توجد عقارات مطابقة لبحثك. حاول تعديل عوامل التصفية.",
       clearFilters: "مسح عوامل التصفية",
+    },
+    browse: {
+      sortLabel: "ترتيب حسب",
+      sort: { recommended: "الموصى بها", priceAsc: "السعر: من الأقل إلى الأعلى", priceDesc: "السعر: من الأعلى إلى الأقل", handover: "التسليم: الأقرب أولاً" },
+      areaLabel: "المنطقة",
+      allAreas: "جميع المناطق",
+      budget: { any: "الكل", under1m: "أقل من 1M", from1to2m: "1M – 2M", from2to5m: "2M – 5M", over5m: "أكثر من 5M" },
+      showMore: (n: number) => `عرض المزيد (${n})`,
+      downPayment: "الدفعة الأولى",
+      finalPayment: "الدفعة الأخيرة",
+      developer: "المطوّر",
+      area: "المنطقة",
+      compare: "قارن",
+      compareCta: (n: number) => `مقارنة (${n})`,
+      compareHint: "اختر حتى 3 مشاريع للمقارنة",
+      compareLimit: "يمكنك مقارنة 3 مشاريع كحد أقصى",
+      clear: "مسح",
+      remove: "إزالة",
+      close: "إغلاق",
+      viewProject: "عرض المشروع",
+      compareTitle: "مقارنة المشاريع",
     },
     card: { startingFrom: "الأسعار تبدأ من", apartmentTypes: "أنواع الوحدات" },
     contact: {
@@ -433,7 +613,7 @@ export const dictionary = {
       submitLabel: "إرسال الاستفسار",
     },
     project: {
-      by: "المطوّر",
+      by: (developer: string) => `المطوّر: ${developer}`,
       startingFrom: "الأسعار تبدأ من",
       apartmentTypesLabel: "أنواع الوحدات",
       community: "الموقع",
@@ -449,7 +629,7 @@ export const dictionary = {
       amenities: "المرافق",
       location: "الموقع",
       documentsTitle: "المستندات والأسعار",
-      documentsBody: "شاركنا بياناتك وسيرسلها لك فريق المبيعات مباشرة.",
+      documentsBody: "شاركنا بياناتك وسنرسلها إلى بريدك الإلكتروني فورًا.",
       whatsappCta: "تواصل عبر واتساب",
       whatsappMessage: (name: string) => `مرحبًا، أنا مهتم بمشروع ${name}.`,
     },
@@ -463,7 +643,7 @@ export const dictionary = {
     downloadGate: {
       request: (label: string) => `طلب: ${label}`,
       shareDetails: (label: string, projectName: string) =>
-        `شاركنا بياناتك وسيرسل لك فريق المبيعات مستند "${label}" الخاص بمشروع ${projectName} مباشرة.`,
+        `شاركنا بياناتك وسنرسل مستند "${label}" الخاص بمشروع ${projectName} إلى بريدك الإلكتروني فورًا.`,
     },
     leadForm: {
       requesting: "طلب",
@@ -481,8 +661,19 @@ export const dictionary = {
       successGeneral: "تم استلام استفسارك وسنتواصل معك قريبًا.",
       genericError: "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
       networkError: "حدث خطأ في الشبكة. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.",
+      rateLimited: "عدد كبير من الطلبات. يُرجى الانتظار بضع دقائق ثم المحاولة مرة أخرى، أو راسلنا عبر واتساب.",
+      verificationFailed: "يُرجى إكمال التحقق الأمني ثم المحاولة مرة أخرى.",
+      countryCode: "رمز الدولة",
+      contactVia: "تواصلوا معي عبر",
+      contactOptions: { whatsapp: "واتساب", call: "مكالمة هاتفية", email: "البريد الإلكتروني" },
+      purposeLabel: "الغرض من الشراء (اختياري)",
+      purposeOptions: { live: "للسكن", invest: "للاستثمار" },
+      successDocSent: (label: string, email: string) =>
+        `أرسلنا مستند "${label}" إلى ${email}. إن لم يصل إلى بريدك الوارد خلال دقائق، يُرجى التحقق من مجلد الرسائل غير المرغوب فيها.`,
     },
     footer: {
+      privacy: "سياسة الخصوصية",
+      office: "المكتب",
       blurb: "مساكن فاخرة قيد الإنشاء في دبي، تم اختيارها بعناية. نربط بين المشترين المميزين وأرقى المشاريع الجديدة في المدينة.",
       projects: "المشاريع",
       contact: "التواصل",
@@ -516,21 +707,36 @@ export const dictionary = {
     },
   },
   fa: {
-    nav: { home: "خانه", projects: "پروژه‌ها", enquire: "تماس با ما" },
+    nav: {
+      home: "خانه",
+      projects: "پروژه‌ها",
+      enquire: "تماس با ما",
+      menu: "منو",
+      openMenu: "باز کردن منو",
+      closeMenu: "بستن منو",
+      language: "زبان",
+    },
     hero: {
+      imageAlt: "املاک لوکس در حال ساخت در دبی",
       eyebrow: "املاک لوکس در حال ساخت در دبی",
       heading: "آدرس‌های متمایز. یک استاندارد از زندگی.",
       body: "مجموعه کامل جدیدترین و برجسته‌ترین پروژه‌های دبی را کاوش کنید — برج‌های ساحلی، مجتمع‌های با استخر روی پشت‌بام، ویلاهای جزیره نخل و آدرس‌های برند‌دار — و مستقیماً با تیم ما در تماس باشید.",
       ctaExplore: "مشاهده پروژه‌ها",
       ctaContact: "گفتگو با تیم ما",
     },
+    notFound: {
+      title: "صفحه پیدا نشد",
+      body: "صفحه‌ای که به دنبال آن هستید وجود ندارد یا منتقل شده است.",
+      cta: "بازگشت به همه پروژه‌ها",
+    },
+    privacyPage: {
+      englishOnly: "این سیاست در حال حاضر فقط به زبان انگلیسی در دسترس است.",
+    },
     stats: {
       developments: "پروژه اختصاصی",
       startingFrom: "شروع قیمت از",
       onRequest: "بر اساس درخواست",
       districts: "منطقه برتر دبی",
-      enquiries: "ارتباط با ما",
-      enquiriesValue: "واتساپ و ایمیل",
     },
     portfolio: {
       eyebrow: "نمونه‌کارهای ما",
@@ -539,12 +745,31 @@ export const dictionary = {
     search: {
       typeLabel: "نوع ملک",
       budgetLabel: "بودجه (درهم امارات)",
-      budgetFrom: "از",
-      budgetTo: "تا",
       types: { studio: "استودیو", "1br": "یک خوابه", "2br": "دو خوابه", "3br": "سه خوابه", villa: "ویلا" },
       resultsCount: (n: number) => `${n} ملک یافت شد`,
       noResults: "هیچ ملکی مطابق با جستجوی شما یافت نشد. فیلترها را تغییر دهید.",
       clearFilters: "پاک کردن فیلترها",
+    },
+    browse: {
+      sortLabel: "مرتب‌سازی بر اساس",
+      sort: { recommended: "پیشنهادی", priceAsc: "قیمت: کم به زیاد", priceDesc: "قیمت: زیاد به کم", handover: "تحویل: زودترین" },
+      areaLabel: "منطقه",
+      allAreas: "همه مناطق",
+      budget: { any: "همه", under1m: "کمتر از 1M", from1to2m: "1M – 2M", from2to5m: "2M – 5M", over5m: "بیش از 5M" },
+      showMore: (n: number) => `نمایش ${n} مورد دیگر`,
+      downPayment: "پیش‌پرداخت",
+      finalPayment: "قسط نهایی",
+      developer: "سازنده",
+      area: "منطقه",
+      compare: "مقایسه",
+      compareCta: (n: number) => `مقایسه ${n} پروژه`,
+      compareHint: "حداکثر 3 پروژه را برای مقایسه انتخاب کنید",
+      compareLimit: "حداکثر 3 پروژه قابل مقایسه است",
+      clear: "پاک کردن",
+      remove: "حذف",
+      close: "بستن",
+      viewProject: "مشاهده پروژه",
+      compareTitle: "مقایسه پروژه‌ها",
     },
     card: { startingFrom: "شروع قیمت از", apartmentTypes: "نوع واحدها" },
     contact: {
@@ -556,7 +781,7 @@ export const dictionary = {
       submitLabel: "ارسال درخواست",
     },
     project: {
-      by: "سازنده",
+      by: (developer: string) => `سازنده: ${developer}`,
       startingFrom: "شروع قیمت از",
       apartmentTypesLabel: "نوع واحدها",
       community: "موقعیت",
@@ -572,7 +797,7 @@ export const dictionary = {
       amenities: "امکانات",
       location: "موقعیت",
       documentsTitle: "مدارک و قیمت‌ها",
-      documentsBody: "اطلاعات خود را با ما در میان بگذارید تا تیم فروش ما مستقیماً آن‌ها را برای شما ارسال کند.",
+      documentsBody: "اطلاعات خود را وارد کنید تا فوراً آن‌ها را به ایمیل شما بفرستیم.",
       whatsappCta: "گفتگو در واتساپ",
       whatsappMessage: (name: string) => `سلام، به پروژه ${name} علاقه‌مندم.`,
     },
@@ -586,7 +811,7 @@ export const dictionary = {
     downloadGate: {
       request: (label: string) => `درخواست: ${label}`,
       shareDetails: (label: string, projectName: string) =>
-        `اطلاعات خود را با ما در میان بگذارید تا تیم فروش ما «${label}» مربوط به پروژه ${projectName} را مستقیماً برای شما ارسال کند.`,
+        `اطلاعات خود را وارد کنید تا «${label}» مربوط به پروژه ${projectName} را فوراً به ایمیل شما بفرستیم.`,
     },
     leadForm: {
       requesting: "درخواست برای",
@@ -604,8 +829,19 @@ export const dictionary = {
       successGeneral: "درخواست شما دریافت شد و به‌زودی با شما تماس خواهیم گرفت.",
       genericError: "خطایی رخ داد. لطفاً دوباره تلاش کنید.",
       networkError: "خطای شبکه. لطفاً اتصال اینترنت خود را بررسی کرده و دوباره تلاش کنید.",
+      rateLimited: "تعداد درخواست‌ها زیاد است. لطفاً چند دقیقه صبر کنید و دوباره تلاش کنید، یا از طریق واتساپ به ما پیام دهید.",
+      verificationFailed: "لطفاً بررسی امنیتی را تکمیل کرده و دوباره تلاش کنید.",
+      countryCode: "کد کشور",
+      contactVia: "روش تماس با من",
+      contactOptions: { whatsapp: "واتساپ", call: "تماس تلفنی", email: "ایمیل" },
+      purposeLabel: "هدف از خرید (اختیاری)",
+      purposeOptions: { live: "برای سکونت", invest: "برای سرمایه‌گذاری" },
+      successDocSent: (label: string, email: string) =>
+        `«${label}» را به ${email} فرستادیم. اگر تا چند دقیقه دیگر در صندوق ورودی نبود، لطفاً پوشه اسپم را بررسی کنید.`,
     },
     footer: {
+      privacy: "سیاست حفظ حریم خصوصی",
+      office: "دفتر",
       blurb: "املاک لوکس در حال ساخت در دبی، با دقت انتخاب‌شده. ما خریداران باسلیقه را به برجسته‌ترین پروژه‌های جدید شهر متصل می‌کنیم.",
       projects: "پروژه‌ها",
       contact: "تماس",

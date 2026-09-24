@@ -1,8 +1,9 @@
 # FAO Properties — Luxury Off-Plan Website
 
-Next.js 16 site listing two luxury off-plan Dubai projects (**Eltiera Views**,
-**Sky Level 1**), with gated brochure/floor-plan downloads, a lead pipeline
-(email + Excel), an admin-only leads dashboard, and a WhatsApp chat button.
+Next.js 16 site listing luxury off-plan Dubai projects in 5 languages
+(en/sr/tr/ar/fa), with gated brochure/floor-plan downloads, a lead pipeline
+(email + database, with Excel export), an admin-only leads dashboard, and a
+WhatsApp chat button.
 
 ## Local development
 
@@ -19,27 +20,51 @@ Edit `.env.local` (already gitignored — never commit it):
 
 | Variable | Purpose |
 |---|---|
-| `SMTP_PASS` | Gmail **App Password** for `SMTP_USER` (mahabdelrauof1979@gmail.com). Generate at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) — requires 2‑Step Verification on that account. Without this, leads still save to Excel but no email is sent. |
+| `SMTP_PASS` | Gmail **App Password** for `SMTP_USER` (mahabdelrauof1979@gmail.com). Generate at [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) — requires 2‑Step Verification on that account. Without this, leads are still saved (see `/admin/leads`) but no email is sent — neither the team notification nor the brochure emails to visitors. Brochures are sent to visitors *from* `SMTP_USER`, so for good inbox placement use a mailbox on the company domain (e.g. Google Workspace) with SPF/DKIM set up rather than a personal Gmail address. |
 | `ADMIN_USERNAME` / `ADMIN_PASSWORD` | Credentials for `/admin/leads`. Leave blank and the admin page stays inaccessible (safe default). |
 | `LEAD_NOTIFY_EMAIL` | Already set to `fao@faoproperties.com`. |
 | `SESSION_SECRET` | Already auto-generated. Signs admin sessions and download links — do not share or rotate casually (rotating logs everyone out and invalidates in-flight download links). |
 | `NEXT_PUBLIC_SITE_URL` | Already set to `https://faoproperties.com`. Drives the sitemap, canonical/hreflang links and Open Graph URLs — update it first if the real domain ever changes. |
+| `NEXT_PUBLIC_GA_ID` | Optional. GA4 measurement ID (`G-…`). Loads Google Analytics and tracks `generate_lead`, `whatsapp_click` and `email_click` events. Blank = no analytics at all. Rebuild after changing. |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY` | Optional. Cloudflare Turnstile keys: adds an invisible bot check to every lead form. Without them the forms still have a honeypot field and a per-IP rate limit. Set both, then rebuild. |
 | `GOOGLE_SITE_VERIFICATION` | Blank by default. Paste the verification code from Google Search Console (Settings → Ownership verification → HTML tag → just the `content="..."` value) once you've added the property. |
 
 ## How leads work
 
 1. Visitor fills the form on the homepage (`general-enquiry`) or clicks
    **Get Brochure / Get Price List** on a project page (`gated-download`).
-2. `POST /api/leads` validates the input, appends a row to
-   `data/leads.xlsx` (auto-created), and emails `LEAD_NOTIFY_EMAIL` via
-   Gmail SMTP.
-3. For gated downloads, the response includes a signed, 15-minute
-   download link (`/api/documents/[project]/[doc]?token=...`) which the
-   browser opens automatically.
+   The form asks for name, email and phone (with a country-code picker,
+   pre-set by site language), how they'd like to be contacted (WhatsApp /
+   call / email), and optionally why they're buying and a message.
+2. `POST /api/leads` validates the input, saves the lead to the SQLite
+   database `data/leads.db` (auto-created), and emails `LEAD_NOTIFY_EMAIL`
+   via Gmail SMTP.
+3. For gated downloads, the visitor is **emailed the document straight
+   away**, in the language of the page they were on: a signed, 7-day
+   download link (`/api/documents/[project]/[doc]?token=...`), with replies
+   going to `LEAD_NOTIFY_EMAIL`. The team notification includes the same
+   link. Each email address gets at most 3 such emails per day (so the form
+   can't be used to flood someone's inbox); past that, or if SMTP isn't
+   configured, the visitor is told the team will send it and the
+   notification asks the team to. Files are streamed from disk, so large
+   brochures don't load into server memory.
 4. All leads (from both entry points) are visible at `/admin/leads`
-   after signing in at `/admin/login`.
+   after signing in at `/admin/login`. Each lead has a status (New,
+   Contacted, Qualified, Won, Lost) the team can change from the table, and
+   **Export to Excel** downloads the leads currently in view, respecting
+   the date and status filters. Contact preference, purpose and site
+   language are shown in the table and included in the export.
 
-`data/leads.xlsx` and the source PDFs in `protected-documents/` are **not**
+**Upgrading from the Excel version:** the first time this version starts, it
+imports every row of an existing `data/leads.xlsx` into `data/leads.db` once,
+then leaves the spreadsheet untouched as a backup. Nothing to do by hand.
+
+Spam protection: each IP can submit 8 leads per 10 minutes, a hidden
+honeypot field silently discards bot submissions, and Cloudflare Turnstile
+kicks in when its keys are set (see above). The admin login allows 10
+attempts per IP per 15 minutes.
+
+`data/` (the leads database) and the source PDFs in `protected-documents/` are **not**
 in `/public` — they're only reachable through the signed-token route, so
 they can't be discovered or downloaded without going through the lead form.
 
@@ -51,6 +76,36 @@ update copy, prices, or add a new project (drop assets into
 `public/projects/<slug>/` and `protected-documents/<slug>/`, then also
 register the document filenames in
 `src/app/api/documents/[projectSlug]/[docId]/route.ts`).
+
+## Project photos
+
+Photos in `public/projects/<slug>/gallery/` are stored at most 2,560 px on
+the long side, as ~80-quality JPEGs (the originals were print renders of up
+to 5,334 px and 2.5 MB). After adding a new project's photos, run:
+
+```bash
+npm run images:optimize
+```
+
+It only touches photos that are oversized or heavy, so re-running is safe
+(`-- --dry` to preview). The site serves resized WebP versions through
+`next/image`, cached for 31 days. **When replacing a photo, give the new file
+a new name** — the same name keeps serving the cached old version until the
+cache expires.
+
+For production, put the site behind a CDN such as Cloudflare (orange-cloud
+proxy on the domain) so photos and pages are served from edge caches near
+visitors instead of the VPS. Make sure the proxy forwards the `Accept` header,
+which `next/image` uses to choose WebP.
+
+## Link-preview images
+
+`public/og/` holds a 1200×630, ~120 KB share image per project (plus
+`home.jpg`), generated from each project's `heroImage` by
+[`scripts/generate-og-images.mjs`](scripts/generate-og-images.mjs). It runs
+automatically before every `npm run build` (or on demand with `npm run og`)
+and only redoes images whose source changed. The folder is gitignored, so
+there's nothing to do by hand when adding a project.
 
 ## SEO
 
@@ -127,16 +182,20 @@ specifically:
 ## Deployment
 
 Built for a **persistent Node.js host** (not serverless) — e.g. a VPS,
-Railway, or Render — because leads are stored in a real file
-(`data/leads.xlsx`) that needs to persist across requests.
+Railway, or Render — because leads are stored in a local SQLite file
+(`data/leads.db`) that needs to persist across requests and deploys.
 
 ```bash
 npm run build
 npm run start
 ```
 
-Set the same environment variables on the host. Back up `data/leads.xlsx`
-regularly — it's the only copy of your leads.
+Set the same environment variables on the host. Back up `data/leads.db`
+regularly — it's the only copy of your leads. The database runs in WAL mode,
+so either copy `leads.db`, `leads.db-wal` and `leads.db-shm` together while
+the app is stopped, or take a live snapshot with
+`sqlite3 data/leads.db ".backup 'leads-backup.db'"`. (The admin page's
+Export to Excel is handy for a quick copy too, but it isn't a full backup.)
 
 ### Git & GitHub
 
@@ -148,8 +207,8 @@ well over GitHub's 100MB per-file limit. When you deploy to a real host,
 copy `protected-documents/` there separately (scp/sftp/rsync) — it's not
 part of the git history and never will be.
 
-`data/` (the leads spreadsheet) is gitignored for the same reason (customer
-PII) plus it's regenerated at runtime.
+`data/` (the leads database) is gitignored for the same reason (customer
+PII) plus it's created at runtime.
 
 Everything else — the app code and `public/` (the gallery images actually
 shown on the live site) — is meant to be committed and deployed normally.+

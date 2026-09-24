@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { LOCALES, LOCALE_PREFIX, dictionary, type Locale } from "./i18n/dictionary";
-import { SITE_NAME, CONTACT_EMAIL, WHATSAPP_NUMBER } from "./constants";
-import { parseAedValue } from "./format";
-import type { Project } from "./projects";
+import { LOCALES, dictionary, type Locale } from "./i18n/dictionary";
+import { localizedPath } from "./i18n/paths";
+import { SITE_NAME, CONTACT_EMAIL, OFFICE_ADDRESS, WHATSAPP_NUMBER } from "./constants";
+import { startingPriceAed, type Project } from "./projects";
 
 // Falls back to a placeholder so local/staging builds don't crash, but every
 // production deploy must set this so canonical URLs, the sitemap and OG tags
@@ -19,16 +19,22 @@ export const OG_LOCALE: Record<Locale, string> = {
 
 const BUSINESS_ADDRESS = {
   "@type": "PostalAddress",
-  streetAddress: "i Rise Tower, TECOM",
-  addressLocality: "Dubai",
-  addressCountry: "AE",
+  streetAddress: OFFICE_ADDRESS.street,
+  addressLocality: OFFICE_ADDRESS.city,
+  addressCountry: OFFICE_ADDRESS.countryCode,
 } as const;
 
-/** Locale-agnostic path (e.g. "/" or "/projects/eltiera-views") -> that locale's route. */
-export function localizedPath(locale: Locale, path: string): string {
-  const prefix = LOCALE_PREFIX[locale];
-  if (path === "/") return prefix || "/";
-  return `${prefix}${path}`;
+export { localizedPath };
+
+/**
+ * The 1200×630 share image (Open Graph / WhatsApp / X link previews) for a
+ * project slug, or "home" for the homepage. These are generated from each
+ * project's heroImage by scripts/generate-og-images.mjs, which runs before
+ * every `npm run build` — the raw heroes are 1–2 MB, too heavy for WhatsApp
+ * previews and not actually 1200×630 as declared below.
+ */
+export function shareImagePath(slug: string): string {
+  return `/og/${slug}.jpg`;
 }
 
 export function absoluteUrl(path: string): string {
@@ -59,7 +65,7 @@ export function buildPageMetadata({
   image?: string;
 }): Metadata {
   const url = absoluteUrl(localizedPath(locale, path));
-  const ogImage = absoluteUrl(image || "/projects/eltiera-views/gallery/01_exterior_aerial_twilight.jpg");
+  const ogImage = absoluteUrl(image || shareImagePath("home"));
 
   return {
     title,
@@ -101,7 +107,7 @@ export function organizationJsonLd() {
 
 export function projectJsonLd(project: Project, locale: Locale) {
   const url = absoluteUrl(localizedPath(locale, `/projects/${project.slug}`));
-  const price = parseAedValue(project.startingPrice);
+  const price = startingPriceAed(project.slug);
   const images = [project.heroImage, ...project.gallery.slice(0, 4).map((g) => g.src)].map(absoluteUrl);
 
   const json: Record<string, unknown> = {
